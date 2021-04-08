@@ -1,8 +1,33 @@
 import logo from "./logo.svg";
 import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import Nav from "./components/Nav";
+import { About, Home, Products, Login, Review } from "./pages";
 
 function App() {
-  return <div>Hello World</div>;
+  return (
+    <Router>
+      <Nav />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/review">
+          <Review />
+        </Route>
+        <Route path="/products">
+          <Products />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 export default App;
