@@ -1,4 +1,5 @@
 import React from "react";
+import ReviewForm from "../components/ReviewForm.js";
 
 // input: product drop-down / product search
 // input: 5 star-rating
@@ -10,7 +11,12 @@ import React from "react";
 // (optional) the age of the reviewer (dont wanna do it lmao)
 
 const Review = () => {
-  return <h1 className="text-4xl text-blue-500">Review</h1>;
+  return (
+    <div>
+      <h1 className="text-4xl text-blue-500">Review</h1>
+      <ReviewForm />
+    </div>
+  );
 };
 
 export default Review;
