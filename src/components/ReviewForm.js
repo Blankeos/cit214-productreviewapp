@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const ReviewForm = () => {
   const [state, setState] = useState({
-    productName: "Enter Product Name",
-    productReview: "Optional...",
+    productName: "",
+    productReview: "",
   });
 
   const handleChange = (event, fieldName) => {
