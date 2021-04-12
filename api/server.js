@@ -9,7 +9,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const findOrCreate = require("mongoose-findorcreate");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 const app = express();
 
 import mongoose from "../lib/db.js";
@@ -60,7 +60,7 @@ passport.use(
     {
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/<callback>",
+      callbackURL: `http://localhost:${env.process.PORT}/auth/google/<callback>`,
     },
     function (accesstoken, refreshToken, profile, cb) {
       console.log(profile);
@@ -77,6 +77,7 @@ app.get("/api/login", (req, res) => {
 
 app.post("/api/login", (req, res) => {
   console.log("Someone posted to /api/login");
+  console.log(req.body);
 });
 
 app.listen(process.env.PORT, () => {

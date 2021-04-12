@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const LoginForm = () => {
   const [state, setState] = useState({
@@ -12,7 +13,12 @@ const LoginForm = () => {
     });
   };
 
+  useEffect(() => {
+    axios.get(`http://localhost:${env.process.PORT}/api/login}`);
+  }, []);
+
   const submit = () => {
+    axios.post(`http://localhost:${env.process.PORT}/api/login}`, state);
     console.log(state);
   };
 
