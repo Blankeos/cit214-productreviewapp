@@ -2,7 +2,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Nav from "./components/Nav";
-import { About, Home, Products, Login, Review } from "./pages";
+import { About, Home, Products, Login, Review, Register } from "./pages";
 
 function App() {
   return (
@@ -23,6 +23,9 @@ function App() {
         </Route>
         <Route path="/about">
           <About />
+        </Route>
+        <Route path="/register">
+          <Register />
         </Route>
       </Switch>
     </Router>
