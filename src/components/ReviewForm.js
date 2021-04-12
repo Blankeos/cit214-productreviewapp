@@ -21,13 +21,13 @@ const ReviewForm = () => {
       <h1 className="text-2xl">Product</h1>
       <input
         className="border rounded border-black"
-        value={state.name}
+        placeholder="Enter product name"
         onChange={(event) => handleChange(event, "productName")}
       />
       <h1 className="text-2xl">Review</h1>
       <textarea
         className="border rounded border-black"
-        value={state.review}
+        placeholder="(Optional...)"
         onChange={(event) => handleChange(event, "productReview")}
       />
       <div>

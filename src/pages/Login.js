@@ -7,7 +7,7 @@ import LoginForm from "../components/LoginForm";
 const Login = () => {
   return (
     <div>
-      <h1 className="text-4xl text-blue-500">Login</h1>;
+      <h1 className="text-4xl text-blue-500">Login</h1>
       <LoginForm />
     </div>
   );

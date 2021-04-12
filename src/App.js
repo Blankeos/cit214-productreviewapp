@@ -15,6 +15,9 @@ function App() {
         <Route path="/login">
           <Login />
         </Route>
+        <Route path="/register">
+          <Register />
+        </Route>
         <Route path="/review">
           <Review />
         </Route>
@@ -23,9 +26,6 @@ function App() {
         </Route>
         <Route path="/about">
           <About />
-        </Route>
-        <Route path="/register">
-          <Register />
         </Route>
       </Switch>
     </Router>
