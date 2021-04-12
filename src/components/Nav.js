@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
+const handleLogout = () => {};
 const Nav = () => {
   return (
     <div>
@@ -23,6 +25,9 @@ const Nav = () => {
           </li>
           <li>
             <Link to="/register"> Register </Link>
+          </li>
+          <li>
+            <Link onClick={handleLogout}> Logout </Link>
           </li>
         </ul>
       </nav>
