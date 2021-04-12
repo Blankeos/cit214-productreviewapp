@@ -13,13 +13,13 @@ const LoginForm = () => {
     });
   };
 
-  useEffect(() => {
-    axios.get(`http://localhost:${env.process.PORT}/api/login}`);
-  }, []);
+  const headers = {
+    "Content-Type": "application/x-www-form-urlencoded",
+    "Access-Control-Allow-Origin": "*",
+  };
 
   const submit = () => {
-    axios.post(`http://localhost:${env.process.PORT}/api/login}`, state);
-    console.log(state);
+    axios.post("http://localhost:3000/api/login", state);
   };
 
   return (
