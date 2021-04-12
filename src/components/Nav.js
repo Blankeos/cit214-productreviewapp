@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Nav = () => {
   return (
     <div>
-      <nav>
-        <ul>
+      <nav className="flex">
+        <ul className="flex space-x-4">
           <li>
             <Link to="/"> Home</Link>
           </li>
@@ -20,6 +20,9 @@ const Nav = () => {
           </li>
           <li>
             <Link to="/about"> About </Link>
+          </li>
+          <li>
+            <Link to="/register"> Register </Link>
           </li>
         </ul>
       </nav>

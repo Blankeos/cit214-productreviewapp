@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 const ReviewForm = () => {
   const [state, setState] = useState({
-    productName: "Enter Product Name",
-    productReview: "Optional...",
+    productName: "",
+    productReview: "",
   });
 
   const handleChange = (event, fieldName) => {
@@ -21,13 +21,13 @@ const ReviewForm = () => {
       <h1 className="text-2xl">Product</h1>
       <input
         className="border rounded border-black"
-        value={state.name}
+        placeholder="Enter product name"
         onChange={(event) => handleChange(event, "productName")}
       />
       <h1 className="text-2xl">Review</h1>
       <textarea
         className="border rounded border-black"
-        value={state.review}
+        placeholder="(Optional...)"
         onChange={(event) => handleChange(event, "productReview")}
       />
       <div>
