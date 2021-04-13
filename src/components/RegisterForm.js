@@ -10,27 +10,38 @@ const RegisterForm = () => {
   const { register, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState({
+    length: 0,
+  });
 
   const handleChange = (event, fieldName) => {
+    if (fieldName == "password") {
+      setPasswordStrength({
+        length: event.target.value.length,
+      });
+    }
+
     setState((prevState) => {
       return { ...prevState, [fieldName]: event.target.value };
     });
   };
 
-  const submit = async () => {
+  const submit = async (e) => {
+    e.preventDefault();
+
     try {
       setError("");
       setLoading(true);
       await register(state.email, state.password);
-    } catch {}
+    } catch {
+      setError("There's an error creating your account.");
+      if (passwordStrength.length < 6)
+        setError("Password is less than 6 chars.");
+      if (state.email == "" || state.password == "") {
+        setError("Fields can't be empty.");
+      }
+    }
     setLoading(false);
-    // .post("http://localhost:3000/api/register", state)
-    // .then((res) => {
-    //   alert(res.status);
-    // })
-    // .catch((err) => {
-    //   alert(err.status);
-    // });
   };
 
   return (
@@ -39,8 +50,12 @@ const RegisterForm = () => {
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>
-      {error && { error }}
-      <div className="w-96 m-8 mx-auto p-12 border h-auto">
+      <form className="relative w-96 mx-auto p-12 border h-auto">
+        {error && (
+          <p className="text-center p-4 text-red-600 bg-red-200 w-72 rounded-lg  justify-self mb-4 text-sm">
+            {error}
+          </p>
+        )}
         <div className="flex flex-col space-y-3">
           <label>Email</label>
           <input
@@ -59,14 +74,29 @@ const RegisterForm = () => {
             onChange={(event) => handleChange(event, "password")}
           ></input>
         </div>
+        <p className="absolute text-right p-4 text-green-600 rounded-lg justify-content text-sm right-8 w-44">
+          <p className="text-red-500">
+            {passwordStrength.length < 6 &&
+              passwordStrength.length > 0 &&
+              "Bad password"}
+          </p>
+          <p className="text-yellow-500">
+            {passwordStrength.length >= 6 &&
+              passwordStrength.length < 10 &&
+              "Good"}
+          </p>
+          {passwordStrength.length >= 10 && "Great"}
+        </p>
+
         <button
-          className="shadow-md disabled:opacity-50 border bg-yellow-500 px-5 py-2 rounded-full mt-4 text-white"
-          onClick={submit}
+          className="shadow-md disabled:opacity-50 border bg-yellow-500 px-5 py-2 rounded-full mt-4 text-white transition hover:bg-yellow-400"
+          type="submit"
+          onClick={(e) => submit(e)}
           disabled={loading}
         >
           Register
         </button>
-      </div>
+      </form>
     </div>
   );
 };
