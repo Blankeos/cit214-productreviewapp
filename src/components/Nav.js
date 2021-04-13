@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
 
 const Nav = () => {
+  const { logout, currentUser } = useAuth();
+
+  const handleLogout = async () => {
+    await logout();
+  };
+
   return (
     <div>
       <nav className="flex">
@@ -24,6 +32,11 @@ const Nav = () => {
           <li>
             <Link to="/register"> Register </Link>
           </li>
+          {currentUser && (
+            <li>
+              <Link onClick={handleLogout}> Logout </Link>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
