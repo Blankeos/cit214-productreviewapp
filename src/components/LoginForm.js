@@ -19,6 +19,7 @@ const LoginForm = () => {
   const submit = async (e) => {
     e.preventDefault();
     try {
+      setError("");
       await login(state.email, state.password);
     } catch {
       setError("Can't log in");
@@ -27,11 +28,11 @@ const LoginForm = () => {
 
   return (
     <div className="mt-36">
-      <h1 className="text-4xl text-blue-500 text-center">Login</h1>
+      <h1 className="text-4xl text-myOrange text-center">Login</h1>
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>
-      <form className="w-96 mx-auto p-12 border h-auto">
+      <form className="w-96 mx-auto p-12 border border-gray-300 rounded-md h-auto">
         {error && (
           <p className="text-center p-4 text-red-600 bg-red-200 w-72 rounded-lg  justify-self mb-4 text-sm">
             {error}
@@ -41,7 +42,7 @@ const LoginForm = () => {
           <label>Email</label>
           <input
             onChange
-            className="border border-black rounded-sm p-2"
+            className="border border-gray-300 rounded-sm p-2"
             name="email"
             type="email"
             placeholder="Enter your email here"
@@ -49,7 +50,7 @@ const LoginForm = () => {
           ></input>
           <label>Password</label>
           <input
-            className="border border-black rounded-sm p-2"
+            className="border  border-gray-300 rounded-sm p-2"
             name="password"
             type="password"
             placeholder="Enter your password here"
@@ -57,7 +58,7 @@ const LoginForm = () => {
           ></input>
         </div>
         <button
-          className="shadow-md disabled:opacity-50 border bg-yellow-500 px-5 py-2 rounded-full mt-4 text-white transition hover:bg-yellow-400"
+          className="shadow-md disabled:opacity-50 border-2 border-myOrange text-myOrange px-5 py-2 rounded-full mt-4 hover:text-white transition hover:bg-myOrange"
           type="submit"
           onClick={(e) => submit(e)}
           disabled={loading}

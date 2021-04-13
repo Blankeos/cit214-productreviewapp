@@ -1,11 +1,15 @@
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        myOrange: "#ffa500",
+      },
+    },
   },
   variants: {
     extend: {},
   },
   plugins: [],
-}
+};
