@@ -46,11 +46,11 @@ const RegisterForm = () => {
 
   return (
     <div className="mt-36">
-      <h1 className="text-4xl text-blue-500 text-center">Register</h1>
+      <h1 className="text-4xl text-yellow-500 text-center">Register</h1>
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>
-      <form className="relative w-96 mx-auto p-12 border h-auto">
+      <form className="relative w-96 mx-auto p-12 border border-gray-300 rounded-md h-auto">
         {error && (
           <p className="text-center p-4 text-red-600 bg-red-200 w-72 rounded-lg  justify-self mb-4 text-sm">
             {error}
@@ -59,7 +59,7 @@ const RegisterForm = () => {
         <div className="flex flex-col space-y-3">
           <label>Email</label>
           <input
-            className="border border-black rounded-sm p-2"
+            className="border border-gray-300 rounded-sm p-2"
             name="email"
             type="email"
             placeholder="Enter your email here"
@@ -67,7 +67,7 @@ const RegisterForm = () => {
           ></input>
           <label>Password</label>
           <input
-            className="border border-black rounded-sm p-2"
+            className="border border-gray-300 rounded-sm p-2"
             name="password"
             type="password"
             placeholder="Enter your password here"
