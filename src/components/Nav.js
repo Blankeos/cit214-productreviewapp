@@ -33,12 +33,16 @@ const Nav = () => {
       </nav>
       <div>
         <ul className="flex space-x-2">
-          <li className="disabled:opacity-50 border-2 border-myOrange text-myOrange px-4 py-1 rounded hover:text-white transition hover:bg-myOrange">
-            <Link to="/login"> Login </Link>
-          </li>
-          <li className="disabled:opacity-50 border bg-yellow-500 px-4 py-1 rounded text-white transition hover:bg-yellow-400">
-            <Link to="/register"> Register </Link>
-          </li>
+          {!currentUser && (
+            <React.Fragment>
+              <li className="disabled:opacity-50 border-2 border-primary text-primary px-4 py-1 rounded hover:text-white transition hover:bg-primary">
+                <Link to="/login"> Login </Link>
+              </li>
+              <li className="disabled:opacity-50 border bg-primary px-4 py-1 rounded text-white transition hover:bg-yellow-400">
+                <Link to="/register"> Register </Link>
+              </li>
+            </React.Fragment>
+          )}
           {currentUser && (
             <li>
               <Link onClick={handleLogout}> Logout </Link>
