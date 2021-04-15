@@ -23,6 +23,60 @@ const ProductGrid = () => {
         productReviews="215 reviews"
         productImage="product image"
       />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
+      <ProductCard
+        productName="Product Name"
+        productRating="5 stars"
+        productReviews="215 reviews"
+        productImage="product image"
+      />
     </div>
   );
 };

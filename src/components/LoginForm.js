@@ -27,7 +27,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="mt-36">
+    <div>
       <h1 className="text-4xl text-myOrange text-center">Login</h1>
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
