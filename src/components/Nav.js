@@ -35,11 +35,21 @@ const Nav = () => {
         <ul className="flex space-x-2">
           {!currentUser && (
             <React.Fragment>
-              <li className="disabled:opacity-50 border-2 border-primary text-primary px-4 py-1 rounded hover:text-white transition hover:bg-primary">
-                <Link to="/login"> Login </Link>
+              <li>
+                <Link
+                  className="disabled:opacity-50 border-2 border-primary text-primary px-4 py-1 rounded hover:text-white transition hover:bg-primary"
+                  to="/login"
+                >
+                  Login
+                </Link>
               </li>
-              <li className="disabled:opacity-50 border bg-primary px-4 py-1 rounded text-white transition hover:bg-yellow-400">
-                <Link to="/register"> Register </Link>
+              <li>
+                <Link
+                  className="disabled:opacity-50 border-2 border-primary bg-primary px-4 py-1 rounded text-white transition hover:bg-yellow-400"
+                  to="/register"
+                >
+                  Register
+                </Link>
               </li>
             </React.Fragment>
           )}
