@@ -11,45 +11,41 @@ const Nav = () => {
   };
 
   return (
-    <div>
-      <nav>
-        <div className="flex justify-between items-center mx-10 py-8">
-          <div className="flex space-x-10 items-center">
-            <Link to="/">
-              <img className="w-20" src={Logo} />
-            </Link>
-            <ul className="flex space-x-6">
-              <li>
-                <Link to="/"> Home</Link>
-              </li>
-              <li>
-                <Link to="/review"> Review </Link>
-              </li>
-              <li>
-                <Link to="/products"> Products </Link>
-              </li>
-              <li>
-                <Link to="/about"> About </Link>
-              </li>
-            </ul>
-          </div>
-          <div>
-            <ul className="flex space-x-6">
-              <li>
-                <Link to="/login"> Login </Link>
-              </li>
-              <li>
-                <Link to="/register"> Register </Link>
-              </li>
-              {currentUser && (
-                <li>
-                  <Link onClick={handleLogout}> Logout </Link>
-                </li>
-              )}
-            </ul>
-          </div>
-        </div>
+    <div className="sticky top-0 flex justify-between items-center py-8 px-10 bg-white w-full">
+      <nav className="flex space-x-10 items-center">
+        <Link to="/">
+          <img className="w-20" src={Logo} />
+        </Link>
+        <ul className="flex space-x-6 text-gray-700">
+          <li>
+            <Link to="/"> Home</Link>
+          </li>
+          <li>
+            <Link to="/review"> Review </Link>
+          </li>
+          <li>
+            <Link to="/products"> Products </Link>
+          </li>
+          <li>
+            <Link to="/about"> About </Link>
+          </li>
+        </ul>
       </nav>
+      <div>
+        <ul className="flex space-x-2">
+          <li className="disabled:opacity-50 border-2 border-myOrange text-myOrange px-4 py-1 rounded hover:text-white transition hover:bg-myOrange">
+            <Link to="/login"> Login </Link>
+          </li>
+          <li className="disabled:opacity-50 border bg-yellow-500 px-4 py-1 rounded text-white transition hover:bg-yellow-400">
+            <Link to="/register"> Register </Link>
+          </li>
+          {currentUser && (
+            <li>
+              <Link onClick={handleLogout}> Logout </Link>
+            </li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 };
