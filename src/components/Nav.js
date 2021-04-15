@@ -13,31 +13,35 @@ const Nav = () => {
   return (
     <div>
       <nav className="flex">
-        <ul className="flex space-x-4">
-          <li>
-            <Link to="/"> Home</Link>
-          </li>
-          <li>
-            <Link to="/login"> Login </Link>
-          </li>
-          <li>
-            <Link to="/review"> Review </Link>
-          </li>
-          <li>
-            <Link to="/products"> Products </Link>
-          </li>
-          <li>
-            <Link to="/about"> About </Link>
-          </li>
-          <li>
-            <Link to="/register"> Register </Link>
-          </li>
-          {currentUser && (
+        <div className="flex justify-between mx-10">
+          <ul className="flex space-x-4">
             <li>
-              <Link onClick={handleLogout}> Logout </Link>
+              <Link to="/"> Home</Link>
             </li>
-          )}
-        </ul>
+            <li>
+              <Link to="/review"> Review </Link>
+            </li>
+            <li>
+              <Link to="/products"> Products </Link>
+            </li>
+            <li>
+              <Link to="/about"> About </Link>
+            </li>
+          </ul>
+          <ul className="flex space-x-4">
+            <li>
+              <Link to="/login"> Login </Link>
+            </li>
+            <li>
+              <Link to="/register"> Register </Link>
+            </li>
+            {currentUser && (
+              <li>
+                <Link onClick={handleLogout}> Logout </Link>
+              </li>
+            )}
+          </ul>
+        </div>
       </nav>
     </div>
   );
