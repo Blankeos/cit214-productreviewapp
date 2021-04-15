@@ -28,7 +28,7 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h1 className="text-4xl text-myOrange text-center">Login</h1>
+      <h1 className="text-4xl text-primary text-center">Login</h1>
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>
@@ -58,7 +58,7 @@ const LoginForm = () => {
           ></input>
         </div>
         <button
-          className="shadow-md disabled:opacity-50 border-2 border-myOrange text-myOrange px-5 py-2 rounded-full mt-4 hover:text-white transition hover:bg-myOrange"
+          className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-5 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary"
           type="submit"
           onClick={(e) => submit(e)}
           disabled={loading}
