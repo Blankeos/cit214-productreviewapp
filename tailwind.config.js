@@ -13,6 +13,10 @@ module.exports = {
         darkGray: "#282f42",
         myOrange: "#ffa500",
       },
+      fontFamily: {
+        body: ["Poppins"],
+        inter: ["Inter"],
+      },
     },
   },
   variants: {

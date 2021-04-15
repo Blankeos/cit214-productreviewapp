@@ -7,31 +7,33 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <AuthProvider>
-      <Router>
-        <Nav />
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/review">
-            <Review />
-          </Route>
-          <Route path="/products">
-            <Products />
-          </Route>
-          <Route path="/about">
-            <About />
-          </Route>
-        </Switch>
-      </Router>
-    </AuthProvider>
+    <div className="mx-auto max-w-screen-xl">
+      <AuthProvider>
+        <Router>
+          <Nav />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/review">
+              <Review />
+            </Route>
+            <Route path="/products">
+              <Products />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+          </Switch>
+        </Router>
+      </AuthProvider>
+    </div>
   );
 }
 

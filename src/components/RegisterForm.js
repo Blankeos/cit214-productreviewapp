@@ -46,7 +46,9 @@ const RegisterForm = () => {
 
   return (
     <div>
-      <h1 className="text-4xl text-yellow-500 text-center">Register</h1>
+      <h1 className="text-4xl text-yellow-500 text-center font-extrabold">
+        Register
+      </h1>
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>

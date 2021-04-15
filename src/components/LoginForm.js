@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [state, setState] = useState({
@@ -28,7 +29,9 @@ const LoginForm = () => {
 
   return (
     <div>
-      <h1 className="text-4xl text-primary text-center">Login</h1>
+      <h1 className="text-4xl text-primary text-center font-extrabold">
+        Login
+      </h1>
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>
@@ -57,14 +60,22 @@ const LoginForm = () => {
             onChange={(event) => handleChange(event, "password")}
           ></input>
         </div>
-        <button
-          className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-5 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary"
-          type="submit"
-          onClick={(e) => submit(e)}
-          disabled={loading}
-        >
-          Login
-        </button>
+        <div className="flex space-x-3">
+          <button
+            className="shadow-md disabled:opacity-50 border bg-primary px-5 py-2 rounded-full mt-4 text-white transition hover:bg-yellow-400"
+            type="submit"
+            onClick={(e) => submit(e)}
+            disabled={loading}
+          >
+            Login
+          </button>
+          <Link
+            to="/register"
+            className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-5 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary"
+          >
+            Create an Account
+          </Link>
+        </div>
       </form>
     </div>
   );
