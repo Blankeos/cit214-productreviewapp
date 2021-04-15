@@ -11,10 +11,10 @@ const Nav = () => {
   };
 
   return (
-    <div className="sticky top-0 flex justify-between items-center py-8 px-10 bg-white w-full">
-      <nav className="flex space-x-10 items-center">
+    <nav className="flex justify-between  items-center sticky top-0 bg-white w-full py-8">
+      <div className="flex space-x-10 items-center">
         <Link to="/">
-          <img className="w-20" src={Logo} />
+          <img className="w-20 relative transform -translate-y-1" src={Logo} />
         </Link>
         <ul className="flex space-x-6 text-gray-700">
           <li>
@@ -30,14 +30,14 @@ const Nav = () => {
             <Link to="/about"> About </Link>
           </li>
         </ul>
-      </nav>
+      </div>
       <div>
         <ul className="flex space-x-2">
           {!currentUser && (
             <React.Fragment>
               <li>
                 <Link
-                  className="disabled:opacity-50 border-2 border-primary text-primary px-4 py-1 rounded hover:text-white transition hover:bg-primary"
+                  className="disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full hover:text-white transition hover:bg-primary"
                   to="/login"
                 >
                   Login
@@ -45,7 +45,7 @@ const Nav = () => {
               </li>
               <li>
                 <Link
-                  className="disabled:opacity-50 border-2 border-primary bg-primary px-4 py-1 rounded text-white transition hover:bg-yellow-400"
+                  className="font-poppins disabled:opacity-50 border-2 border-primary bg-primary px-4 py-2 rounded-full text-white transition hover:bg-yellow-400 hover:border-yellow-400"
                   to="/register"
                 >
                   Register
@@ -60,7 +60,7 @@ const Nav = () => {
           )}
         </ul>
       </div>
-    </div>
+    </nav>
   );
 };
 
