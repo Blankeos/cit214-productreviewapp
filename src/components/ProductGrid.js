@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 const ProductGrid = () => {
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-8">
       <h1>Product Grid</h1>
       <ProductCard
         productName="Product Name"
