@@ -18,8 +18,8 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6 mx-16">
-      <form className="flex flex-col space-y-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:max-w-6xl mx-auto px-3 md:px-8">
+      <form className="overflow-hidden shadow-xl px-6 py-6 rounded-lg flex flex-col space-y-3">
         <h2 className="text-2xl">Product</h2>
         <input
           className="border rounded border-black p-2"

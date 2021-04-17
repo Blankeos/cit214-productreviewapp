@@ -6,7 +6,11 @@ import React from "react";
 // address
 
 const About = () => {
-  return <h1 className="text-4xl text-blue-500">About</h1>;
+  return (
+    <div className="mt-10">
+      <h1 className="max-w-6xl mx-auto text-4xl text-blue-500 px-8">About</h1>
+    </div>
+  );
 };
 
 export default About;

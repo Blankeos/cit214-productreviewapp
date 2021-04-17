@@ -7,8 +7,10 @@ import ProductGrid from "../components/ProductGrid.js";
 
 const Products = () => {
   return (
-    <div>
-      <h1 className="text-4xl text-blue-500">Products</h1>
+    <div className="mt-10">
+      <h1 className="max-w-6xl mx-auto text-4xl px-8 text-blue-500 mb-5">
+        Products
+      </h1>
       <ProductGrid />
     </div>
   );

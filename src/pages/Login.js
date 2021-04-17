@@ -6,7 +6,7 @@ import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   return (
-    <div>
+    <div className="mt-10 px-8">
       <LoginForm />
     </div>
   );
