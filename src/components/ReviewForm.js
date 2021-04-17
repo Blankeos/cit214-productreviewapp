@@ -18,7 +18,7 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="grid grid-cols-2 gap-6 mx-16">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-16">
       <form className="flex flex-col space-y-3">
         <h2 className="text-2xl">Product</h2>
         <input

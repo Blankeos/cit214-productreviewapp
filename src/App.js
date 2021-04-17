@@ -7,7 +7,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <div className="mx-auto max-w-screen-xl">
+    <div className="mx-auto">
       <AuthProvider>
         <Router>
           <Nav />
