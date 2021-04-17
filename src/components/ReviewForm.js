@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import StarRating from "./StarRating";
 
 const ReviewForm = () => {
   const [state, setState] = useState({
@@ -24,10 +25,12 @@ const ReviewForm = () => {
         placeholder="Enter product name"
         onChange={(event) => handleChange(event, "productName")}
       />
+      <h1 className="text-2xl">Rating</h1>
+      <StarRating starCount={5} />
       <h1 className="text-2xl">Review</h1>
       <textarea
         className="border rounded border-black"
-        placeholder="(Optional...)"
+        placeholder="Optional..."
         onChange={(event) => handleChange(event, "productReview")}
       />
       <div>
