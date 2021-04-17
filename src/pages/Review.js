@@ -13,7 +13,7 @@ import ReviewForm from "../components/ReviewForm.js";
 const Review = () => {
   return (
     <div>
-      <h1 className="text-4xl text-blue-500">Review</h1>
+      <h1 className="text-4xl text-blue-500 mx-16 mb-5">Review</h1>
       <ReviewForm />
     </div>
   );
