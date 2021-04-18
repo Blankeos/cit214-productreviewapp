@@ -62,7 +62,7 @@ const LoginForm = () => {
         </div>
         <div className="flex space-x-3">
           <button
-            className="shadow-md disabled:opacity-50 border bg-primary px-5 py-2 rounded-full mt-4 text-white transition hover:bg-yellow-400"
+            className="shadow-md disabled:opacity-50 border-2 border-primary bg-primary px-5 py-2 rounded-full mt-4 text-white transition hover:bg-yellow-400 hover:border-yellow-400"
             type="submit"
             onClick={(e) => submit(e)}
             disabled={loading}
@@ -71,7 +71,7 @@ const LoginForm = () => {
           </button>
           <Link
             to="/register"
-            className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-5 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary"
+            className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary"
           >
             Create an Account
           </Link>

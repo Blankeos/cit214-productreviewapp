@@ -28,7 +28,7 @@ const ReviewForm = () => {
         </h2>
         <h2 className="text-xl text-gray-600">Product</h2>
         <input
-          className="border rounded border-black p-2"
+          className="border border-gray-300 rounded-sm p-2"
           placeholder="Enter product name"
           onChange={(event) => handleChange(event, "productName")}
         />
@@ -36,7 +36,8 @@ const ReviewForm = () => {
         <StarRating starCount={5} />
         <h2 className="text-xl text-gray-600">Review</h2>
         <textarea
-          className="border rounded border-black p-2 h-36"
+          className="border border-gray-300 rounded-sm p-2 h-36 max-h-48"
+          style={{ minHeight: "9rem" }}
           placeholder="Optional..."
           onChange={(event) => handleChange(event, "productReview")}
         />
@@ -56,10 +57,6 @@ const ReviewForm = () => {
           className="relative bg-yellow-400 animate-pulse w-56 h-56 rounded-lg flex justify-center items-center"
           style={{ animationDelay: "0.5s" }}
         >
-          {/* <AiOutlineLoading3Quarters
-            className="text-primary animate-spin"
-            size="2em"
-          /> */}
           <RiLoader4Fill
             size="3em"
             className="absolute animate-spin text-yellow-200"
