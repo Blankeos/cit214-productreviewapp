@@ -52,7 +52,7 @@ const RegisterForm = () => {
       <p className="text-center p-4">
         {currentUser && "Currently logged in: " + currentUser.email}
       </p>
-      <form className="relative w-96 mx-auto p-12 border border-gray-300 rounded-md h-auto">
+      <form className="relative w-96 mx-auto p-12 border border-gray-300 rounded-md h-auto bg-white">
         {error && (
           <p className="text-center p-4 text-red-600 bg-red-200 w-72 rounded-lg  justify-self mb-4 text-sm">
             {error}

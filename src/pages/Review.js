@@ -13,9 +13,9 @@ import ReviewForm from "../components/ReviewForm.js";
 const Review = () => {
   return (
     <div className="mt-10">
-      <h1 className="px-8 text-4xl text-blue-500 md:max-w-6xl mx-auto mb-5">
+      {/* <h1 className="px-8 text-4xl text-blue-500 md:max-w-6xl mx-auto mb-5">
         Review
-      </h1>
+      </h1> */}
       <ReviewForm />
     </div>
   );
