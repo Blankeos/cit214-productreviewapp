@@ -44,10 +44,10 @@ const Nav = () => {
           </div>
         </div>
         <div>
-          <div className="relative md:hidden w-7 h-8 flex flex-col justify-evenly cursor-pointer">
-            <span className="bg-gray-700 w-full h-1 rounded-full"></span>
-            <span className="bg-gray-700 w-full h-1 rounded-full"></span>
-            <span className="bg-gray-700 w-full h-1 rounded-full"></span>
+          <div className="relative md:hidden w-5 h-5 flex flex-col justify-evenly cursor-pointer">
+            <span className="bg-white w-full h-1 rounded-full"></span>
+            <span className="bg-white w-full h-1 rounded-full"></span>
+            <span className="bg-white w-full h-1 rounded-full"></span>
           </div>
           <ul className="hidden md:flex md:space-x-2">
             {!currentUser && (
