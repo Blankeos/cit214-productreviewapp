@@ -32,6 +32,7 @@ module.exports = {
       padding: ["focus-within"],
       translate: ["focus-within"],
       transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
+      borderRadius: ["hover", "focus"],
     },
   },
   plugins: [],
