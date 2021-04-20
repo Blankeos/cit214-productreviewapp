@@ -17,12 +17,21 @@ module.exports = {
         body: ["Poppins"],
         inter: ["Inter"],
       },
+      transitionProperty: {
+        width: "width",
+      },
     },
   },
   variants: {
     extend: {
       scale: ["active"],
       outline: ["active"],
+      position: ["focus-within"],
+      width: ["responsive", "hover", "focus", "focus-within"],
+      margin: ["focus-within"],
+      padding: ["focus-within"],
+      translate: ["focus-within"],
+      transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
     },
   },
   plugins: [],
