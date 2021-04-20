@@ -18,7 +18,7 @@ const Nav = () => {
         <div className="flex md:space-x-4 items-center">
           <Link to="/">
             <img
-              className="w-20 relative transform -translate-y-1"
+              className="w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110"
               src={Logo}
             />
           </Link>
