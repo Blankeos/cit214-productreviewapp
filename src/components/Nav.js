@@ -95,13 +95,19 @@ const Nav = () => {
               </div>
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
                 <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link to="/review">Review</Link>
+                  <Link onClick={handleMenuButton} to="/review">
+                    Review
+                  </Link>
                 </li>
                 <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link to="/products">Products</Link>
+                  <Link onClick={handleMenuButton} to="/products">
+                    Products
+                  </Link>
                 </li>
                 <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link to="/about">About</Link>
+                  <Link onClick={handleMenuButton} to="/about">
+                    About
+                  </Link>
                 </li>
               </ul>
             </div>

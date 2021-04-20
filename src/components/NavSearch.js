@@ -37,24 +37,25 @@ const NavSearch = (props) => {
           </Link>
           <div className="bg-primary md:bg-transparent flex flex-col space-y-4 top-0 left-0 py-5 pt-20 absolute w-full items-center md:relative md:flex-row md:items-center md:mt-0 md:space-x-4 md:space-y-0 md:py-0 md:pb-0 md:focus-within:pb-0 pb-40 focus-within:pb-10 rounded-b-2xl transition-all">
             {/* Search Box */}
-            <div
-              ref={node}
-              className="flex bg-white transition-all duration-300 ease-out focus-within:w-11/12 md:focus-within:w-full focus-within:shadow-lg py-2 px-2.5 md:w-48 rounded-full space-x-1 md:border md:border-gray-300 items-center w-10/12"
-            >
+            <div className="flex bg-white transition-all duration-300 ease-out focus-within:w-11/12 md:focus-within:w-full focus-within:shadow-lg py-2 px-2.5 md:w-48 rounded-full space-x-1 md:border md:border-gray-300 items-center w-10/12">
               <RiSearch2Line size="1.2em" color="gray" />
-              <input
-                autoFocus
-                ref={searchRef}
-                className="w-full p-1"
-                placeholder="Search..."
-              ></input>
-              <button
-                onMouseDown={() => {
-                  searchRef.current.value = "";
-                }}
-              >
-                <BsX size="1.2em" color="gray" />
-              </button>
+              <div ref={node} className="w-full flex space-x-1">
+                <input
+                  autoFocus
+                  ref={searchRef}
+                  className="w-full p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
+                  placeholder="Search..."
+                ></input>
+                <button
+                  className="px-1.5 focus:ring-primary focus:ring-1 rounded-full focus:outline-none transition transform active:scale-75"
+                  onClick={() => {
+                    searchRef.current.focus();
+                    searchRef.current.value = "";
+                  }}
+                >
+                  <BsX size="1.2em" color="gray" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
