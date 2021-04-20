@@ -42,11 +42,7 @@ const ReviewForm = () => {
           onChange={(event) => handleChange(event, "productReview")}
         />
         <div>
-          <button
-            className="shadow-md disabled:opacity-50 border bg-primary px-5 py-2 rounded-full mt-4 text-white transition hover:bg-yellow-400"
-            type="submit"
-            onClick={submitReview}
-          >
+          <button className="default-btn" type="submit" onClick={submitReview}>
             Submit Review
           </button>
         </div>
