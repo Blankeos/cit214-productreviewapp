@@ -68,19 +68,19 @@ const ReviewForm = () => {
         ></div>
         <div
           className="mt-3 w-5/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
+          style={{ animationDelay: "1.2s" }}
+        ></div>
+        <div
+          className="mt-3 w-6/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
+          style={{ animationDelay: "1.6s" }}
+        ></div>
+        <div
+          className="mt-3 w-5/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
           style={{ animationDelay: "2s" }}
         ></div>
         <div
           className="mt-3 w-6/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "1s" }}
-        ></div>
-        <div
-          className="mt-3 w-5/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "3s" }}
-        ></div>
-        <div
-          className="mt-3 w-6/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "4s" }}
+          style={{ animationDelay: "2.4s" }}
         ></div>
         {/* <h2 className="mt-5">Product Name</h2> */}
       </div>
