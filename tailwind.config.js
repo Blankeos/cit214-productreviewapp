@@ -20,7 +20,10 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      scale: ["active"],
+      outline: ["active"],
+    },
   },
   plugins: [],
 };
