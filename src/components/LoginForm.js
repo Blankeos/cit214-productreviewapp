@@ -19,12 +19,14 @@ const LoginForm = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       setError("");
       await login(state.email, state.password);
     } catch {
       setError("Can't log in");
     }
+    setLoading(false);
   };
 
   return (
