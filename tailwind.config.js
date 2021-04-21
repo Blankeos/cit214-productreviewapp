@@ -37,6 +37,7 @@ module.exports = {
       translate: ["focus-within"],
       transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
       borderRadius: ["hover", "focus"],
+      opacity: ["disabled"],
     },
   },
   plugins: [],
