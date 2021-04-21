@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import { Link } from "react-router-dom";
+import { GiCoffeeBeans } from "react-icons/gi";
 
 const LoginForm = () => {
   const [state, setState] = useState({
@@ -29,26 +30,23 @@ const LoginForm = () => {
     setLoading(false);
   };
 
+  //   <p className="text-center p-4">
+  //   {currentUser && "Currently logged in: " + currentUser.email}
+  // </p>
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-auto">
-      <div>
-        <h1 className="text-4xl text-primary text-center font-extrabold">
-          Login
-        </h1>
-        <p className="text-center p-4">
-          {currentUser && "Currently logged in: " + currentUser.email}
-        </p>
-        <form className="w-96 mx-auto p-12 border border-gray-300 rounded-md h-auto bg-white">
-          {error && (
-            <p className="text-center p-4 text-red-600 bg-red-200 w-72 rounded-lg  justify-self mb-4 text-sm">
-              {error}
-            </p>
-          )}
-          <div className="flex flex-col space-y-3">
+    <div class="mt-20 p-2 md:max-w-6xl md:p-12 mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:h-96 border border-gray-300 rounded-2xl shadow-xl overflow-hidden">
+        <form className="w-full p-12 col-span-1 flex flex-col justify-center flex-shrink-0">
+          <h2 className="flex font-bold text-gray-600 space-x-2 text-2xl mb-5">
+            <GiCoffeeBeans className="relative transform translate-y-1 text-primary" />
+            <span>Login</span>
+          </h2>
+          <div className="flex flex-col space-y-3 w-full">
             <label>Email</label>
             <input
               onChange
-              className="border border-gray-300 rounded-sm p-2"
+              className="border border-gray-300 rounded-sm p-2 outline-none focus:ring-1 focus:ring-primary"
               name="email"
               type="email"
               placeholder="Enter your email here"
@@ -56,7 +54,7 @@ const LoginForm = () => {
             ></input>
             <label>Password</label>
             <input
-              className="border  border-gray-300 rounded-sm p-2"
+              className="border  border-gray-300 rounded-sm p-2 outline-none focus:ring-1 focus:ring-primary"
               name="password"
               type="password"
               placeholder="Enter your password here"
@@ -74,15 +72,15 @@ const LoginForm = () => {
             </button>
             <Link
               to="/register"
-              className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary"
+              className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary flex-shrink-0"
             >
               Create an Account
             </Link>
           </div>
         </form>
-      </div>
-      <div className="bg-gradient-to-tr from-white via-yellow-100 to-primary">
-        <h1 className="text-4xl text-center mt-5">Cafe.ly</h1>
+        <div className="h-40 md:h-full md:w-full bg-login-img bg-cover bg-center col-span-1 order-first md:order-last flex-shrink">
+          <h1 className="text-4xl text-center"></h1>
+        </div>
       </div>
     </div>
   );
