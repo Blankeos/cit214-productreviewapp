@@ -4,6 +4,10 @@ import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Nav from "./components/Nav";
 import { About, Home, Products, Login, Review, Register } from "./pages";
 import { AuthProvider } from "./contexts/AuthContext";
+import Popup from "./components/Popup";
+
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -31,6 +35,7 @@ function App() {
               <About />
             </Route>
           </Switch>
+          <ToastContainer position="bottom-right" />
         </Router>
       </AuthProvider>
     </div>
