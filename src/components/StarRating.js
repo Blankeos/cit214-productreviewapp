@@ -7,6 +7,7 @@ import { FaStar } from "react-icons/fa";
 const StarRating = () => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
+  const [starColor, setStarColor] = useState("text-gray-200");
 
   return (
     <div class="flex space-x-2">
@@ -14,12 +15,19 @@ const StarRating = () => {
         const ratingValue = i + 1;
         let color;
         if (hover) {
-          color = ratingValue <= (hover || rating) ? "yellow-400" : "gray-200";
+          color =
+            ratingValue <= (hover || rating)
+              ? "text-yellow-400"
+              : "text-gray-200";
         } else {
-          color = ratingValue <= (hover || rating) ? "primary" : "gray-200";
+          color =
+            ratingValue <= (hover || rating) ? "text-primary" : "text-gray-200";
         }
         return (
-          <label key={i} className="transform transition hover:scale-125">
+          <label
+            key={i}
+            className="transform transition hover:scale-125 ease-in-out"
+          >
             <input
               type="radio"
               name="rating"
@@ -28,7 +36,7 @@ const StarRating = () => {
               onClick={() => setRating(ratingValue)}
             />
             <FaStar
-              className={`cursor-pointer text-${color} transition ease-in-out`}
+              className={"cursor-pointer transition ease-in-out " + color}
               size="2.5em"
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}

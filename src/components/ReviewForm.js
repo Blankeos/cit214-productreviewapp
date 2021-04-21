@@ -20,8 +20,8 @@ const ReviewForm = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:max-w-6xl mx-auto px-3 md:px-8">
-      <form className="overflow-hidden bg-white shadow-xl px-6 py-6 rounded-2xl border border-gray-100 flex flex-col space-y-3 col-span-2">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:max-w-6xl mx-auto px-3 lg:px-8">
+      <form className="overflow-hidden bg-white shadow-xl px-6 py-6 rounded-2xl border border-gray-100 flex flex-col space-y-3 col-span-1 lg:col-span-2">
         <h2 className="flex font-bold text-gray-600 space-x-2 text-2xl mb-5">
           <MdRateReview className="relative transform translate-y-1.5 text-primary" />
           <span>Review</span>
@@ -48,41 +48,40 @@ const ReviewForm = () => {
         </div>
       </form>
 
-      <div className="bg-white flex flex-col justify-start items-center p-6 col-span-1 rounded-2xl border border-gray-100 shadow-xl">
-        <div
-          className="relative bg-yellow-400 animate-pulse w-56 h-56 rounded-lg flex justify-center items-center"
-          style={{ animationDelay: "0.5s" }}
-        >
-          <RiLoader4Fill
-            size="3em"
-            className="absolute animate-spin text-yellow-200"
-          />
-          <RiLoader5Fill
-            size="3em"
-            className="absolute animate-spin text-white"
-          />
+      <div className="flex flex-row col-span-1 order-first lg:order-last lg:flex-col">
+        <div className="overflow-hidden space-x-4 sm:w-full md:w-8/12 lg:w-full lg:flex-col lg:space-y-4 lg:space-x-0 lg:p-0 lg:pb-6 lg:items-center bg-white flex flex-row p-4 rounded-2xl border border-gray-100 shadow-xl">
+          <div
+            className="relative rounded-xl lg:rounded-none flex-shrink-0 bg-yellow-400 animate-pulse w-32 h-32 lg:w-full lg:h-64 md:w-56 md:h-56 flex justify-center items-center"
+            style={{ animationDelay: "0.5s" }}
+          >
+            <RiLoader4Fill
+              size="3em"
+              className="absolute animate-spin text-yellow-200"
+            />
+            <RiLoader5Fill
+              size="3em"
+              className="absolute animate-spin text-white"
+            />
+          </div>
+
+          <div className="flex flex-col w-10/12 space-y-4">
+            <div
+              className="w-full h-12 bg-yellow-400 rounded-lg animate-pulse"
+              style={{ animationDelay: "0.8s" }}
+            ></div>
+
+            <div className="w-full space-y-2">
+              <div
+                className="w-24 h-5 bg-yellow-200 rounded-lg animate-pulse"
+                style={{ animationDelay: "1.2s" }}
+              ></div>
+              <div
+                className="w-20 h-5 bg-yellow-200 rounded-lg animate-pulse"
+                style={{ animationDelay: "1.6s" }}
+              ></div>
+            </div>
+          </div>
         </div>
-        <div
-          className="mt-5 w-8/12 h-8 bg-primary rounded-lg animate-pulse"
-          style={{ animationDelay: "0.8s" }}
-        ></div>
-        <div
-          className="mt-3 w-5/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "1.2s" }}
-        ></div>
-        <div
-          className="mt-3 w-6/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "1.6s" }}
-        ></div>
-        <div
-          className="mt-3 w-5/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "2s" }}
-        ></div>
-        <div
-          className="mt-3 w-6/12 h-3 bg-yellow-200 rounded-lg animate-pulse"
-          style={{ animationDelay: "2.4s" }}
-        ></div>
-        {/* <h2 className="mt-5">Product Name</h2> */}
       </div>
     </div>
   );

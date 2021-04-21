@@ -61,7 +61,7 @@ const Nav = () => {
 
       <nav className="sticky top-0 bg-white shadow-lg z-10">
         <div
-          className="h-20 md:h-28 flex justify-between items-center w-full py-5 px-8 md:py-8 md:max-w-6xl mx-auto"
+          className="h-16 md:h-28 flex justify-between items-center w-full py-5 px-8 md:py-8 md:max-w-6xl mx-auto"
           style={{
             display: searchMode ? "none" : "flex",
           }}
@@ -69,7 +69,7 @@ const Nav = () => {
           <div className="flex md:space-x-4 items-center w-full mr-10">
             <Link to="/">
               <img
-                className="w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
+                className="w-16 md:w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />
             </Link>
@@ -95,13 +95,19 @@ const Nav = () => {
               </div>
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
                 <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link to="/review">Review</Link>
+                  <Link onClick={handleMenuButton} to="/review">
+                    Review
+                  </Link>
                 </li>
                 <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link to="/products">Products</Link>
+                  <Link onClick={handleMenuButton} to="/products">
+                    Products
+                  </Link>
                 </li>
                 <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link to="/about">About</Link>
+                  <Link onClick={handleMenuButton} to="/about">
+                    About
+                  </Link>
                 </li>
               </ul>
             </div>
