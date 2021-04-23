@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 
+import { toast } from "react-toastify";
+
 const RegisterForm = () => {
   const [state, setState] = useState({
     email: "",
@@ -33,13 +35,19 @@ const RegisterForm = () => {
       setError("");
       setLoading(true);
       await register(state.email, state.password);
+      toast.success(`☕ ${state.email} is successfully registered!`, {
+        autoClose: 5000,
+      });
     } catch {
-      setError("There's an error creating your account.");
-      if (passwordStrength.length < 6)
-        setError("Password is less than 6 chars.");
-      if (state.email == "" || state.password == "") {
-        setError("Fields can't be empty.");
-      }
+      toast.error("⚠ Failed to register", { autoClose: 5000 });
+      // setError("There's an error creating your account.");
+      // if (passwordStrength.length < 6)
+      //   toast.error("⚠ Password is less than 6 characters", {
+      //     autoClose: 5000,
+      //   });
+      // if (state.email == "" || state.password == "") {
+      //   toast.error("⚠ Fields can't be empty", { autoClose: 5000 });
+      // }
     }
     setLoading(false);
   };

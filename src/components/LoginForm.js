@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { GiCoffeeBeans } from "react-icons/gi";
+import Popup from "./Popup";
+
+import { toast } from "react-toastify";
 
 const LoginForm = () => {
+  const history = useHistory();
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -24,7 +28,12 @@ const LoginForm = () => {
     try {
       setError("");
       await login(state.email, state.password);
+      history.push("/");
+      toast.success(`😃 Successfully logged in as ${state.email}`, {
+        autoClose: 5000,
+      });
     } catch {
+      toast.error("⚠ Failed to login", { autoClose: 5000 });
       setError("Can't log in");
     }
     setLoading(false);

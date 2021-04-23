@@ -31,7 +31,7 @@ const NavSearch = (props) => {
         <div className="flex md:space-x-4 items-center w-full">
           <Link to="/">
             <img
-              className="w-20 relative transform -translate-y-1 transition duration-200 ease-out hover:scale-110 active:scale-90"
+              className="w-20 h-20 relative transform -translate-y-1 transition duration-200 ease-out hover:scale-110 active:scale-90"
               src={Logo}
             />
           </Link>

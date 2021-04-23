@@ -1,14 +1,17 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import Logo from "../assets/imgs/cafely_logo.svg";
 import { RiSearch2Line } from "react-icons/ri";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 
+import { toast } from "react-toastify";
+
 import NavSearch from "./NavSearch";
 
 const Nav = () => {
+  const history = useHistory();
   const [searchMode, setSearchMode] = useState(false);
   const [menuActive, setMenuActive] = useState({
     state: false,
@@ -47,6 +50,8 @@ const Nav = () => {
 
   const handleLogout = async () => {
     await logout();
+    history.push("/login");
+    toast.warn("👋 You have logged out. See you later!", { autoClose: 5000 });
   };
 
   return (
@@ -69,7 +74,7 @@ const Nav = () => {
           <div className="flex md:space-x-4 items-center w-full mr-10">
             <Link to="/">
               <img
-                className="w-16 md:w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
+                className="w-20 h-20 md:w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />
             </Link>
@@ -83,7 +88,7 @@ const Nav = () => {
               <div className="flex bg-white transition-all ease-out py-2 px-2.5 md:w-48 rounded-full space-x-1 md:border md:border-gray-300 items-center w-10/12">
                 <RiSearch2Line size="1.2em" color="gray" />
                 <input
-                  onClick={() => {
+                  onFocus={() => {
                     setSearchMode(true);
                   }}
                   className="w-full p-1"
@@ -94,21 +99,21 @@ const Nav = () => {
                 <BiDotsVerticalRounded size="1.5em" className="text-primary" />
               </div>
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
-                <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link onClick={handleMenuButton} to="/review">
+                <Link onClick={handleMenuButton} to="/review">
+                  <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
                     Review
-                  </Link>
-                </li>
-                <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link onClick={handleMenuButton} to="/products">
+                  </li>
+                </Link>
+                <Link onClick={handleMenuButton} to="/products">
+                  <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
                     Products
-                  </Link>
-                </li>
-                <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
-                  <Link onClick={handleMenuButton} to="/about">
+                  </li>
+                </Link>
+                <Link onClick={handleMenuButton} to="/about">
+                  <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">
                     About
-                  </Link>
-                </li>
+                  </li>
+                </Link>
               </ul>
             </div>
           </div>
