@@ -74,7 +74,7 @@ const Nav = () => {
           <div className="flex md:space-x-4 items-center w-full mr-10">
             <Link to="/">
               <img
-                className="w-16 md:w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
+                className="w-20 h-20 md:w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />
             </Link>
@@ -88,7 +88,7 @@ const Nav = () => {
               <div className="flex bg-white transition-all ease-out py-2 px-2.5 md:w-48 rounded-full space-x-1 md:border md:border-gray-300 items-center w-10/12">
                 <RiSearch2Line size="1.2em" color="gray" />
                 <input
-                  onClick={() => {
+                  onFocus={() => {
                     setSearchMode(true);
                   }}
                   className="w-full p-1"
