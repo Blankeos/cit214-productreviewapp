@@ -36,7 +36,10 @@ const StarRating = () => {
               onClick={() => setRating(ratingValue)}
             />
             <FaStar
-              className={"cursor-pointer transition ease-in-out " + color}
+              className={
+                "active:text-yellow-300 cursor-pointer transition ease-in-out " +
+                color
+              }
               size="2.5em"
               onMouseEnter={() => setHover(ratingValue)}
               onMouseLeave={() => setHover(null)}
