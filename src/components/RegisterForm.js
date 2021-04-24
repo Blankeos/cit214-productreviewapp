@@ -3,6 +3,7 @@ import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 
 import { toast } from "react-toastify";
+import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
 
 const RegisterForm = () => {
   const [state, setState] = useState({
@@ -104,7 +105,7 @@ const RegisterForm = () => {
           onClick={(e) => submit(e)}
           disabled={loading}
         >
-          Register
+          {loading ? <AnimatedLoadingIcon size="1.4em" /> : "Register"}
         </button>
       </form>
     </div>
