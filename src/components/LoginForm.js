@@ -6,6 +6,7 @@ import { GiCoffeeBeans } from "react-icons/gi";
 import Popup from "./Popup";
 
 import { toast } from "react-toastify";
+import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -77,7 +78,7 @@ const LoginForm = () => {
               onClick={(e) => submit(e)}
               disabled={loading}
             >
-              Login
+              {loading ? <AnimatedLoadingIcon size="1.4em" /> : "Login"}
             </button>
             <Link
               to="/register"

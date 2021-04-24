@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import StarRating from "./StarRating";
 import { MdRateReview } from "react-icons/md";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { RiLoader4Fill, RiLoader5Fill } from "react-icons/ri";
+import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
+
 const ReviewForm = () => {
   const [state, setState] = useState({
     productName: "",
@@ -54,14 +54,7 @@ const ReviewForm = () => {
             className="relative rounded-xl lg:rounded-none flex-shrink-0 bg-yellow-400 animate-pulse w-32 h-32 lg:w-full lg:h-64 md:w-56 md:h-56 flex justify-center items-center"
             style={{ animationDelay: "0.5s" }}
           >
-            <RiLoader4Fill
-              size="3em"
-              className="absolute animate-spin text-yellow-200"
-            />
-            <RiLoader5Fill
-              size="3em"
-              className="absolute animate-spin text-white"
-            />
+            <AnimatedLoadingIcon size="3.5em" />
           </div>
 
           <div className="flex flex-col w-10/12 space-y-4">
