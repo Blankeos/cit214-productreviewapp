@@ -27,11 +27,11 @@ const NavSearch = (props) => {
 
   return (
     <nav className="sticky top-0 bg-white shadow-lg z-10">
-      <div className="h-20 md:h-28 flex justify-between items-center w-full py-5 px-8 md:py-8 md:max-w-6xl mx-auto">
+      <div className="h-16 md:h-28 flex justify-between items-center w-full py-5 px-8 md:py-8 md:max-w-6xl mx-auto">
         <div className="flex md:space-x-4 items-center w-full">
           <Link to="/">
             <img
-              className="w-20 h-20 relative transform -translate-y-1 transition duration-200 ease-out hover:scale-110 active:scale-90"
+              className="w-16 h-16 md:w-20 md:h-20 relative transform -translate-y-1 transition duration-200 ease-out hover:scale-110 active:scale-90"
               src={Logo}
             />
           </Link>

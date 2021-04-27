@@ -74,7 +74,7 @@ const Nav = () => {
           <div className="flex md:space-x-4 items-center w-full mr-10">
             <Link to="/">
               <img
-                className="w-20 h-20 md:w-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
+                className="w-16 h-16 md:w-20 md:h-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />
             </Link>
@@ -95,9 +95,41 @@ const Nav = () => {
                   placeholder="Search..."
                 ></input>
               </div>
+
               <div className="p-2 hidden md:flex lg:hidden ">
                 <BiDotsVerticalRounded size="1.5em" className="text-primary" />
               </div>
+
+              <div className="md:hidden flex space-x-4">
+                {!currentUser ? (
+                  <>
+                    <Link
+                      onClick={handleMenuButton}
+                      className="px-4 py-2 rounded-full border-gray-700 border-2 text-gray-700 hover:bg-gray-700 hover:text-primary"
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      onClick={handleMenuButton}
+                      className="px-4 py-2 rounded-full bg-gray-700 border-2 border-gray-700 text-primary hover:bg-gray-800 hover:border-gray-800"
+                      to="/register"
+                    >
+                      Register
+                    </Link>
+                  </>
+                ) : (
+                  <Link
+                    onClick={() => {
+                      handleLogout();
+                      handleMenuButton();
+                    }}
+                  >
+                    Logout
+                  </Link>
+                )}
+              </div>
+
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
                 <Link onClick={handleMenuButton} to="/review">
                   <li className="transform transition duration-75 ease-out hover:scale-105 active:scale-90">

@@ -45,7 +45,7 @@ const LoginForm = () => {
   // </p>
 
   return (
-    <div class="mt-20 p-2 md:max-w-6xl md:p-12 mx-auto">
+    <div class="md:mt-20 p-2 md:max-w-6xl md:p-12 mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 md:h-96 border border-gray-300 rounded-2xl shadow-xl overflow-hidden">
         <form className="w-full p-12 col-span-1 flex flex-col justify-center flex-shrink-0">
           <h2 className="flex font-bold text-gray-600 space-x-2 text-2xl mb-5">
