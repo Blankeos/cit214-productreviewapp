@@ -183,9 +183,12 @@ const Nav = () => {
                 </React.Fragment>
               )}
               {currentUser && (
-                <li>
-                  <Link onClick={handleLogout}> Logout </Link>
-                </li>
+                <>
+                  <div className="w-12 h-12 rounded-full bg-gray-100"></div>
+                  <li>
+                    <Link onClick={handleLogout}> Logout </Link>
+                  </li>
+                </>
               )}
             </ul>
           </div>
