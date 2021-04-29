@@ -2,7 +2,15 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import Nav from "./components/Nav";
-import { About, Home, Products, Login, Review, Register } from "./pages";
+import {
+  About,
+  Home,
+  Products,
+  Login,
+  Review,
+  Register,
+  Profile,
+} from "./pages";
 import { AuthProvider } from "./contexts/AuthContext";
 import Popup from "./components/Popup";
 
@@ -33,6 +41,9 @@ function App() {
             </Route>
             <Route path="/about">
               <About />
+            </Route>
+            <Route path="/profile">
+              <Profile />
             </Route>
           </Switch>
           <ToastContainer position="bottom-right" />
