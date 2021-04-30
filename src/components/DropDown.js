@@ -39,9 +39,9 @@ export default function DropDown(props) {
               className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             >
               <div className="py-1">
-                {props.items.map((item) => {
+                {props.items.map((item, i) => {
                   return (
-                    <Menu.Item>
+                    <Menu.Item key={i}>
                       {({ active }) => (
                         <Link
                           to={item.route}
