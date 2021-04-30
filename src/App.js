@@ -11,8 +11,11 @@ import {
   Register,
   Profile,
 } from "./pages";
+
+import PrivateRoute from "./components/PrivateRoute.js";
+import NotAuthedRoute from "./components/NotAuthedRoute.js";
 import { AuthProvider } from "./contexts/AuthContext";
-import Popup from "./components/Popup";
+// import Popup from "./components/Popup";
 
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,24 +30,24 @@ function App() {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/login">
+            <NotAuthedRoute path="/login">
               <Login />
-            </Route>
-            <Route path="/register">
+            </NotAuthedRoute>
+            <NotAuthedRoute path="/register">
               <Register />
-            </Route>
-            <Route path="/review">
+            </NotAuthedRoute>
+            <PrivateRoute path="/review">
               <Review />
-            </Route>
+            </PrivateRoute>
             <Route path="/products">
               <Products />
             </Route>
-            <Route path="/about">
+            <PrivateRoute path="/about">
               <About />
-            </Route>
-            <Route path="/profile">
+            </PrivateRoute>
+            <PrivateRoute path="/profile">
               <Profile />
-            </Route>
+            </PrivateRoute>
           </Switch>
           <ToastContainer position="bottom-right" />
         </Router>
