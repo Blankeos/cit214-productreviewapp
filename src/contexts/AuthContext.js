@@ -9,6 +9,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
+  const [authStateChecked, setAuthStateChecked] = useState(false);
 
   function register(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -25,6 +26,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
+      setAuthStateChecked(true);
     });
     return unsubscribe;
   }, []);
@@ -34,6 +36,7 @@ export function AuthProvider({ children }) {
     register,
     login,
     logout,
+    authStateChecked,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
