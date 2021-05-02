@@ -13,17 +13,17 @@ import DropDown from "./DropDown.js";
 import { toast } from "react-toastify";
 
 import NavSearch from "./NavSearch";
+import AuthRender from "./AuthRender";
 
 const Nav = () => {
   const history = useHistory();
+  const { logout, currentUser, authStateChecked } = useAuth();
   const [searchMode, setSearchMode] = useState(false);
   const [menuActive, setMenuActive] = useState({
     state: false,
     btnClass: "",
     menuClass: "-translate-y-full",
   });
-  const menu = useRef();
-  const { logout, currentUser } = useAuth();
 
   useEffect(() => {
     handleMenuButton();
@@ -127,7 +127,7 @@ const Nav = () => {
               </div>
 
               <div className="md:hidden flex space-x-4">
-                {!currentUser ? (
+                {authStateChecked && !currentUser ? (
                   <>
                     <Link
                       onClick={handleMenuButton}
@@ -188,7 +188,7 @@ const Nav = () => {
               <span className="bg-gray-800 w-full h-0.5 rounded-sm  transform transition-transform duration-300"></span>
             </div>
             <ul className="hidden md:flex md:space-x-2">
-              {!currentUser && (
+              {authStateChecked && !currentUser && (
                 <React.Fragment>
                   <li>
                     <Link
@@ -208,31 +208,30 @@ const Nav = () => {
                   </li>
                 </React.Fragment>
               )}
-              {currentUser && (
-                <>
-                  {/* <div className="w-12 h-12 rounded-full bg-gray-100"></div> */}
-                  <DropDown
-                    menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75"
-                    label={<SiCoffeescript className="text-white" />}
-                    items={[
-                      {
-                        icon: <BsFillPersonFill className="text-primary" />,
-                        label: "Profile",
-                        route: "/profile",
-                      },
-                      {
-                        icon: <GoSignOut className="text-primary" />,
-                        label: "Sign Out",
-                        route: "/logout",
-                        onClick: handleLogout,
-                      },
-                    ]}
-                  />
-                  {/* <li>
+
+              <AuthRender>
+                {/* <div className="w-12 h-12 rounded-full bg-gray-100"></div> */}
+                <DropDown
+                  menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75"
+                  label={<SiCoffeescript className="text-white" />}
+                  items={[
+                    {
+                      icon: <BsFillPersonFill className="text-primary" />,
+                      label: "Profile",
+                      route: "/profile",
+                    },
+                    {
+                      icon: <GoSignOut className="text-primary" />,
+                      label: "Sign Out",
+                      route: "/logout",
+                      onClick: handleLogout,
+                    },
+                  ]}
+                />
+                {/* <li>
                     <Link onClick={handleLogout}> Logout </Link>
                   </li> */}
-                </>
-              )}
+              </AuthRender>
             </ul>
           </div>
         </div>
