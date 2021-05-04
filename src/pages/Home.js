@@ -29,8 +29,8 @@ const Home = () => {
             </button>
           </div>
           <div className="absolute flex justify-end w-full bottom-0 right-0 mb-10 gap-5">
-            <div className="rounded-lg bg-red-100 w-44 h-72"></div>
-            <div className="rounded-lg bg-red-100 w-44 h-72"></div>
+            <div className="rounded-lg bg-primary w-44 h-72"></div>
+            <div className="rounded-lg bg-primary w-44 h-72"></div>
           </div>
         </div>
       </div>
@@ -54,6 +54,7 @@ const Home = () => {
             </div>
             {/* Side Bar */}
             <div className="hidden lg:flex lg:flex-col lg:col-span-1">
+              {/* Latest Story */}
               <h2 className="font-bold text-xl my-5">📄 Latest Story</h2>
               <a href="https://www.globenewswire.com/news-release/2021/05/03/2221241/0/en/Wawa-s-Free-Coffee-Tuesday-Offer-for-Rewards-Members-Returns-this-May-with-Enhancements.html">
                 <div className="shadow-xl rounded-xl border border-gray-100 flex justify-between overflow-hidden">
@@ -69,6 +70,7 @@ const Home = () => {
                   </div>
                 </div>
               </a>
+              {/* NewsLetter */}
               <h2 className="font-bold text-xl my-5 mt-10">📰 Newsletter</h2>
               <div className="shadow-xl rounded-xl border border-gray-100 flex flex-col overflow-hidden text-sm">
                 {/* Picture */}
