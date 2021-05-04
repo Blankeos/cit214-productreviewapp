@@ -38,12 +38,12 @@ const ReviewForm = () => {
         <textarea
           className="border border-gray-300 rounded-sm p-2 h-36 max-h-48"
           style={{ minHeight: "9rem" }}
-          placeholder="Optional..."
+          placeholder="Describe your experience."
           onChange={(event) => handleChange(event, "productReview")}
         />
         <div>
           <button className="default-btn" type="submit" onClick={submitReview}>
-            Submit Review
+            Post My Review
           </button>
         </div>
       </form>
