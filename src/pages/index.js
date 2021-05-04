@@ -5,3 +5,4 @@ export { default as Products } from "./Products.js";
 export { default as Review } from "./Review.js";
 export { default as Register } from "./Register.js";
 export { default as Profile } from "./Profile.js";
+export { default as Page404 } from "./Page404.js";

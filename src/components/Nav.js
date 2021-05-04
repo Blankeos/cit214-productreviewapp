@@ -14,6 +14,7 @@ import { toast } from "react-toastify";
 
 import NavSearch from "./NavSearch";
 import AuthRender from "./AuthRender";
+import SkeletonRenderer from "./SkeletonRenderer";
 
 const Nav = () => {
   const history = useHistory();
@@ -210,7 +211,6 @@ const Nav = () => {
               )}
 
               <AuthRender>
-                {/* <div className="w-12 h-12 rounded-full bg-gray-100"></div> */}
                 <DropDown
                   menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75"
                   label={<SiCoffeescript className="text-white" />}
@@ -228,9 +228,6 @@ const Nav = () => {
                     },
                   ]}
                 />
-                {/* <li>
-                    <Link onClick={handleLogout}> Logout </Link>
-                  </li> */}
               </AuthRender>
             </ul>
           </div>
