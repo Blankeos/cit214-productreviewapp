@@ -38,9 +38,38 @@ const About = () => {
             <h2 className="font-extrabold text-5xl">Meet the Team</h2>
             {/* Grids of the people */}
             <div className="grid grid-cols-2 gap-10 w-full p-5">
-              <div className="bg-brown-100 h-96">asd</div>
-              <div className="bg-brown-100 h-96">asd</div>
-              <div className="bg-brown-100 h-96">asd</div>
+              <div className="flex flex-col bg-brown-100 h-96">
+                <div className="w-full h-3/4 bg-blue-400">img</div>
+                <h1 className="p-1 text-xl font-bold">Carlo Taleon</h1>
+                <p className="px-1">Lead Developer</p>
+              </div>
+              <div className="flex flex-col bg-brown-100 h-96">
+                <div className="w-full h-3/4 bg-blue-400">img</div>
+                <h1 className="p-1 text-xl font-bold">CJ Rubinos</h1>
+                <p className="px-1">Front-End Developer</p>
+              </div>
+              <div className="flex flex-col bg-brown-100 h-96">
+                <div className="w-full h-3/4 bg-blue-400">img</div>
+                <h1 className="p-1 text-xl font-bold">Jiezel Maglalang</h1>
+                <p className="px-1">UI/UX Designer</p>
+              </div>
+              <div className="flex flex-col bg-brown-100 h-96">
+                <div className="w-full h-3/4 bg-blue-400">img</div>
+                <h1 className="p-1 text-xl font-bold">
+                  Xyphrus Von Keith Caguan
+                </h1>
+                <p className="px-1">UX Designer</p>
+              </div>
+              <div className="flex flex-col bg-brown-100 h-96">
+                <div className="w-full h-3/4 bg-blue-400">img</div>
+                <h1 className="p-1 text-xl font-bold">Gene Caleb Carbonilla</h1>
+                <p className="px-1">Data Specialist</p>
+              </div>
+              <div className="flex flex-col bg-brown-100 h-96">
+                <div className="w-full h-3/4 bg-blue-400">img</div>
+                <h1 className="p-1 text-xl font-bold">Zhyray Remigio</h1>
+                <p className="px-1">Documentation Specialist</p>
+              </div>
             </div>
           </div>
         </div>
