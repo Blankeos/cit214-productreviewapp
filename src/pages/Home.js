@@ -74,12 +74,30 @@ const Home = () => {
                 </div>
               </a>
               <h2 className="font-bold text-xl my-5 mt-10">📰 Newsletter</h2>
-              <div className="shadow-xl rounded-2xl border border-gray-100">
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
+              <div className="shadow-xl rounded-xl border border-gray-100 flex flex-col overflow-hidden text-sm">
+                {/* Picture */}
+                <div
+                  className="h-44 w-full"
+                  style={{
+                    backgroundImage: `url("https://static.wikia.nocookie.net/5ef5d627-c162-4309-ab47-e09f6b411883")`,
+                    backgroundSize: "cover",
+                  }}
+                ></div>
+                {/* Words and Form */}
+                <div className="p-5 flex-col space-y-4">
+                  <div>
+                    Get the best new coffee products in your inbox, every day 👇
+                  </div>
+                  <form className="flex flex-col space-y-2">
+                    <input
+                      className="border w-full p-3 rounded"
+                      placeholder="Your email"
+                    ></input>
+                    <button className="bg-primary p-3 rounded text-white">
+                      SUBSCRIBE
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
