@@ -28,7 +28,6 @@ const Home = () => {
             </button>
           </div>
           <div className="absolute flex justify-end w-full bottom-0 right-0 mb-10 gap-5">
-            ASSSSSSSSSS ASSAASD
             <div className="rounded-lg bg-red-100 w-44 h-72"></div>
             <div className="rounded-lg bg-red-100 w-44 h-72"></div>
           </div>
