@@ -2,7 +2,7 @@ import React from "react";
 import { MdRateReview } from "react-icons/md";
 import { FaStar } from "react-icons/fa";
 
-export default function HorizontalProductCard() {
+export default function HorizontalProductCard({ productData, ...rest }) {
   return (
     <div className="flex-col sm:flex-row sm:h-48 w-full border-t border-gray-100 flex overflow-hidden">
       {/* Image */}
