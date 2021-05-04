@@ -19,6 +19,7 @@ module.exports = {
       },
       transitionProperty: {
         width: "width",
+        borderRadius: "rounded",
       },
       backgroundImage: (theme) => ({
         "login-img":
@@ -35,8 +36,13 @@ module.exports = {
       margin: ["focus-within"],
       padding: ["focus-within"],
       translate: ["focus-within"],
-      transitionProperty: ["responsive", "motion-safe", "motion-reduce"],
-      borderRadius: ["hover", "focus"],
+      transitionProperty: [
+        "responsive",
+        "motion-safe",
+        "motion-reduce",
+        "active",
+      ],
+      borderRadius: ["hover", "focus", "active", "responsive"],
       opacity: ["disabled"],
       textColor: ["active"],
       backgroundColor: ["active"],

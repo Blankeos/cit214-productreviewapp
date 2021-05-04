@@ -1,5 +1,6 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
+import HorizontalProductCard from "../components/HorizontalProductCard";
 import ProductCard from "../components/ProductCard";
 import ProductGrid from "../components/ProductGrid";
 
@@ -36,23 +37,19 @@ const Home = () => {
       {/* Other Sections */}
       <div className="flex flex-col flex-grow h-full bg-darkGray">
         {/* Other Sections Starts Here */}
-        <div className="bg-white flex-grow h-full rounded-t-3xl pt-16 px-8 pb-24">
+        <div className="bg-white flex-grow h-full rounded-t-3xl pt-16 px-2 sm:px-8 pb-24">
           <div className="max-w-6xl mx-auto grid grid-cols-3 gap-5 text-gray-800">
             {/* Primary Left Bar */}
             <div className="col-span-full lg:col-span-2">
               <h2 className="font-bold text-xl my-5">
                 🔥 Top Rated Products Today
               </h2>
-              <div className="shadow-md rounded-2xl border border-gray-100">
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
-                <p>asdasd</p>
+              <div className="shadow-md rounded-2xl border border-gray-100 overflow-hidden">
+                <HorizontalProductCard />
+                <HorizontalProductCard />
+                <HorizontalProductCard />
+                <HorizontalProductCard />
+                <HorizontalProductCard />
               </div>
             </div>
             {/* Side Bar */}
