@@ -38,77 +38,37 @@ const About = () => {
             <h2 className="font-extrabold text-5xl m-8">Meet the Team</h2>
             {/* Grids of the people */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 w-full p-5 px-20 sm:px-5">
-              <div className="flex flex-col h-96">
-                <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-                  img
-                </div>
-                <div className="flex flex-col space-y-2 pt-5">
-                  <h3 className="text-xl font-bold">Carlo Taleon</h3>
-                  <p className="uppercase text-sm text-gray-500">
-                    Lead Developer
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col h-96">
-                <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-                  img
-                </div>
-                <div className="flex flex-col space-y-2 pt-5">
-                  <h3 className="text-xl font-bold">CJ Rubinos</h3>
-                  <p className="uppercase text-sm text-gray-500">
-                    Front-End Developer
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col h-96">
-                <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-                  img
-                </div>
-                <div className="flex flex-col space-y-2 pt-5">
-                  <h3 className="text-xl font-bold">Jiezel Maglalang</h3>
-                  <p className="uppercase text-sm text-gray-500">
-                    UI/UX Designer
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col h-96">
-                <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-                  img
-                </div>
-                <div className="flex flex-col space-y-2 pt-5">
-                  <h3 className="text-xl font-bold">
-                    Xyphrus Von Keith Caguan
-                  </h3>
-                  <p className="uppercase text-sm text-gray-500">UX Designer</p>
-                </div>
-              </div>
-              <div className="flex flex-col h-96">
-                <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-                  img
-                </div>
-                <div className="flex flex-col space-y-2 pt-5">
-                  <h3 className="text-xl font-bold">Gene Caleb Carbonilla</h3>
-                  <p className="uppercase text-sm text-gray-500">
-                    Data Specialist
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col h-96">
-                <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-                  img
-                </div>
-                <div className="flex flex-col space-y-2 pt-5">
-                  <h3 className="text-xl font-bold">Zhyray Remigio</h3>
-                  <p className="uppercase text-sm text-gray-500">
-                    Documentation Specialist
-                  </p>
-                </div>
-              </div>
+              <TeamMember name="Carlo Taleon" title="Lead Developer" />
+              <TeamMember name="CJ Rubinos" title="Front-End Developer" />
+              <TeamMember name="Jiezel Maglalang" title="UI/UX Designer" />
+              <TeamMember
+                name="Gene Caleb Carbonilla"
+                title="Data Specialist"
+              />
+              <TeamMember name="Xyphrus Von Keith Caguan" title="UX Designer" />
+              <TeamMember
+                name="Zhyray Remigio"
+                title="Documentation Specialist"
+              />
             </div>
           </div>
         </div>
       </div>
     </>
+  );
+};
+
+const TeamMember = ({ name, title, ...rest }) => {
+  return (
+    <div className="flex flex-col h-96">
+      <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
+        img
+      </div>
+      <div className="flex flex-col space-y-2 pt-5">
+        <h3 className="text-xl font-bold">{name}</h3>
+        <p className="uppercase text-sm text-gray-500">{title}</p>
+      </div>
+    </div>
   );
 };
 
