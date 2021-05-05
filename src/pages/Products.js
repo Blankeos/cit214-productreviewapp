@@ -1,10 +1,11 @@
 import React from "react";
-import { IconContext } from "react-icons";
 import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoIosSad } from "react-icons/io";
 import { FaStar } from "react-icons/fa";
 import StarMeter from "../components/StarMeter";
+import PageContainer from "../components/PageContainer";
+
 // import { BsX } from "react-icons/bs";
 // import ProductGrid from "../components/ProductGrid.js";
 
@@ -13,7 +14,7 @@ import StarMeter from "../components/StarMeter";
 
 const Products = () => {
   return (
-    <div className="text-gray-800 bg-white w-full flex-grow h-full px-2 sm:px-8 pt-12 pb-24">
+    <PageContainer>
       {/* Container */}
       <div className="max-w-6xl mx-auto">
         {/* Product Search Section */}
@@ -24,16 +25,21 @@ const Products = () => {
               <span>Products</span>
             </h1>
             {/* Search Bar */}
-            <div className="mb-5 flex space-x-1 items-center bg-white p-2 rounded text-gray-600 shadow-md border border-gray-100">
-              <RiSearch2Line className="mx-0.5" />
-              <input
-                className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
-                placeholder="What are you looking for?"
-              ></input>
-              {/* <BsX className="" /> */}
+            <div className="flex w-full mb-5 gap-2">
+              <div className="flex-grow flex space-x-1 items-center bg-white p-2 rounded text-gray-600 shadow-md border border-gray-100">
+                <RiSearch2Line className="mx-0.5" />
+                <input
+                  className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
+                  placeholder="What are you looking for?"
+                ></input>
+                {/* <BsX className="" /> */}
+              </div>
+              <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
+                Add a Product
+              </button>
             </div>
           </div>
-          <div className="w-56 h-1"></div>
+          <div className="w-56 h-1 hidden md:block"></div>
         </div>
         {/* Page Grid */}
         <div className="flex flex-wrap w-full gap-5">
@@ -57,7 +63,7 @@ const Products = () => {
                 <span> Can't Find A Specific Product?</span>
               </h2>
               <p className="text-xs">Contribute to our database.</p>
-              <button className="rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
+              <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
                 Add a Product
               </button>
             </div>
@@ -65,7 +71,7 @@ const Products = () => {
         </div>
       </div>
       {/* <ProductGrid /> */}
-    </div>
+    </PageContainer>
   );
 };
 
@@ -85,16 +91,17 @@ export const ProductCard = () => {
         ></div>
       </div>
       {/* Stars */}
-      <div className="absolute top-0 right-0 p-2">
+      <div className="absolute top-0 right-0 p-2 flex space-x-2 items-end">
         <StarMeter
           rating={4.3}
-          shadeClass="text-yellow-400"
-          lightClass="text-white"
-          lightIcon={<FaStar className="shadow-2xl" />}
+          iconSize="1.2em"
+          // shadeClass="text-yellow-400"
+          lightClass="text-white shadow"
         />
+        <span className="text-white text-xs">4.1</span>
       </div>
       {/* Body */}
-      <div className="p-2 bg-white group-hover:bg-gray-900">
+      <div className="p-2 bg-white group-hover:bg-gray-900 transition-all duration-300">
         <h3 className="font-bold text-sm">Product Name</h3>
         <p className="text-xs">18 Reviews</p>
         <p className="text-xs">25 Ratings</p>
