@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-// import axios from "axios";
+import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { GiCoffeeBeans } from "react-icons/gi";
@@ -13,8 +12,7 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
-  const { login, currentUser, authStateChecked } = useAuth();
-  const [error, setError] = useState("");
+  const { login, authStateChecked } = useAuth();
   const [loading, setLoading] = useState(false);
   const handleChange = (event, fieldName) => {
     setState((prevState) => {
@@ -26,7 +24,6 @@ const LoginForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      setError("");
       await login(state.email, state.password);
       history.push("/");
       toast.success(`😃 Successfully logged in as ${state.email}`, {
@@ -34,17 +31,12 @@ const LoginForm = () => {
       });
     } catch {
       toast.error("⚠ Failed to login", { autoClose: 5000 });
-      setError("Can't log in");
     }
     setLoading(false);
   };
 
-  //   <p className="text-center p-4">
-  //   {currentUser && "Currently logged in: " + currentUser.email}
-  // </p>
-
   return (
-    <div class="md:mt-20 p-2 md:max-w-6xl md:p-12 mx-auto">
+    <div className="md:mt-20 p-2 md:max-w-6xl md:p-12 mx-auto">
       {authStateChecked ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:h-96 border border-gray-300 rounded-2xl shadow-xl overflow-hidden">
           <form className="w-full p-12 col-span-1 flex flex-col justify-center flex-shrink-0">
@@ -55,7 +47,6 @@ const LoginForm = () => {
             <div className="flex flex-col space-y-3 w-full">
               <label>Email</label>
               <input
-                onChange
                 className="border border-gray-300 rounded-sm p-2 outline-none focus:ring-1 focus:ring-primary"
                 name="email"
                 type="email"
@@ -88,9 +79,7 @@ const LoginForm = () => {
               </Link>
             </div>
           </form>
-          <div className="h-40 md:h-full md:w-full bg-login-img bg-cover bg-center col-span-1 order-first md:order-last flex-shrink">
-            <h1 className="text-4xl text-center"></h1>
-          </div>
+          <div className="h-40 md:h-full md:w-full bg-login-img bg-cover bg-center col-span-1 order-first md:order-last flex-shrink"></div>
         </div>
       ) : (
         <AnimatedLoadingIcon size="5em" />

@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import Logo from "../assets/imgs/cafely_logo.svg";
 import { RiSearch2Line } from "react-icons/ri";
@@ -14,7 +13,6 @@ import { toast } from "react-toastify";
 
 import NavSearch from "./NavSearch";
 import AuthRender from "./AuthRender";
-import SkeletonRenderer from "./SkeletonRenderer";
 
 const Nav = () => {
   const history = useHistory();
@@ -25,10 +23,6 @@ const Nav = () => {
     btnClass: "",
     menuClass: "-translate-y-full",
   });
-
-  useEffect(() => {
-    handleMenuButton();
-  }, []);
 
   const handleMenuButton = () => {
     setMenuActive((prevState) => {
@@ -52,6 +46,10 @@ const Nav = () => {
       }));
     }
   };
+
+  useEffect(() => {
+    handleMenuButton();
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -79,6 +77,7 @@ const Nav = () => {
           <div className="flex md:space-x-4 items-center w-full mr-10">
             <Link to="/">
               <img
+                alt="Cafely Logo"
                 className="w-16 h-16 md:w-20 md:h-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />

@@ -18,9 +18,9 @@ export default function HorizontalProductCard({ productData, ...rest }) {
         <div>
           <h3 className="font-bold text-sm sm:text-lg">Product Name</h3>
           <p className="text-xs sm:text-sm">
-            Bacon ipsum dolor amet jowl jerky spare ribs capicola. Pork chop
-            short ribs picanha, alcatra ground round flank tenderloin shoulder
-            t-bone.
+            Pumpkin spice cream rich single origin, bar french press aromatic
+            that latte. Crema, white organic crema steamed grounds mazagran
+            organic mazagran cultivar.
           </p>
         </div>
         <div className="text-xs mt-5 sm:text-sm sm:mt-0">
@@ -35,7 +35,7 @@ export default function HorizontalProductCard({ productData, ...rest }) {
               <FaStar />
               {/* Stars Inner */}
               <div
-                class="absolute top-0 left-0 overflow-hidden whitespace-nowrap"
+                className="absolute top-0 left-0 overflow-hidden whitespace-nowrap"
                 style={{ width: "70%" }}
               >
                 <div className="text-primary flex w-24">

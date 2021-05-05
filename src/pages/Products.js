@@ -1,5 +1,4 @@
 import React from "react";
-import ProductCard from "../components/ProductCard.js";
 import ProductGrid from "../components/ProductGrid.js";
 
 // search engine of all products on the site

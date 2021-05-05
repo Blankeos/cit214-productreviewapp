@@ -1,13 +1,9 @@
-import { PromiseProvider } from "mongoose";
-import { PreviousMap } from "postcss";
-import React, { useEffect, useState } from "react";
-import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
+import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
 const StarRating = () => {
   const [rating, setRating] = useState(null);
   const [hover, setHover] = useState(null);
-  const [starColor, setStarColor] = useState("text-gray-200");
 
   return (
     <div class="flex space-x-2">

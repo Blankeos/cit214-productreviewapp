@@ -1,8 +1,6 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import HorizontalProductCard from "../components/HorizontalProductCard";
-import ProductCard from "../components/ProductCard";
-import ProductGrid from "../components/ProductGrid";
 
 // Goal is to have a hero (banner)
 // product feature component (display featured products)
@@ -64,6 +62,7 @@ const Home = () => {
                   </div>
                   <div className="min-h-full w-28 flex-shrink-0">
                     <img
+                      alt="Latest Story"
                       className="object-cover w-full h-full"
                       src="https://ml.globenewswire.com/Resource/Download/45f0eb60-9290-40f4-b9e5-0bb0b842747e?size=3"
                     />

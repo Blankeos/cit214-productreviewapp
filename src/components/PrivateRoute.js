@@ -1,13 +1,14 @@
-import React, { Component, useEffect } from "react";
-import { Redirect, Route, useHistory } from "react-router-dom";
+import React from "react";
+import { Redirect, Route } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
-import PropTypes from "prop-types";
 
 const customId = "custom-id-yes";
 
 export const PrivateRoute = ({
   component: Component,
+  customToast = `😳 You're  not authorized`,
+  toastDuration = 1200,
   redirectTo = "/login",
   ...rest
 }) => {
@@ -21,8 +22,8 @@ export const PrivateRoute = ({
           <Component {...props} />
         ) : (
           <Redirect to={redirectTo}>
-            {toast.error(`😳 You're not authorized`, {
-              autoClose: 1200,
+            {toast.error(customToast, {
+              autoClose: toastDuration,
               toastId: customId,
             })}
           </Redirect>

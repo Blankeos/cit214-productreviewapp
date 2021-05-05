@@ -1,6 +1,6 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
 import {
@@ -19,7 +19,7 @@ import PrivateRoute from "./components/PrivateRoute.js";
 import { AuthProvider } from "./contexts/AuthContext";
 // import Popup from "./components/Popup";
 
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
@@ -32,7 +32,12 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
-            <PrivateRoute path="/review" component={Review} />
+            <PrivateRoute
+              path="/review"
+              customToast={`😓 You need to login before review`}
+              toastDuration={2000}
+              component={Review}
+            />
             <Route path="/products" component={Products} />
             <Route path="/about" component={About} />
             <PrivateRoute path="/profile" component={Profile} />

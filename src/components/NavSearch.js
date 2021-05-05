@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../assets/imgs/cafely_logo.svg";
 import { BsX } from "react-icons/bs";
@@ -31,6 +31,7 @@ const NavSearch = (props) => {
         <div className="flex md:space-x-4 items-center w-full">
           <Link to="/">
             <img
+              alt="Cafely Logo"
               className="w-16 h-16 md:w-20 md:h-20 relative transform -translate-y-1 transition duration-200 ease-out hover:scale-110 active:scale-90"
               src={Logo}
             />

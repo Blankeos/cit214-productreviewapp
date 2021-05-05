@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 
 import { toast } from "react-toastify";
@@ -18,7 +17,7 @@ const RegisterForm = () => {
   });
 
   const handleChange = (event, fieldName) => {
-    if (fieldName == "password") {
+    if (fieldName === "password") {
       setPasswordStrength({
         length: event.target.value.length,
       });
