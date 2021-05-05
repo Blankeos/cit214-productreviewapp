@@ -1,9 +1,10 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
 import HorizontalProductCard from "../components/HorizontalProductCard";
-import ProductCard from "../components/ProductCard";
-import ProductGrid from "../components/ProductGrid";
+import PageContainer from "../components/PageContainer";
 
+import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
+import CafelyLogo2 from "../assets/imgs/cafely-graphic-logotype.svg";
 // Goal is to have a hero (banner)
 // product feature component (display featured products)
 // "join our community" button
@@ -11,27 +12,48 @@ import ProductGrid from "../components/ProductGrid";
 
 const Home = () => {
   return (
-    <div className="flex flex-col flex-grow h-full">
+    <div className="flex flex-col flex-grow h-full overflow-hidden">
       {/* Hero Section */}
-      <div className="bg-darkGray w-full h-96 mx-auto ">
-        <div className="p-10 py-20 h-full max-w-4xl mx-auto text-white relative">
-          <div className="">
-            <h1 className="text-4xl font-black">What's the best for you?</h1>
-            <p className="mt-5 mb-8 font-light text-xl">
-              <i>In culture, in taste</i>
-            </p>
-            <button className="text-sm animate-bounce default-btn flex items-center justify-center">
-              <span>Browse Now</span>
-              <AiOutlineArrowDown
-                className="transform translate-x-1"
-                size="1.3em"
-              />
-            </button>
+      <div className="bg-darkGray w-full h-96 mx-auto">
+        <div className="flex mx-auto max-w-4xl h-full relative">
+          <div className="p-10 pr-16 py-20 h-full text-white relative">
+            <div className="">
+              <h1 className="text-4xl font-black">What's the best for you?</h1>
+              <p className="mt-5 mb-8 font-light text-xl">
+                <i>
+                  Defining the best coffee experience. In culture, in taste.
+                </i>
+              </p>
+              <button className="text-sm animate-bounce default-btn flex items-center justify-center">
+                <span>Browse Now</span>
+                <AiOutlineArrowDown
+                  className="transform translate-x-1"
+                  size="1.3em"
+                />
+              </button>
+            </div>
           </div>
-          <div className="absolute flex justify-end w-full bottom-0 right-0 mb-10 gap-5">
+          <div className="hidden sm:block w-96 transform sm:-translate-x-8">
+            <div className="animate-pulse absolute transform translate-x-4 -rotate-12 w-96 h-96 bg-primary shadow-md rounded-2xl"></div>
+            <img
+              src={CafelyLogo1}
+              className="absolute transform rotate-12 w-96 h-96 bg-white opacity-90 border-white border-4 shadow rounded-2xl"
+              style={{ animationDelay: "2s" }}
+            />
+            <div
+              class="h-12 w-12 bg-primary absolute rounded-full transform translate-x-4 shadow-md animate-pulse translate-y-5"
+              style={{ animationDelay: "3s" }}
+            ></div>
+            <div
+              class="h-10 w-10 bottom-0 bg-primary absolute rounded-full transform translate-x-4 shadow-md animate-pulse -translate-y-7"
+              style={{ animationDelay: ".8s" }}
+            ></div>
+            <div class="h-16 w-16 right-0 top-0 bg-primary absolute rounded-full transform translate-x-4 shadow-md animate-pulse translate-y-10"></div>
+          </div>
+          {/* <div className="absolute flex justify-end w-full bottom-0 right-0 mb-10 gap-5">
             <div className="rounded-lg bg-primary w-44 h-72"></div>
             <div className="rounded-lg bg-primary w-44 h-72"></div>
-          </div>
+          </div> */}
         </div>
       </div>
       {/* Other Sections */}
@@ -64,6 +86,7 @@ const Home = () => {
                   </div>
                   <div className="min-h-full w-28 flex-shrink-0">
                     <img
+                      alt="Latest Story"
                       className="object-cover w-full h-full"
                       src="https://ml.globenewswire.com/Resource/Download/45f0eb60-9290-40f4-b9e5-0bb0b842747e?size=3"
                     />
@@ -91,7 +114,7 @@ const Home = () => {
                       className="border w-full p-3 rounded"
                       placeholder="Your email"
                     ></input>
-                    <button className="bg-primary p-3 rounded text-white">
+                    <button className="select-none bg-primary p-3 rounded text-white">
                       SUBSCRIBE
                     </button>
                   </form>

@@ -13,6 +13,9 @@ module.exports = {
         darkGray: "#282f42",
         myOrange: "#ffa500",
       },
+      fontSize: {
+        xxs: ".625rem",
+      },
       fontFamily: {
         body: ["Poppins"],
         inter: ["Inter"],

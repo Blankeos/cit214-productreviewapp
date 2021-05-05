@@ -1,4 +1,3 @@
-import { PromiseProvider } from "mongoose";
 import React from "react";
 
 import { RiLoader4Fill, RiLoader5Fill } from "react-icons/ri";

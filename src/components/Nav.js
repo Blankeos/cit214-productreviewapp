@@ -1,6 +1,5 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../contexts/AuthContext";
 import Logo from "../assets/imgs/cafely_logo.svg";
 import { RiSearch2Line } from "react-icons/ri";
@@ -14,7 +13,6 @@ import { toast } from "react-toastify";
 
 import NavSearch from "./NavSearch";
 import AuthRender from "./AuthRender";
-import SkeletonRenderer from "./SkeletonRenderer";
 
 const Nav = () => {
   const history = useHistory();
@@ -25,10 +23,6 @@ const Nav = () => {
     btnClass: "",
     menuClass: "-translate-y-full",
   });
-
-  useEffect(() => {
-    handleMenuButton();
-  }, []);
 
   const handleMenuButton = () => {
     setMenuActive((prevState) => {
@@ -52,6 +46,10 @@ const Nav = () => {
       }));
     }
   };
+
+  useEffect(() => {
+    handleMenuButton();
+  }, []);
 
   const handleLogout = async () => {
     await logout();
@@ -79,6 +77,7 @@ const Nav = () => {
           <div className="flex md:space-x-4 items-center w-full mr-10">
             <Link to="/">
               <img
+                alt="Cafely Logo"
                 className="w-16 h-16 md:w-20 md:h-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />
@@ -146,30 +145,30 @@ const Nav = () => {
                     </Link>
                   </>
                 ) : (
-                  <Link
+                  <button
                     onClick={() => {
                       handleLogout();
                       handleMenuButton();
                     }}
                   >
                     Logout
-                  </Link>
+                  </button>
                 )}
               </div>
 
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
                 <Link onClick={handleMenuButton} to="/review">
-                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90">
+                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90 hover:text-primary">
                     Review
                   </li>
                 </Link>
                 <Link onClick={handleMenuButton} to="/products">
-                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90">
+                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90 hover:text-primary">
                     Products
                   </li>
                 </Link>
                 <Link onClick={handleMenuButton} to="/about">
-                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90">
+                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90 hover:text-primary">
                     About
                   </li>
                 </Link>
@@ -193,7 +192,7 @@ const Nav = () => {
                 <React.Fragment>
                   <li>
                     <Link
-                      className="text-sm disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full hover:text-white transition hover:bg-primary"
+                      className="select-none text-sm disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full hover:text-white transition hover:bg-primary"
                       to="/login"
                     >
                       Login
@@ -201,7 +200,7 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link
-                      className="text-sm disabled:opacity-50 border-2 border-primary bg-primary px-4 py-2 rounded-full text-white transition hover:bg-yellow-400 hover:border-yellow-400"
+                      className="select-none text-sm disabled:opacity-50 border-2 border-primary bg-primary px-4 py-2 rounded-full text-white transition hover:bg-yellow-400 hover:border-yellow-400"
                       to="/register"
                     >
                       Register
