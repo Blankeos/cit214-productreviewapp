@@ -21,11 +21,13 @@ import { AuthProvider } from "./contexts/AuthContext";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <AuthProvider>
       <Router>
+        <ScrollToTop />
         <Nav />
         <div className="flex flex-col min-h-screen ">
           <Switch>
