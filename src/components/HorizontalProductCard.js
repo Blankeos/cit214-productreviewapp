@@ -1,6 +1,6 @@
 import React from "react";
 import { MdRateReview } from "react-icons/md";
-import { FaStar } from "react-icons/fa";
+import StarMeter from "./StarMeter";
 
 export default function HorizontalProductCard({ productData, ...rest }) {
   return (
@@ -25,29 +25,7 @@ export default function HorizontalProductCard({ productData, ...rest }) {
         </div>
         <div className="text-xs mt-5 sm:text-sm sm:mt-0">
           <p>18 Reviews</p>
-          {/* Stars */}
-          <div className="flex">
-            <div className="relative flex text-gray-200 self-start">
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              <FaStar />
-              {/* Stars Inner */}
-              <div
-                className="absolute top-0 left-0 overflow-hidden whitespace-nowrap"
-                style={{ width: "70%" }}
-              >
-                <div className="text-primary flex w-24">
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                </div>
-              </div>
-            </div>
-          </div>
+          <StarMeter rating={1.3} />
         </div>
       </div>
       {/* Button CTA */}

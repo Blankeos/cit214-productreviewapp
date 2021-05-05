@@ -1,19 +1,76 @@
 import React from "react";
-import ProductGrid from "../components/ProductGrid.js";
+import { RiSearch2Line } from "react-icons/ri";
+import { GiShoppingBag } from "react-icons/gi";
+import StarMeter from "../components/StarMeter";
+// import { BsX } from "react-icons/bs";
+// import ProductGrid from "../components/ProductGrid.js";
 
 // search engine of all products on the site
 // grid/list of product cards
 
 const Products = () => {
   return (
-    <div className="bg-brown-100 w-full flex-grow h-full px-2 sm:px-8 pt-12 pb-24">
+    <div className="text-gray-800 bg-white w-full flex-grow h-full px-2 sm:px-8 pt-12 pb-24">
       {/* Container */}
-      <div className="max-w-6xl bg-blue-100 mx-auto">
-        <div className="">
-          <input placeholder="Find a product."></input>
+      <div className="max-w-6xl mx-auto">
+        {/* Grid */}
+        <div className="flex w-full gap-5">
+          {/* Primary Left Bar */}
+          <div className="flex-grow">
+            <h1 className="font-extrabold text-3xl mb-5 flex space-x-3">
+              <GiShoppingBag className="text-primary" />
+              <span>Products</span>
+            </h1>
+            {/* Search Bar */}
+            <div className="mb-5 flex space-x-1 items-center bg-white p-2 rounded text-gray-600 shadow-md border border-gray-100">
+              <RiSearch2Line className="mx-0.5" />
+              <input
+                className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
+                placeholder="Find a product..."
+              ></input>
+              {/* <BsX className="" /> */}
+            </div>
+            {/* Product Grid */}
+            <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+              <ProductCard />
+            </div>
+          </div>
+          {/* Right SideBar */}
+          <div className="col-span-1 bg-yellow-200 flex-grow">as</div>
         </div>
       </div>
-      <ProductGrid />
+      {/* <ProductGrid /> */}
+    </div>
+  );
+};
+
+export const ProductCard = () => {
+  return (
+    <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group hover:text-white overflow-hidden">
+      {/* Product Image */}
+      <div className="relative w-full h-80 sm:h-40 md:h-48">
+        <div className="bg-gradient-to-t from-transparent via-transparent to-black opacity-70 w-full h-full absolute"></div>
+        <div
+          className="bg-gray-100 w-full h-full"
+          style={{
+            backgroundImage: `url(https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        ></div>
+      </div>
+      {/* Stars */}
+      <div className="absolute top-0 right-0 p-2">
+        <StarMeter rating={4.5} />
+      </div>
+      <div className="p-2 bg-white group-hover:bg-gray-900">
+        <h3 className="font-bold text-sm">Product Name</h3>
+        <p className="text-xs">18 Reviews</p>
+        <p className="text-xs">25 Ratings</p>
+      </div>
     </div>
   );
 };
