@@ -1,6 +1,9 @@
 import React from "react";
+import { IconContext } from "react-icons";
 import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
+import { IoIosSad } from "react-icons/io";
+import { FaStar } from "react-icons/fa";
 import StarMeter from "../components/StarMeter";
 // import { BsX } from "react-icons/bs";
 // import ProductGrid from "../components/ProductGrid.js";
@@ -48,9 +51,10 @@ const Products = () => {
           {/* Right SideBar */}
           <div className="w-56 flex">
             {/* Can't Find Your Product? */}
-            <div className="bg-white w-56 h-56 p-5 rounded-2xl shadow-md border border-gray-100 flex flex-col space-y-3">
-              <h2 className="font-extrabold text-2xl">
-                Can't Find A Specific Product?
+            <div className="bg-white w-56 h-64 p-5 rounded-2xl shadow-md border border-gray-100 flex flex-col space-y-3">
+              <h2 className="font-extrabold text-2xl inline">
+                <IoIosSad className="" size="1.5em" />
+                <span> Can't Find A Specific Product?</span>
               </h2>
               <p className="text-xs">Contribute to our database.</p>
               <button className="rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
@@ -82,8 +86,14 @@ export const ProductCard = () => {
       </div>
       {/* Stars */}
       <div className="absolute top-0 right-0 p-2">
-        <StarMeter rating={4.5} />
+        <StarMeter
+          rating={4.3}
+          shadeClass="text-yellow-400"
+          lightClass="text-white"
+          lightIcon={<FaStar className="shadow-2xl" />}
+        />
       </div>
+      {/* Body */}
       <div className="p-2 bg-white group-hover:bg-gray-900">
         <h3 className="font-bold text-sm">Product Name</h3>
         <p className="text-xs">18 Reviews</p>
