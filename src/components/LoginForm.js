@@ -73,7 +73,7 @@ const LoginForm = () => {
               </button>
               <Link
                 to="/register"
-                className="shadow-md disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary flex-shrink-0"
+                className="select-none shadow-md disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary flex-shrink-0"
               >
                 Create an Account
               </Link>

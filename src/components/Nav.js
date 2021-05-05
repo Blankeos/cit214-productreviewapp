@@ -145,30 +145,30 @@ const Nav = () => {
                     </Link>
                   </>
                 ) : (
-                  <Link
+                  <button
                     onClick={() => {
                       handleLogout();
                       handleMenuButton();
                     }}
                   >
                     Logout
-                  </Link>
+                  </button>
                 )}
               </div>
 
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
                 <Link onClick={handleMenuButton} to="/review">
-                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90">
+                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90 hover:text-primary">
                     Review
                   </li>
                 </Link>
                 <Link onClick={handleMenuButton} to="/products">
-                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90">
+                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90 hover:text-primary">
                     Products
                   </li>
                 </Link>
                 <Link onClick={handleMenuButton} to="/about">
-                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90">
+                  <li className="text-sm transform transition duration-75 ease-out hover:scale-105 active:scale-90 hover:text-primary">
                     About
                   </li>
                 </Link>
@@ -192,7 +192,7 @@ const Nav = () => {
                 <React.Fragment>
                   <li>
                     <Link
-                      className="text-sm disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full hover:text-white transition hover:bg-primary"
+                      className="select-none text-sm disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full hover:text-white transition hover:bg-primary"
                       to="/login"
                     >
                       Login
@@ -200,7 +200,7 @@ const Nav = () => {
                   </li>
                   <li>
                     <Link
-                      className="text-sm disabled:opacity-50 border-2 border-primary bg-primary px-4 py-2 rounded-full text-white transition hover:bg-yellow-400 hover:border-yellow-400"
+                      className="select-none text-sm disabled:opacity-50 border-2 border-primary bg-primary px-4 py-2 rounded-full text-white transition hover:bg-yellow-400 hover:border-yellow-400"
                       to="/register"
                     >
                       Register
