@@ -13,9 +13,8 @@ const Products = () => {
     <div className="text-gray-800 bg-white w-full flex-grow h-full px-2 sm:px-8 pt-12 pb-24">
       {/* Container */}
       <div className="max-w-6xl mx-auto">
-        {/* Grid */}
-        <div className="flex w-full gap-5">
-          {/* Primary Left Bar */}
+        {/* Product Search Section */}
+        <div className="flex flex-wrap w-full gap-5">
           <div className="flex-grow">
             <h1 className="font-extrabold text-3xl mb-5 flex space-x-3">
               <GiShoppingBag className="text-primary" />
@@ -26,10 +25,17 @@ const Products = () => {
               <RiSearch2Line className="mx-0.5" />
               <input
                 className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
-                placeholder="Find a product..."
+                placeholder="What are you looking for?"
               ></input>
               {/* <BsX className="" /> */}
             </div>
+          </div>
+          <div className="w-56 h-1"></div>
+        </div>
+        {/* Page Grid */}
+        <div className="flex flex-wrap w-full gap-5">
+          {/* Primary Left Bar */}
+          <div className="flex-grow">
             {/* Product Grid */}
             <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
               <ProductCard />
@@ -38,8 +44,20 @@ const Products = () => {
               <ProductCard />
             </div>
           </div>
+          <div className="break md:hidden" />
           {/* Right SideBar */}
-          <div className="col-span-1 bg-yellow-200 flex-grow">as</div>
+          <div className="w-56 flex">
+            {/* Can't Find Your Product? */}
+            <div className="bg-white w-56 h-56 p-5 rounded-2xl shadow-md border border-gray-100 flex flex-col space-y-3">
+              <h2 className="font-extrabold text-2xl">
+                Can't Find A Specific Product?
+              </h2>
+              <p className="text-xs">Contribute to our database.</p>
+              <button className="rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
+                Add a Product
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       {/* <ProductGrid /> */}
