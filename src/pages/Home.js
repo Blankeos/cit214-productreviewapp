@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import HorizontalProductCard from "../components/HorizontalProductCard";
 import PageContainer from "../components/PageContainer";
 
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";

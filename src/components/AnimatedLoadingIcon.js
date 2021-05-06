@@ -2,18 +2,19 @@ import React from "react";
 
 import { RiLoader4Fill, RiLoader5Fill } from "react-icons/ri";
 
-const AnimatedLoadingIcon = (props) => {
+const AnimatedLoadingIcon = ({
+  size = "1em",
+  backFillClass = "text-yellow-200",
+  ...rest
+}) => {
   return (
     <>
       <RiLoader4Fill
-        size={props.size}
-        className="absolute animate-spin text-yellow-200"
+        size={size}
+        className={`absolute animate-spin ${backFillClass}`}
       />
-      <RiLoader5Fill
-        size={props.size}
-        className="absolute animate-spin text-white"
-      />
-      <div style={{ width: props.size, height: props.size }}></div>
+      <RiLoader5Fill size={size} className="absolute animate-spin text-white" />
+      <div style={{ width: size, height: size }}></div>
     </>
   );
 };

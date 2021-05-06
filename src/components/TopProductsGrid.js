@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import HorizontalProductCard from "./HorizontalProductCard";
+import HorizontalProductCardSkeleton from "./Skeletons/HorizontalProductCardSkeleton";
 
 export default function TopProductsGrid() {
   const [products, setProducts] = useState(null);
@@ -27,12 +28,21 @@ export default function TopProductsGrid() {
 
   return (
     <div>
-      {products &&
+      {products ? (
         products.map((product) => {
           return (
             <HorizontalProductCard key={product._idx} productData={product} />
           );
-        })}
+        })
+      ) : (
+        <>
+          <HorizontalProductCardSkeleton />
+          <HorizontalProductCardSkeleton delayFactor={2} />
+          <HorizontalProductCardSkeleton delayFactor={7} />
+          <HorizontalProductCardSkeleton delayFactor={11} />
+          <HorizontalProductCardSkeleton delayFactor={15} />
+        </>
+      )}
       {/* <p>{products.data}</p>
       {products.data.map((item, i) => {
         return <p key={i}>{item.name}</p>;
