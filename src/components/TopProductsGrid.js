@@ -7,7 +7,7 @@ export default function TopProductsGrid() {
 
   useEffect(async () => {
     await axios
-      .get("http://localhost:3000/api/products", {
+      .get("/api/products", {
         headers: {
           "Access-Control-Allow-Origin": "*",
         },
