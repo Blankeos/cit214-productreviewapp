@@ -4,25 +4,33 @@ import StarMeter from "./StarMeter";
 
 export default function HorizontalProductCard({ productData, ...rest }) {
   return (
-    <div className="flex-col sm:flex-row sm:h-48 w-full border-t border-gray-100 flex overflow-hidden">
+    <div className="flex-col sm:flex-row sm:h-64 md:h-52 w-full border-t border-gray-100 flex overflow-hidden">
       {/* Image */}
       <div
         className="w-full h-64 sm:h-full sm:w-48 bg-gray-100 flex-shrink-0"
         style={{
-          backgroundImage: `url('https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg')`,
+          backgroundImage: `url(${
+            productData.images
+              ? productData.images[0]
+              : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
+          })`,
           backgroundSize: `cover`,
           backgroundPosition: "center",
         }}
       ></div>
       {/* Body */}
       <div className="p-5 flex flex-col flex-grow justify-between">
-        <div className="flex space-x-10">
+        <div className="flex space-x-10 justify-between">
           <div>
-            <h3 className="font-bold text-sm sm:text-lg">Product Name</h3>
+            <h3 className="font-bold text-sm sm:text-xl">
+              {productData.name ? productData.name : "Product Name"}
+            </h3>
             <p className="text-xs sm:text-sm text-gray-600">
-              Pumpkin spice cream rich single origin, bar french press aromatic
-              that latte. Crema, white organic crema steamed grounds mazagran
-              organic mazagran cultivar.
+              {productData.description
+                ? productData.description.length >= 300
+                  ? productData.description.slice(0, 300) + "..."
+                  : productData.description
+                : "Pumpkin spice cream rich single origin, bar french press aromatic that latte. Crema, white organic crema steamed grounds mazagran organic mazagran cultivar."}
             </p>
           </div>
           {/* Button CTA */}

@@ -2,7 +2,6 @@ import React from "react";
 import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoIosSad } from "react-icons/io";
-import { FaStar } from "react-icons/fa";
 import StarMeter from "../components/StarMeter";
 import PageContainer from "../components/PageContainer";
 
