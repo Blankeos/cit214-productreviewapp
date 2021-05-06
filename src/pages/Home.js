@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import HorizontalProductCard from "../components/HorizontalProductCard";
 import PageContainer from "../components/PageContainer";
 
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
@@ -15,7 +14,7 @@ const Home = () => {
   return (
     <div className="flex flex-col flex-grow h-full overflow-hidden">
       {/* Hero Section */}
-      <div className="bg-darkGray w-full h-96 mx-auto">
+      <div className="bg-gradient-to-bl from-gray-700 to-darkGray w-full h-96 mx-auto">
         <div className="flex mx-auto max-w-4xl h-full relative">
           <div className="p-10 pr-16 py-20 h-full text-white relative">
             <div className="">
@@ -75,7 +74,10 @@ const Home = () => {
             <div className="hidden lg:flex lg:flex-col lg:col-span-1">
               {/* Latest Story */}
               <h2 className="font-bold text-xl my-5">📄 Latest Story</h2>
-              <a href="https://www.globenewswire.com/news-release/2021/05/03/2221241/0/en/Wawa-s-Free-Coffee-Tuesday-Offer-for-Rewards-Members-Returns-this-May-with-Enhancements.html">
+              <a
+                href="https://www.globenewswire.com/news-release/2021/05/03/2221241/0/en/Wawa-s-Free-Coffee-Tuesday-Offer-for-Rewards-Members-Returns-this-May-with-Enhancements.html"
+                target="_blank"
+              >
                 <div className="shadow-xl rounded-xl border border-gray-100 flex justify-between overflow-hidden">
                   <div className="h-full w-full pl-4 py-4 pr-2 text-sm">
                     Wawa’s “Free Coffee Tuesday” Offer for Rewards Members
