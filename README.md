@@ -13,7 +13,7 @@ Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes 
 ### Front-End
 
 1. :atom_symbol: ReactJS
-2. Tailwind
+2. ![](https://simpleicons.org//icons/tailwindcss.svg)Tailwind
 
 ### Back-End & Database
 
