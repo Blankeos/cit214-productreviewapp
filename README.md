@@ -13,11 +13,11 @@ Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes 
 ### Front-End
 
 1. :atom_symbol: ReactJS
-2. <img src="https://simpleicons.org//icons/tailwindcss.svg" alt="drawing" width="32px"/> Tailwind
+2. <img src="https://simpleicons.org//icons/tailwindcss.svg" alt="drawing" width="20px"/> Tailwind
 
 ### Back-End & Database
 
-1. Express (Exported as a serverless function)
+1. <img src="https://simpleicons.org/icons/express.svg" alt="drawing" width="20px"/> Express (Exported as a serverless function)
 2. 🔥 Firebase (Authentication)
 3. 🍃 MongoDB (Real-time database)
 
