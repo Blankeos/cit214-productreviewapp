@@ -4,6 +4,8 @@
 
 <img src="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/meta/preview.jpg" alt="Site Preview Screenshot">
 
+## :label: About
+
 Cafe.ly is a review site like Yelp, IMDB, Metacritic, or RottenTomatoes, but for ☕**Coffee**! This is our finals project for CIT 214 Software Engineering.
 
 ## :building_construction: Architecture
@@ -32,6 +34,10 @@ Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes 
 5. 🤡 Remigio, Zhyray
 6. 😎 Taleon, Carlo Antonio
 ```
+
+## :magnet: Other Stuff
+
+- [Image Repository](https://github.com/seajayrubynose/cafely-pictures)
 
 <hr>
 
