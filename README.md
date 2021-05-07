@@ -1,5 +1,9 @@
 # ☕ Cafe.ly | A Coffee Review Site
 
+> 🔗 [cafely-vercel-test-blankeos.vercel.app](https://cafely-vercel-test-blankeos.vercel.app)
+
+<img src="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/meta/preview.jpg" alt="Site Preview Screenshot">
+
 > Our CIT214 - Software Engineering Final Project
 
 Cafe.ly is a review site like Yelp, IMDB, Metacritic, or RottenTomatoes, but for **Coffee**!
