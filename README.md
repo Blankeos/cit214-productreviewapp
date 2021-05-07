@@ -4,9 +4,7 @@
 
 <img src="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/meta/preview.jpg" alt="Site Preview Screenshot">
 
-> Our CIT214 - Software Engineering Final Project
-
-Cafe.ly is a review site like Yelp, IMDB, Metacritic, or RottenTomatoes, but for **Coffee**!
+Cafe.ly is a review site like Yelp, IMDB, Metacritic, or RottenTomatoes, but for ☕**Coffee**! This is our finals project for CIT 214 Software Engineering.
 
 ## Architecture
 
@@ -15,7 +13,7 @@ Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes 
 ### Front-End
 
 ```json
-1. ⚛ ReactJS
+1. :atom_symbol: ReactJS
 2. Tailwind
 ```
 
