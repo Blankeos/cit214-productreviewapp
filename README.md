@@ -20,6 +20,7 @@ Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes 
 1. <img src="https://simpleicons.org/icons/express.svg" alt="drawing" width="16px"/> Express (Exported as a serverless function)
 2. 🔥 Firebase (Authentication)
 3. 🍃 MongoDB (Real-time database)
+4. <img src="https://simpleicons.org/icons/vercel.svg" alt="drawing" width="16px"/> Vercel (Deployment)
 
 ## Group Members
 
