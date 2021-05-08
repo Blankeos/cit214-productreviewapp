@@ -12,6 +12,7 @@ router.get("/products/:id", async (req, res) => {
   const product = await Product.findOne({ _id: req.params.id });
   res.send(product);
 });
+
 // router.get("/api/logout", (req, res) => {
 //   req.logout();
 //   res.sendStatus(200);
