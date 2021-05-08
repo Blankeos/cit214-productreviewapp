@@ -41,9 +41,8 @@ function App() {
               toastDuration={2000}
               component={Review}
             />
-            <Route exact path="/product" component={ProductPage} />
-            <Route path="/product/:slug" component={ProductPage} />
-            <Route path="/products" component={Products} />
+            <Route path="/products/:slug" component={ProductPage} />
+            <Route exact path="/products" component={Products} />
             <Route path="/about" component={About} />
             <PrivateRoute path="/profile" component={Profile} />
             <Route path="*" component={Page404} />
