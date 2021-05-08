@@ -1,17 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+import { Link } from "react-router-dom";
 import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoIosSad } from "react-icons/io";
 import StarMeter from "../components/StarMeter";
 import PageContainer from "../components/PageContainer";
 
-// import { BsX } from "react-icons/bs";
-// import ProductGrid from "../components/ProductGrid.js";
-
-// search engine of all products on the site
-// grid/list of product cards
-
 const Products = () => {
+  const [products, setProducts] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("/api/products", {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        })
+        .then((response) => {
+          const results = response.data.map((product) => {
+            return {
+              ...product,
+            };
+          });
+          setProducts(results);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+
   return (
     <PageContainer>
       {/* Container */}
@@ -43,13 +65,25 @@ const Products = () => {
         {/* Page Grid */}
         <div className="flex flex-wrap w-full gap-5">
           {/* Primary Left Bar */}
-          <div className="flex-grow">
+          <div className="flex-grow w-8/12">
             {/* Product Grid */}
             <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+              {products ? (
+                products.map((product) => {
+                  return (
+                    <Link to={`/products/${product._id}`}>
+                      <ProductCard key={product._id} productData={product} />
+                    </Link>
+                  );
+                })
+              ) : (
+                <>
+                  <ProductCardSkeleton />
+                  <ProductCardSkeleton />
+                  <ProductCardSkeleton />
+                  <ProductCardSkeleton />
+                </>
+              )}
             </div>
           </div>
           <div className="break md:hidden" />
@@ -74,7 +108,7 @@ const Products = () => {
   );
 };
 
-export const ProductCard = () => {
+export const ProductCard = ({ productData, ...rest }) => {
   return (
     <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group hover:text-white overflow-hidden">
       {/* Product Image */}
@@ -83,7 +117,11 @@ export const ProductCard = () => {
         <div
           className="bg-gray-100 w-full h-full"
           style={{
-            backgroundImage: `url(https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg)`,
+            backgroundImage: `url(${
+              productData.images
+                ? productData.images[0]
+                : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
+            })`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
@@ -95,15 +133,45 @@ export const ProductCard = () => {
           rating={4.3}
           iconSize="1.2em"
           // shadeClass="text-yellow-400"
-          lightClass="text-white shadow"
+          lightClass="text-white"
         />
         <span className="text-white text-xs">4.1</span>
       </div>
       {/* Body */}
-      <div className="p-2 bg-white group-hover:bg-gray-900 transition-all duration-300">
-        <h3 className="font-bold text-sm">Product Name</h3>
+      <div className="flex flex-col p-2 bg-white group-hover:bg-gray-900 transition-all duration-300">
+        <h3 className="font-bold text-sm">
+          {productData.name ? productData.name : "No Name Found"}
+        </h3>
         <p className="text-xs">18 Reviews</p>
         <p className="text-xs">25 Ratings</p>
+      </div>
+    </div>
+  );
+};
+
+export const ProductCardSkeleton = () => {
+  return (
+    <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group hover:text-white overflow-hidden">
+      {/* Product Image */}
+      <div className="relative w-full h-80 sm:h-40 md:h-48">
+        <div className="bg-gray-100 w-full h-full"></div>
+      </div>
+      {/* Stars */}
+      <div className="absolute top-0 right-0 p-2 flex space-x-2 items-center">
+        <StarMeter
+          iconSize="1.2em"
+          // shadeClass="text-yellow-400"
+          lightClass="text-gray-300"
+        />
+        <span className="text-gray-300 text-xs bg-gray-300 rounded">0.0</span>
+      </div>
+      {/* Body */}
+      <div className="p-2 bg-white">
+        <h3 className="font-bold text-sm bg-gray-400 text-gray-400 w-28 rounded">
+          Product Name
+        </h3>
+        <p className="my-1 rounded text-xs bg-gray-200 text-gray-200 w-16">s</p>
+        <p className="rounded text-xs bg-gray-200 text-gray-200 w-14">s</p>
       </div>
     </div>
   );
