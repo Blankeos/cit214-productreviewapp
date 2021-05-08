@@ -49,6 +49,7 @@ const About = () => {
               <TeamMember
                 name="Zhyray Remigio"
                 title="Documentation Specialist"
+                imageSource="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/team_images/documentation_specialist.png"
               />
             </div>
           </div>
@@ -58,11 +59,22 @@ const About = () => {
   );
 };
 
-const TeamMember = ({ name, title, ...rest }) => {
+const TeamMember = ({ name, title, imageSource, ...rest }) => {
   return (
     <div className="flex flex-col h-96">
-      <div className="w-full flex-grow bg-gradient-to-tl from-primary to-yellow-300">
-        img
+      <div className="w-full flex-grow overflow-hidden relative">
+        {/* Background */}
+        <div className="absolute bottom-0 w-full h-5/6 bg-gradient-to-tl from-primary to-yellow-300"></div>
+        {/* Image */}
+        <div
+          className="w-full h-full absolute"
+          style={{
+            backgroundImage: `url(${imageSource})`,
+            backgroundPosition: "center",
+            backgroundSize: "contain",
+            backgroundRepeat: "no-repeat",
+          }}
+        ></div>
       </div>
       <div className="flex flex-col space-y-2 pt-5">
         <h3 className="text-xl font-bold">{name}</h3>
