@@ -34,7 +34,7 @@ export default function TopProductsGrid() {
       {products ? (
         products.map((product) => {
           return (
-            <HorizontalProductCard key={product._idx} productData={product} />
+            <HorizontalProductCard key={product._id} productData={product} />
           );
         })
       ) : (

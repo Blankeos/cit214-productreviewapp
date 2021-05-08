@@ -12,6 +12,7 @@ import {
   Register,
   Profile,
   Page404,
+  ProductPage,
 } from "./pages";
 
 import PrivateRoute from "./components/PrivateRoute.js";
@@ -40,6 +41,8 @@ function App() {
               toastDuration={2000}
               component={Review}
             />
+            <Route exact path="/product" component={ProductPage} />
+            <Route path="/product/:slug" component={ProductPage} />
             <Route path="/products" component={Products} />
             <Route path="/about" component={About} />
             <PrivateRoute path="/profile" component={Profile} />
