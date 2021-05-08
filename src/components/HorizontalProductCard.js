@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 export default function HorizontalProductCard({ productData, ...rest }) {
   return (
-    <div className="flex-col sm:flex-row sm:h-64 md:h-52 w-full border-t border-gray-100 flex overflow-hidden">
+    <div className="flex flex-col sm:flex-row sm:h-64 md:h-52 w-full border-t border-gray-100 overflow-hidden">
       {/* Image */}
       <Link to={`/products/${productData._id}`}>
         <div className="group relative w-full h-64 sm:h-full sm:w-48 overflow-hidden">
@@ -28,7 +28,7 @@ export default function HorizontalProductCard({ productData, ...rest }) {
         </div>
       </Link>
       {/* Body */}
-      <div className="p-5 flex flex-col flex-grow justify-between">
+      <div className="p-5 flex flex-col flex-grow justify-between hover:bg-gray-100">
         <div className="flex space-x-10 justify-between">
           <div>
             <h3 className="font-bold text-sm sm:text-xl">
@@ -52,7 +52,7 @@ export default function HorizontalProductCard({ productData, ...rest }) {
             </Link>
           </div>
         </div>
-        <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-500">
+        <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-400">
           <p>18 Reviews</p>
           <div className="flex space-x-1 items-center">
             <StarMeter rating={2} iconSize="1.4em" />
