@@ -10,7 +10,7 @@ export default function HorizontalProductCard({ productData, ...rest }) {
       <Link to={`/products/${productData._id}`}>
         <div className="group relative w-full h-64 sm:h-full sm:w-48 overflow-hidden">
           <div
-            className="absolute w-full h-full bg-gray-100 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-300"
+            className="absolute w-full h-full bg-gray-100 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-500"
             style={{
               backgroundImage: `url(${
                 productData.images
