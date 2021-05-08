@@ -5,10 +5,6 @@ import PageContainer from "../components/PageContainer";
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
 import CafelyLogo2 from "../assets/imgs/cafely-graphic-logotype.svg";
 import TopProductsGrid from "../components/TopProductsGrid";
-// Goal is to have a hero (banner)
-// product feature component (display featured products)
-// "join our community" button
-// "sign up for newsletter" button
 
 const Home = () => {
   return (
