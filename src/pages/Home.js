@@ -20,6 +20,7 @@ const Home = () => {
             <div className="">
               <h1 className="text-4xl font-black">What's the best for you?</h1>
               <p className="mt-5 mb-8 font-light text-xl">
+                ☕{" "}
                 <i>
                   Defining the best coffee experience. In culture, in taste.
                 </i>
