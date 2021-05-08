@@ -8,7 +8,7 @@ Cafe.ly is a review site like Yelp, IMDB, Metacritic, or RottenTomatoes, but for
 
 ## :building_construction: Architecture
 
-Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes use of a **serverless architecture**. It's overkill but the website is constructured with the MERN Stack in mind. As such, the website is built with MongoDB, Express, and ReactJS. However, Express is exported as a serverless function for the backend without the need for NodeJS for its APIs which is located in the `/api` folder.
+Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes use of a **serverless architecture**. It's overkill but the website is constructed with the MERN Stack in mind. As such, the website is built with MongoDB, Express, and ReactJS. However, Express is exported as a serverless function for the backend for its APIs which is located in the `/api` folder.
 
 ### :atom_symbol: Front-End
 
