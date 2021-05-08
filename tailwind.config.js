@@ -32,7 +32,7 @@ module.exports = {
   },
   variants: {
     extend: {
-      scale: ["active"],
+      scale: ["active", "group-hover"],
       outline: ["active"],
       position: ["focus-within"],
       width: ["responsive", "hover", "focus", "focus-within"],

@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import HorizontalProductCard from "./HorizontalProductCard";
 import HorizontalProductCardSkeleton from "./Skeletons/HorizontalProductCardSkeleton";
+import { Link } from "react-router-dom";
 
 export default function TopProductsGrid() {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
     async function fetchData() {
-      axios
+      await axios
         .get("/api/products", {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -34,7 +35,9 @@ export default function TopProductsGrid() {
       {products ? (
         products.map((product) => {
           return (
-            <HorizontalProductCard key={product._id} productData={product} />
+            <Link to={`/products/${product._id}`}>
+              <HorizontalProductCard key={product._id} productData={product} />
+            </Link>
           );
         })
       ) : (
