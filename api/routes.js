@@ -7,6 +7,11 @@ router.get("/products", async (req, res) => {
   const allProducts = await Product.find({});
   res.send(allProducts);
 });
+
+router.get("/products/:id", async (req, res) => {
+  const product = await Product.findOne({ _id: req.params.id });
+  res.send(product);
+});
 // router.get("/api/logout", (req, res) => {
 //   req.logout();
 //   res.sendStatus(200);
