@@ -1,6 +1,6 @@
 # ☕ Cafe.ly | A Coffee Review Site 🔗 [Visit Site](https://cafely-vercel-test-blankeos.vercel.app)
 
-<img src="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/meta/preview.jpg" alt="Site Preview Screenshot">
+<img src="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/meta/preview_markdown.jpg" alt="Site Preview Screenshot">
 
 ## :label: About
 
