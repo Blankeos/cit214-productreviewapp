@@ -28,7 +28,7 @@ const ReviewForm = () => {
         </h2>
         <h2 className="text-xl text-gray-600">Product</h2>
         <input
-          className="border border-gray-300 rounded-sm p-2"
+          className="border border-gray-300 rounded-sm p-2 inpfield-transition"
           placeholder="Enter product name"
           onChange={(event) => handleChange(event, "productName")}
         />
@@ -36,7 +36,7 @@ const ReviewForm = () => {
         <StarRating starCount={5} />
         <h2 className="text-xl text-gray-600">Review</h2>
         <textarea
-          className="border border-gray-300 rounded-sm p-2 h-36 max-h-48"
+          className="border border-gray-300 rounded-sm p-2 h-36 max-h-48 inpfield-transition"
           style={{ minHeight: "9rem" }}
           placeholder="Describe your experience."
           onChange={(event) => handleChange(event, "productReview")}

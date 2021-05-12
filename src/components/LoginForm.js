@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { GiCoffeeBeans } from "react-icons/gi";
+import { MdError } from "react-icons/md";
 
 import { toast } from "react-toastify";
 import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
+import { ErrorJSX } from "./ErrorJSX";
 
 const LoginForm = () => {
   const history = useHistory();
@@ -30,13 +32,15 @@ const LoginForm = () => {
         autoClose: 5000,
       });
     } catch {
-      toast.error("⚠ Failed to login", { autoClose: 5000 });
+      toast.error(ErrorJSX(<MdError size="1.3em" />, "Failed to Login"), {
+        autoClose: 5000,
+      });
     }
     setLoading(false);
   };
 
   return (
-    <div className="md:mt-20 p-2 md:max-w-6xl md:p-12 mx-auto">
+    <div className="md:mt-10 p-2 md:max-w-6xl md:p-12 mx-auto">
       {authStateChecked ? (
         <div className="grid grid-cols-1 md:grid-cols-2 md:h-96 border border-gray-300 rounded-2xl shadow-xl overflow-hidden">
           <form className="w-full p-12 col-span-1 flex flex-col justify-center flex-shrink-0">
@@ -47,7 +51,7 @@ const LoginForm = () => {
             <div className="flex flex-col space-y-3 w-full">
               <label>Email</label>
               <input
-                className="border border-gray-300 rounded-sm p-2 outline-none focus:ring-1 focus:ring-primary"
+                className="border border-gray-300 rounded-sm p-2 inpfield-transition"
                 name="email"
                 type="email"
                 placeholder="Enter your email here"
@@ -55,7 +59,7 @@ const LoginForm = () => {
               ></input>
               <label>Password</label>
               <input
-                className="border  border-gray-300 rounded-sm p-2 outline-none focus:ring-1 focus:ring-primary"
+                className="border  border-gray-300 rounded-sm p-2 inpfield-transition"
                 name="password"
                 type="password"
                 placeholder="Enter your password here"
