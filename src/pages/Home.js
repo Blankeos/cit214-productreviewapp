@@ -5,10 +5,6 @@ import PageContainer from "../components/PageContainer";
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
 import CafelyLogo2 from "../assets/imgs/cafely-graphic-logotype.svg";
 import TopProductsGrid from "../components/TopProductsGrid";
-// Goal is to have a hero (banner)
-// product feature component (display featured products)
-// "join our community" button
-// "sign up for newsletter" button
 
 const Home = () => {
   return (
@@ -51,10 +47,6 @@ const Home = () => {
             ></div>
             <div className="h-16 w-16 right-0 top-0 bg-primary absolute rounded-full transform translate-x-4 shadow-md animate-pulse translate-y-10"></div>
           </div>
-          {/* <div className="absolute flex justify-end w-full bottom-0 right-0 mb-10 gap-5">
-            <div className="rounded-lg bg-primary w-44 h-72"></div>
-            <div className="rounded-lg bg-primary w-44 h-72"></div>
-          </div> */}
         </div>
       </div>
       {/* Other Sections */}
