@@ -1,16 +1,17 @@
 const dotenv = require("dotenv").config();
+
+// Import middlewares:
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const session = require("express-session");
+const decodeIDToken = require("../lib/authenticateToken");
 
 // Import express stuff:
 const express = require("express");
-const session = require("express-session");
 
 // Import Mongoose:
 const mongoose = require("mongoose");
 const app = express();
-
-app.use(cors());
 
 // Import database models:
 const Product = require("../lib/models/products.js");
@@ -28,7 +29,8 @@ mongoose
 
 mongoose.set("useCreateIndex", true);
 
-// Middleware
+// Add middlewares
+app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   bodyParser.urlencoded({
@@ -43,6 +45,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+app.use(decodeIDToken);
 
 // Configure Routes:
 const router = require("./routes.js");
