@@ -23,6 +23,18 @@ export function AuthProvider({ children }) {
     auth.signOut();
   }
 
+  async function createToken() {
+    const user = currentUser;
+    const token = user && (await user.getIdToken());
+    const payloadHeader = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return payloadHeader;
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
