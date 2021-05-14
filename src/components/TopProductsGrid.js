@@ -35,9 +35,7 @@ export default function TopProductsGrid() {
       {products ? (
         products.map((product) => {
           return (
-            <Link to={`/products/${product._id}`}>
-              <HorizontalProductCard key={product._id} productData={product} />
-            </Link>
+            <HorizontalProductCard key={product._id} productData={product} />
           );
         })
       ) : (
@@ -49,10 +47,6 @@ export default function TopProductsGrid() {
           <HorizontalProductCardSkeleton delayFactor={15} />
         </>
       )}
-      {/* <p>{products.data}</p>
-      {products.data.map((item, i) => {
-        return <p key={i}>{item.name}</p>;
-      })} */}
     </div>
   );
 }
