@@ -49,6 +49,7 @@ export function AuthProvider({ children }) {
     login,
     logout,
     authStateChecked,
+    createToken,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
