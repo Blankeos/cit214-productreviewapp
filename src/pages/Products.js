@@ -71,9 +71,7 @@ const Products = () => {
               {products ? (
                 products.map((product) => {
                   return (
-                    <Link to={`/products/${product._id}`}>
-                      <ProductCard key={product._id} productData={product} />
-                    </Link>
+                    <ProductCard key={product._id} productData={product} />
                   );
                 })
               ) : (
@@ -110,42 +108,44 @@ const Products = () => {
 
 export const ProductCard = ({ productData, ...rest }) => {
   return (
-    <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group hover:text-white overflow-hidden">
-      {/* Product Image */}
-      <div className="relative w-full h-80 sm:h-40 md:h-48">
-        <div className="bg-gradient-to-t from-transparent via-transparent to-black opacity-70 w-full h-full absolute"></div>
-        <div
-          className="bg-gray-100 w-full h-full"
-          style={{
-            backgroundImage: `url(${
-              productData.images
-                ? productData.images[0]
-                : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
-            })`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        ></div>
+    <Link to={`/products/${productData._id}`}>
+      <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group hover:text-white overflow-hidden">
+        {/* Product Image */}
+        <div className="relative w-full h-80 sm:h-40 md:h-48">
+          <div className="bg-gradient-to-t from-transparent via-transparent to-black opacity-70 w-full h-full absolute"></div>
+          <div
+            className="bg-gray-100 w-full h-full"
+            style={{
+              backgroundImage: `url(${
+                productData.images
+                  ? productData.images[0]
+                  : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
+              })`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          ></div>
+        </div>
+        {/* Stars */}
+        <div className="absolute top-0 right-0 p-2 flex space-x-2 items-end">
+          <StarMeter
+            rating={4.3}
+            iconSize="1.2em"
+            // shadeClass="text-yellow-400"
+            lightClass="text-white"
+          />
+          <span className="text-white text-xs">4.1</span>
+        </div>
+        {/* Body */}
+        <div className="flex flex-col p-2 bg-white group-hover:bg-gray-900 transition-all duration-300">
+          <h3 className="font-bold text-sm">
+            {productData.name ? productData.name : "No Name Found"}
+          </h3>
+          <p className="text-xs">18 Reviews</p>
+          <p className="text-xs">25 Ratings</p>
+        </div>
       </div>
-      {/* Stars */}
-      <div className="absolute top-0 right-0 p-2 flex space-x-2 items-end">
-        <StarMeter
-          rating={4.3}
-          iconSize="1.2em"
-          // shadeClass="text-yellow-400"
-          lightClass="text-white"
-        />
-        <span className="text-white text-xs">4.1</span>
-      </div>
-      {/* Body */}
-      <div className="flex flex-col p-2 bg-white group-hover:bg-gray-900 transition-all duration-300">
-        <h3 className="font-bold text-sm">
-          {productData.name ? productData.name : "No Name Found"}
-        </h3>
-        <p className="text-xs">18 Reviews</p>
-        <p className="text-xs">25 Ratings</p>
-      </div>
-    </div>
+    </Link>
   );
 };
 
