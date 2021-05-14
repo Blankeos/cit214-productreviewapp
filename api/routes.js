@@ -13,6 +13,14 @@ router.get("/products/:id", async (req, res) => {
   res.send(product);
 });
 
+router.post("/testToken", async (req, res) => {
+  const auth = req.currentUser;
+  if (auth) {
+    console.log("You are authenticated!", auth);
+    return res.send("Hi, from within the /testToken router POST");
+  }
+  return res.status(403).send("Not authorized");
+});
 // router.get("/api/logout", (req, res) => {
 //   req.logout();
 //   res.sendStatus(200);
