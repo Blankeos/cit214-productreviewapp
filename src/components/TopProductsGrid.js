@@ -7,28 +7,30 @@ import { Link } from "react-router-dom";
 export default function TopProductsGrid() {
   const [products, setProducts] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      await axios
-        .get("/api/products", {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        .then((response) => {
-          const results = response.data.map((product) => {
-            return {
-              ...product,
-            };
-          });
-          setProducts(results);
-        })
-        .catch((error) => {
-          console.log(error);
+  async function fetchData() {
+    await axios
+      .get("/api/products", {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        const results = response.data.map((product) => {
+          return {
+            ...product,
+          };
         });
-    }
-    fetchData();
-  }, []);
+        setProducts(results);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  useEffect(() => {
+    const unsubscribe = fetchData(); //subscribe
+    return unsubscribe; //unsubscribe
+  }, [products]);
 
   return (
     <div>
@@ -41,10 +43,10 @@ export default function TopProductsGrid() {
       ) : (
         <>
           <HorizontalProductCardSkeleton />
-          <HorizontalProductCardSkeleton delayFactor={2} />
-          <HorizontalProductCardSkeleton delayFactor={7} />
-          <HorizontalProductCardSkeleton delayFactor={11} />
-          <HorizontalProductCardSkeleton delayFactor={15} />
+          <HorizontalProductCardSkeleton delayFactor={2.8} />
+          <HorizontalProductCardSkeleton delayFactor={4.1} />
+          <HorizontalProductCardSkeleton delayFactor={6.7} />
+          <HorizontalProductCardSkeleton delayFactor={8.8} />
         </>
       )}
     </div>

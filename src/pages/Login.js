@@ -5,11 +5,7 @@ import LoginForm from "../components/LoginForm";
 // buttons for login, register, login w/ google account
 
 const Login = () => {
-  return (
-    <div className="mt-10">
-      <LoginForm />
-    </div>
-  );
+  return <LoginForm />;
 };
 
 export default Login;

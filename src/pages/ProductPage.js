@@ -7,23 +7,26 @@ import PageContainer from "../components/PageContainer";
 const ProductPage = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
+
+  async function fetchData() {
+    await axios
+      .get(`/api/products/${slug}`, {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+        },
+      })
+      .then((response) => {
+        setProduct(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   useEffect(() => {
-    async function fetchData() {
-      await axios
-        .get(`/api/products/${slug}`, {
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        })
-        .then((response) => {
-          setProduct(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-    fetchData();
-  }, []);
+    const unsubscribe = fetchData(); //subscribe
+    return unsubscribe; //unsubscribe
+  }, [product, slug]);
 
   return (
     <PageContainer className="bg-purple-200 text-gray-800">
