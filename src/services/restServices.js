@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const addToPhonebook = async (createToken, name, number) => {
   const url = "/api/testToken";
   const header = await createToken();
@@ -5,6 +7,8 @@ export const addToPhonebook = async (createToken, name, number) => {
     name,
     number,
   };
+  console.log(payload);
+  console.log(header);
   try {
     const res = await axios.post(url, payload, header);
     return res.data;
