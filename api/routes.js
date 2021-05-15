@@ -6,15 +6,7 @@ const router = express.Router();
 const Product = require("../lib/models/products.js");
 const User = require("../lib/models/user");
 
-<<<<<<< HEAD
-// Firebase imports:
-const auth = require("../lib/admin");
-const { GiTank } = require("react-icons/gi");
-
-// Routes: Get
-=======
 // Routes:
->>>>>>> parent of 6659d7c (Working user data retrieval from Firebase auth)
 router.get("/products", async (req, res) => {
   const allProducts = await Product.find({});
   res.send(allProducts);
@@ -27,7 +19,6 @@ router.get("/products/:id", async (req, res) => {
 
 // Routes: Post
 router.post("/testToken", async (req, res) => {
-
   const auth = req.currentUser;
   if (auth) {
     console.log("You are authenticated!", auth);
