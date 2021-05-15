@@ -106,7 +106,6 @@ const LoginForm = () => {
           <div className="bg-yellow-300 w-full bg-login-img"></div>
         </div>
       </div>
-      {/* authStateChecked ? ( */}
     </>
     // <PageContainer className="flex bg-gray-300">
     //   <div
