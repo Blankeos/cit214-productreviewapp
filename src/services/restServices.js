@@ -17,6 +17,10 @@ export const addToPhonebook = async (createToken, name, number) => {
   }
 };
 
+export const addUser = async (createToken, name) => {
+  const url = "/api/";
+};
+
 // export const getPhonebookEntries = async () => {
 //     const header = await createToken();
 //   try {

@@ -1,8 +1,12 @@
+// Express imports:
 const express = require("express");
 const router = express.Router();
-const Product = require("../lib/models/products.js");
-// const cors = require("cors");
 
+// Model imports:
+const Product = require("../lib/models/products.js");
+const User = require("../lib/models/user");
+
+// Routes:
 router.get("/products", async (req, res) => {
   const allProducts = await Product.find({});
   res.send(allProducts);
@@ -21,6 +25,8 @@ router.post("/testToken", async (req, res) => {
   }
   return res.status(403).send("Not authorized");
 });
+
+router.post("/register", async (req, res) => {});
 // router.get("/api/logout", (req, res) => {
 //   req.logout();
 //   res.sendStatus(200);
