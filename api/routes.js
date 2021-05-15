@@ -8,8 +8,9 @@ const User = require("../lib/models/user");
 
 // Firebase imports:
 const auth = require("../lib/admin");
+const { GiTank } = require("react-icons/gi");
 
-// Routes:
+// Routes: Get
 router.get("/products", async (req, res) => {
   const allProducts = await Product.find({});
   res.send(allProducts);
@@ -20,14 +21,10 @@ router.get("/products/:id", async (req, res) => {
   res.send(product);
 });
 
+// Routes: Post
 router.post("/testToken", async (req, res) => {
+  // Test
   const currentUser = req.currentUser;
-  try {
-    const record = await auth.getUserByEmail("caloy@gmail.com");
-    console.log(record);
-  } catch (err) {
-    console.log("err");
-  }
 
   if (currentUser) {
     console.log("Authenticated UID:", currentUser.uid);
@@ -38,7 +35,13 @@ router.post("/testToken", async (req, res) => {
   return res.status(403).send("Not authorized");
 });
 
-router.post("/register", async (req, res) => {});
+router.post("/register", async (req, res) => {
+  const currentUser = req.currentUser;
+
+  if (currentUser) {
+  }
+});
+
 // router.get("/api/logout", (req, res) => {
 //   req.logout();
 //   res.sendStatus(200);
