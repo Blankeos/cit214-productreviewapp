@@ -3,7 +3,6 @@ const dotenv = require("dotenv").config();
 // Import middlewares:
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const session = require("express-session");
 const decodeIDToken = require("../lib/authenticateToken");
 
 // Import express stuff:
@@ -38,13 +37,6 @@ app.use(
   })
 );
 app.use(bodyParser.json());
-app.use(
-  session({
-    secret: process.env.EXPRESS_SECRET,
-    resave: false,
-    saveUninitialized: false,
-  })
-);
 app.use(decodeIDToken);
 
 // Configure Routes:
