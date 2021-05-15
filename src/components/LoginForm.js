@@ -1,13 +1,21 @@
 import React, { useState } from "react";
+
+// Context API
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
+
+// Services
+import { toast } from "react-toastify";
+
+// Components
+import { ErrorJSX } from "./ErrorJSX";
+
+// Icons
+import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
 import { GiCoffeeBeans } from "react-icons/gi";
 import { MdError } from "react-icons/md";
 
-import { toast } from "react-toastify";
-import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
-import { ErrorJSX } from "./ErrorJSX";
-import PageContainer from "./PageContainer";
+//------------------
 
 const LoginForm = () => {
   const history = useHistory();
@@ -107,63 +115,6 @@ const LoginForm = () => {
         </div>
       </div>
     </>
-    // <PageContainer className="flex bg-gray-300">
-    //   <div
-    //     className="p-2 md:max-w-6xl mx-auto bg-red-100 flex-grow h-full"
-    //     style={{}}
-    //   >
-    //     {authStateChecked ? (
-    //       // Actual Login Form
-    //       <div className="flex flex-row rounded-2xl shadow-xl overflow-hidden">
-    //         {/* Form */}
-    //         <form className="w-96 p-12 col-span-1 flex flex-col justify-center flex-shrink-0">
-    //           <h2 className="flex font-bold text-gray-600 space-x-2 text-2xl mb-5">
-    //             <GiCoffeeBeans className="relative transform translate-y-1 text-primary" />
-    //             <span>Login</span>
-    //           </h2>
-    //           <div className="flex flex-col space-y-3 w-full">
-    //             <label>Email</label>
-    //             <input
-    //               className="border border-gray-300 rounded-sm p-2 inpfield-transition"
-    //               name="email"
-    //               type="email"
-    //               placeholder="Enter your email here"
-    //               onChange={(event) => handleChange(event, "email")}
-    //             ></input>
-    //             <label>Password</label>
-    //             <input
-    //               className="border  border-gray-300 rounded-sm p-2 inpfield-transition"
-    //               name="password"
-    //               type="password"
-    //               placeholder="Enter your password here"
-    //               onChange={(event) => handleChange(event, "password")}
-    //             ></input>
-    //           </div>
-    //           <div className="flex space-x-3 text-xs">
-    //             <button
-    //               className="default-btn"
-    //               type="submit"
-    //               onClick={(e) => submit(e)}
-    //               disabled={loading}
-    //             >
-    //               {loading ? <AnimatedLoadingIcon size="1.4em" /> : "Login"}
-    //             </button>
-    //             <Link
-    //               to="/register"
-    //               className="select-none shadow-md disabled:opacity-50 border-2 border-primary text-primary px-4 py-2 rounded-full mt-4 hover:text-white transition hover:bg-primary flex-shrink-0"
-    //             >
-    //               Create an Account
-    //             </Link>
-    //           </div>
-    //         </form>
-    //         {/* Image */}
-    //         <div className="w-full bg-login-img bg-cover bg-center order-first md:order-last"></div>
-    //       </div>
-    //     ) : (
-    //       <AnimatedLoadingIcon size="5em" />
-    //     )}
-    //   </div>
-    // </PageContainer>
   );
 };
 
