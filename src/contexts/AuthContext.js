@@ -11,8 +11,29 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [authStateChecked, setAuthStateChecked] = useState(false);
 
-  function register(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+  function register(email, password, displayName) {
+    return auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        userCredential.user
+          .updateProfile({
+            displayName: displayName,
+          })
+          .then(
+            () => {
+              // Profile updated successfully!
+              var displayName = userCredential.user.displayName;
+            },
+            (err) => {
+              console.log("Error trying to add displayName");
+            }
+          );
+
+        return userCredential;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   function login(email, password) {
