@@ -6,8 +6,6 @@ const router = express.Router();
 const Product = require("../lib/models/products.js");
 const User = require("../lib/models/user");
 
-
-
 // Firebase imports:
 const auth = require("../lib/admin");
 
@@ -70,12 +68,6 @@ router.post("/testToken", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
-// router.get("/api/logout", (req, res) => {
-//   req.logout();
-//   res.sendStatus(200);
-// });
-=======
 router.post("/register", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -135,7 +127,6 @@ router.post("/register", async (req, res) => {
   //   });
   // return res.status(400).send("Server failed.");
 });
->>>>>>> backend
 
 // router.post("/api/login", (req, res) => {
 //   const user = new User({
