@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from "react";
+
+// Context API
+import { useAuth } from "../contexts/AuthContext";
+
+// Services
+import { getProfile } from "../services/restServices";
+
+// Components
 import ActivityCard from "../components/ActivityCard";
 import PageContainer from "../components/PageContainer";
-import { FiEdit } from "react-icons/fi";
 
-import { getProfile } from "../services/restServices";
-import { useAuth } from "../contexts/AuthContext";
+// Icons
+import { FiEdit } from "react-icons/fi";
+import { SiCoffeescript } from "react-icons/si";
+
+//------------------
 
 const Profile = () => {
   const { createToken } = useAuth();
@@ -12,7 +22,7 @@ const Profile = () => {
 
   async function fetchData() {
     const result = await getProfile(createToken);
-    // setProfile(result);
+    setProfile(result);
   }
 
   useEffect(() => {
@@ -22,8 +32,11 @@ const Profile = () => {
 
   return (
     <PageContainer className="">
-      <ProfileHeaderSkeleton />
-      <ProfileHeader profileData={profile} />
+      {profile ? (
+        <ProfileHeader profileData={profile} />
+      ) : (
+        <ProfileHeaderSkeleton />
+      )}
       {/* Container // it's supposed to be white yes... */}
       <div className="max-w-6xl mx-auto bg-white relative">
         {/* Activity Section */}
@@ -48,7 +61,12 @@ const ProfileHeader = ({ profileData, ...rest }) => {
       {/* Profile Header Section */}
       <div className="flex flex-wrap w-full flex-col items-center px-4 space-y-5 mx-auto overflow-hidden text-center">
         {/* Profile Photo */}
-        <div className="h-36 w-36 rounded-full bg-black"></div>
+        <div className="flex items-center justify-center h-36 w-36 rounded-full bg-primary shadow">
+          {profileData && !profileData.photoUrl && (
+            <SiCoffeescript size="3.3em" className="text-white" />
+          )}
+        </div>
+
         <h1 className="font-bold text-xl">
           {profileData ? profileData.displayName : `Barrack Obama`}
         </h1>
