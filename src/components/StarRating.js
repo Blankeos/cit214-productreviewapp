@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const StarRating = () => {
-  const [rating, setRating] = useState(null);
+const StarRating = ({ rating, setRating, ...rest }) => {
   const [hover, setHover] = useState(null);
 
   return (
-    <div class="flex space-x-2">
+    <div className="flex space-x-2 items-center">
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         let color;
@@ -43,9 +42,19 @@ const StarRating = () => {
           </label>
         );
       })}
-      <p>{rating}</p>
+      <div className="pl-2">
+        <p className="text-gray-400 text-sm">{ratingLabel[rating]}</p>
+      </div>
     </div>
   );
+};
+
+const ratingLabel = {
+  1: <p className="text-red-500">Totally unsatisfied</p>,
+  2: <p className="text-red-500">I don't like it</p>,
+  3: <p className="text-primary">It's okay, I guess</p>,
+  4: <p className="text-green-400">It's pretty good</p>,
+  5: <p className="text-green-400">I love it!</p>,
 };
 
 // const Star = (props) => {
