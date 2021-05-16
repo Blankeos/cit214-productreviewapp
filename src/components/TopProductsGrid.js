@@ -43,10 +43,10 @@ export default function TopProductsGrid() {
       ) : (
         <>
           <HorizontalProductCardSkeleton />
-          <HorizontalProductCardSkeleton delayFactor={2.8} />
-          <HorizontalProductCardSkeleton delayFactor={4.1} />
-          <HorizontalProductCardSkeleton delayFactor={6.7} />
-          <HorizontalProductCardSkeleton delayFactor={8.8} />
+          <HorizontalProductCardSkeleton delayFactor={0.1} />
+          <HorizontalProductCardSkeleton delayFactor={0.2} />
+          <HorizontalProductCardSkeleton delayFactor={0.3} />
+          <HorizontalProductCardSkeleton delayFactor={0.4} />
         </>
       )}
     </div>
