@@ -1,5 +1,10 @@
 import React, { useState } from "react";
+
+// Components
 import StarRating from "./StarRating";
+import SelectSearch from "react-select-search";
+
+// Icons
 import { MdRateReview } from "react-icons/md";
 import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
 
@@ -27,8 +32,9 @@ const ReviewForm = () => {
           <span>Review</span>
         </h2>
         <h2 className="text-xl text-gray-600">Product</h2>
+        <ProductSearch />
         <input
-          className="border border-gray-300 rounded-sm p-2 inpfield-transition"
+          className="hidden border border-gray-300 rounded-sm p-2 inpfield-transition"
           placeholder="Enter product name"
           onChange={(event) => handleChange(event, "productName")}
         />
@@ -76,6 +82,18 @@ const ReviewForm = () => {
           </div>
         </div>
       </div>
+    </div>
+  );
+};
+
+export const ProductSearch = () => {
+  const countries = [
+    { name: "Swedish", value: "sv" },
+    { name: "English", value: "en" },
+  ];
+  return (
+    <div>
+      <SelectSearch options={countries} placeholder="Select your country" />
     </div>
   );
 };
