@@ -59,7 +59,7 @@ const Home = () => {
               <h2 className="font-bold text-xl my-5">
                 🔥 Top Rated Products Today
               </h2>
-              <div className="shadow-md  rounded-2xl border border-gray-100 overflow-hidden">
+              <div className="shadow-md  rounded-2xl border-t border-l border-r border-gray-100 overflow-hidden">
                 <TopProductsGrid />
               </div>
             </div>
@@ -103,7 +103,7 @@ const Home = () => {
                   </div>
                   <form className="flex flex-col space-y-2">
                     <input
-                      className="border w-full p-3 rounded"
+                      className="border w-full p-3 rounded inpfield-transition"
                       placeholder="Your email"
                     ></input>
                     <button className="select-none bg-primary p-3 rounded text-white">

@@ -1,24 +1,37 @@
 import React, { useState } from "react";
-import { useAuth } from "../contexts/AuthContext";
-import { GiCoffeeBeans } from "react-icons/gi";
-import { Link } from "react-router-dom";
 
+// ContextAPI
+import { useAuth } from "../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+
+// Services
 import { toast } from "react-toastify";
+
+// Components
+import { ErrorJSX } from "./ErrorJSX";
+
+// Icons
 import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
+import { GiCoffeeBeans } from "react-icons/gi";
+import { MdError } from "react-icons/md";
+
+//------------------
 
 const RegisterForm = () => {
+  // Hooks
   const [state, setState] = useState({
     displayName: "",
     email: "",
     password: "",
   });
+  const history = useHistory();
   const { register, currentUser, authStateChecked } = useAuth();
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState({
     length: 0,
   });
 
+  // Functions
   const handleChange = (event, fieldName) => {
     if (fieldName === "password") {
       setPasswordStrength({
@@ -36,15 +49,19 @@ const RegisterForm = () => {
     try {
       setLoading(true);
       await register(state.email, state.password, state.displayName);
+      history.push("/");
       toast.success(`☕ ${state.email} is successfully registered!`, {
         autoClose: 5000,
       });
     } catch {
-      toast.error("⚠ Failed to register", { autoClose: 5000 });
+      toast.error(ErrorJSX(<MdError size="1.3em" />, "Failed to Register"), {
+        autoClose: 5000,
+      });
     }
     setLoading(false);
   };
 
+  // Utility JSX
   const passwordStrengthIndicator = (
     <>
       <>
@@ -70,6 +87,7 @@ const RegisterForm = () => {
       </>
     </>
   );
+
   return (
     <>
       {/* Page Container */}
