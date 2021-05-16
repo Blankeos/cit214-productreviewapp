@@ -28,10 +28,20 @@ router.get("/profile", async (req, res) => {
 
   if (currentUser) {
     try {
-      // FETCH User Record
-      const userRecord = await auth.getUser(currentUser.uid); // Firebase Record
-      const userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
-
+      try {
+        // FETCH User Record
+        const userRecord = await auth.getUser(currentUser.uid); // Firebase Record
+      } catch (err) {
+        console.log(err.message);
+        return res.status(400).send("Failed to fetch userRecord.");
+      }
+      try {
+        // Fetch User Document
+        const userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
+      } catch (err) {
+        console.log(err.message);
+        return res.status(400).send("Failed to fetch userDocument.");
+      }
       // CREATE the object to send to user
       const result = {
         uid: userRecord.uid,
@@ -42,7 +52,7 @@ router.get("/profile", async (req, res) => {
       return res.send(result);
     } catch (err) {
       console.log(err.message);
-      return res.status(400).send("Failed to add record");
+      return res.status(400).send("Failed to send profile result.");
     }
   }
   return res.status(401).send("Not authorized.");
