@@ -31,27 +31,42 @@ const Profile = () => {
   }, []);
 
   return (
-    <PageContainer className="">
-      {profile ? (
-        <ProfileHeader profileData={profile} />
-      ) : (
-        <ProfileHeaderSkeleton />
-      )}
-      {/* Container // it's supposed to be white yes... */}
-      <div className="max-w-6xl mx-auto bg-white relative">
-        {/* Activity Section */}
-        <div className="flex flex-col max-w-xl mx-auto items-center gap-3 rounded overflow-hidden">
-          <h1 className="font-bold text-4xl my-20 mb-14">Activity</h1>
-          <div className="flex flex-col w-full gap-3 overflow-hidden">
-            <ActivityCard />
-            <ActivityCard />
-            <ActivityCard />
-            <ActivityCard />
-            <ActivityCard />
+    <div className="relative flex flex-col text-gray-800 w-full flex-grow h-full">
+      {/* Cover Photo */}
+      <div className="absolute top-0 h-32 w-full">
+        <div
+          className="bg-gray-200 h-full w-full"
+          style={{
+            backgroundImage: `url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=956&q=80')`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            zIndex: "0",
+          }}
+        ></div>
+      </div>
+      {/* Body */}
+      <div className="relative px-2 sm:px-8 pt-12 pb-24">
+        {profile ? (
+          <ProfileHeader profileData={profile} />
+        ) : (
+          <ProfileHeaderSkeleton />
+        )}
+        {/* Container // it's supposed to be white yes... */}
+        <div className="max-w-6xl mx-auto relative">
+          {/* Activity Section */}
+          <div className="flex flex-col max-w-xl mx-auto items-center gap-3 rounded">
+            <h1 className="font-bold text-4xl my-20 mb-14">Activity</h1>
+            <div className="flex flex-col w-full gap-3">
+              <ActivityCard />
+              <ActivityCard />
+              <ActivityCard />
+              <ActivityCard />
+              <ActivityCard />
+            </div>
           </div>
         </div>
       </div>
-    </PageContainer>
+    </div>
   );
 };
 
@@ -89,11 +104,11 @@ const ProfileHeader = ({ profileData, ...rest }) => {
         {/* Reviews and Ratings Count */}
         <div className="pt-8 flex items-center  sm:space-x-28 space-x-20 sm:flex-row">
           <div className="flex flex-col items-center">
-            <h3 className="text-4xl font-bold">99</h3>
+            <h3 className="text-4xl font-bold">0</h3>
             <p className="text-gray-600">Reviews</p>
           </div>
           <div className="flex flex-col items-center">
-            <h3 className="text-4xl font-bold">20</h3>
+            <h3 className="text-4xl font-bold">0</h3>
             <p className="text-gray-600">Ratings</p>
           </div>
         </div>
@@ -106,27 +121,102 @@ const ProfileHeaderSkeleton = () => {
   return (
     <>
       {/* Profile Header Section */}
-      <div className="flex flex-wrap w-full flex-col items-center px-4 space-y-5 mx-auto overflow-hidden text-center">
+      <div className="flex flex-wrap w-full flex-col items-center px-4 space-y-5 mx-auto overflow-hidden text-center select-none">
         {/* Profile Photo */}
-        <div className="h-36 w-36 rounded-full bg-gray-300"></div>
-        <h1 className="font-bold text-xl select-none bg-gray-400 rounded text-gray-400">{`Barrack Obama`}</h1>
+        <div className="h-36 w-36 rounded-full bg-white">
+          <div
+            className="h-full w-full rounded-full bg-gray-300 animate-pulse"
+            style={{
+              animationDuration: "1s",
+            }}
+          ></div>
+        </div>
+        <h1
+          className="font-bold text-xl select-none bg-gray-400 rounded text-gray-400 animate-pulse"
+          style={{
+            animationDuration: "1s",
+            animationDelay: "0.2s",
+          }}
+        >{`Barrack Obama`}</h1>
         {/* Bio */}
         <div className="flex flex-col relative border border-gray-100 max-w-2xl overflow-hidden rounded-md p-5 space-y-1 items-center w-11/12 sm:w-9/12">
-          <p className="rounded text-center text-sm h-4 w-full bg-gray-200"></p>
-          <p className="rounded text-center text-sm h-4 w-8/12 bg-gray-200"></p>
-          <p className="rounded text-center text-sm h-4 w-9/12 bg-gray-200"></p>
-          <p className="rounded text-center text-sm h-4 w-11/12 bg-gray-200"></p>
-          <p className="rounded text-center text-sm h-4 w-6/12 bg-gray-200"></p>
+          <p
+            className="rounded text-center text-sm h-4 w-full bg-gray-200 animate-pulse"
+            style={{
+              animationDuration: "1s",
+              animationDelay: "0.4s",
+            }}
+          ></p>
+          <p
+            className="rounded text-center text-sm h-4 w-8/12 bg-gray-200 animate-pulse"
+            style={{
+              animationDuration: "1s",
+              animationDelay: "0.6s",
+            }}
+          ></p>
+          <p
+            className="rounded text-center text-sm h-4 w-9/12 bg-gray-200 animate-pulse"
+            style={{
+              animationDuration: "1s",
+              animationDelay: "0.8s",
+            }}
+          ></p>
+          <p
+            className="rounded text-center text-sm h-4 w-11/12 bg-gray-200 animate-pulse"
+            style={{
+              animationDuration: "1s",
+              animationDelay: "1s",
+            }}
+          ></p>
+          <p
+            className="rounded text-center text-sm h-4 w-6/12 bg-gray-200 animate-pulse"
+            style={{
+              animationDuration: "1s",
+              animationDelay: "1.2s",
+            }}
+          ></p>
         </div>
         {/* Reviews and Ratings Count */}
-        <div className="pt-8 flex items-center  sm:space-x-28 space-x-20 sm:flex-row">
-          <div className="flex flex-col items-center">
-            <h3 className="text-4xl font-bold">99</h3>
-            <p className="text-gray-600">Reviews</p>
+        <div className="pt-8 flex items-center sm:space-x-28 space-x-20 sm:flex-row select-none">
+          <div className="flex flex-col items-center space-y-1">
+            <h3
+              className="text-4xl font-bold bg-gray-300 rounded text-gray-300 animate-pulse"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "1.6s",
+              }}
+            >
+              99
+            </h3>
+            <p
+              className="text-gray-100 bg-gray-100 rounded h-5 animate-pulse"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "1.8s",
+              }}
+            >
+              Reviews
+            </p>
           </div>
-          <div className="flex flex-col items-center">
-            <h3 className="text-4xl font-bold">20</h3>
-            <p className="text-gray-600">Ratings</p>
+          <div className="flex flex-col items-center space-y-1">
+            <h3
+              className="text-4xl font-bold bg-gray-300 rounded text-gray-300 animate-pulse"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "1.6s",
+              }}
+            >
+              20
+            </h3>
+            <p
+              className="text-gray-100 bg-gray-100 rounded h-5 animate-pulse"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "1.8s",
+              }}
+            >
+              Ratings
+            </p>
           </div>
         </div>
       </div>
