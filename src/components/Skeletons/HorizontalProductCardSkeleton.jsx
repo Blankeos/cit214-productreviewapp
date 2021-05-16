@@ -20,32 +20,32 @@ export default function HorizontalProductCardSkeleton({delayFactor = 0, duration
           <div className="flex-grow">
             <h3 className="font-bold text-sm sm:text-xl text-gray-300 bg-gray-300 inline rounded select-none animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+1}s`,
+              animationDelay: `${delayFactor+0.2}s`,
             }}>
               ProductName
             </h3>
             <div className="flex flex-col space-y-1">
             <p className="text-gray-200 text-xs sm:text-sm w-10/12 bg-gray-200 rounded animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+1.5}s`,
+              animationDelay: `${delayFactor+0.4}s`,
             }}>
               .
             </p>
             <p className="text-gray-200 text-xs sm:text-sm w-7/12 bg-gray-200 rounded animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+2}s`,
+              animationDelay: `${delayFactor+0.6}s`,
             }}>
               .
             </p>
             <p className="text-gray-200 text-xs sm:text-sm w-8/12 bg-gray-200 rounded animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+2.5}s`,
+              animationDelay: `${delayFactor+0.8}s`,
             }}>
               .
             </p>
             <p className="text-gray-200 text-xs sm:text-sm w-8/12 bg-gray-200 rounded animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+3}s`,
+              animationDelay: `${delayFactor+1}s`,
             }}>
               .
             </p>
@@ -55,7 +55,7 @@ export default function HorizontalProductCardSkeleton({delayFactor = 0, duration
           <div className="h-full flex-shrink-0 flex justify-end">
             <div className="bg-gray-100 h-10 w-10 rounded flex justify-center items-center shadow focus:outline-none outline-none transform transition active:scale-90 hover:scale-110 overflow-hidden focus:ring focus:ring-offset-2 focus:ring-brown-200 radius-active animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+3.5}s`
+              animationDelay: `${delayFactor+1.2}s`
             }}>
             </div>
           </div>
@@ -63,11 +63,11 @@ export default function HorizontalProductCardSkeleton({delayFactor = 0, duration
         <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-200">
           <p className="bg-gray-200 rounded animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+4}s`
+              animationDelay: `${delayFactor+1.4}s`
             }}>18 Reviews</p>
           <div className="flex space-x-1 items-center animate-pulse" style={{
               animationDuration: `${durationFactor}s`,
-              animationDelay: `${delayFactor+4.5}s`
+              animationDelay: `${delayFactor+1.6}s`
             }}>
             <StarMeter iconSize="1.4em" />
             <span className="bg-gray-200 text-gray-200 rounded text-rounded">0.0 (000)</span>
