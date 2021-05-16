@@ -27,27 +27,30 @@ router.get("/profile", async (req, res) => {
   const currentUser = req.currentUser;
 
   if (currentUser) {
+    let userRecord;
+    let userDocument;
     try {
-      try {
-        // FETCH User Record
-        const userRecord = await auth.getUser(currentUser.uid); // Firebase Record
-      } catch (err) {
-        console.log(err.message);
-        return res.status(400).send("Failed to fetch userRecord.");
-      }
-      try {
-        // Fetch User Document
-        const userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
-      } catch (err) {
-        console.log(err.message);
-        return res.status(400).send("Failed to fetch userDocument.");
-      }
-      // CREATE the object to send to user
+      // FETCH User Record
+      userRecord = await auth.getUser(currentUser.uid); // Firebase Record
+    } catch (err) {
+      console.log(err.message);
+      return res.status(400).send("Failed to fetch userRecord.");
+    }
+    try {
+      // Fetch User Document
+      userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
+    } catch (err) {
+      console.log(err.message);
+      return res.status(400).send("Failed to fetch userDocument.");
+    }
+    try {
+      // CREATE the object to SEND to user
       const result = {
         uid: userRecord.uid,
         displayName: userRecord.displayName,
         bio: userDocument.bio,
       };
+
       // SUCCESS
       return res.send(result);
     } catch (err) {
