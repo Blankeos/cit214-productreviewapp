@@ -34,14 +34,14 @@ router.get("/profile", async (req, res) => {
       userRecord = await auth.getUser(currentUser.uid); // Firebase Record
     } catch (err) {
       console.log(err.message);
-      return res.status(400).send("Failed to fetch userRecord.");
+      return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
     }
     try {
       // Fetch User Document
       userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
     } catch (err) {
       console.log(err.message);
-      return res.status(400).send("Failed to fetch userDocument.");
+      return res.status(400).send("Failed to fetch userDocument. (MongoDB)");
     }
     try {
       // CREATE the object to SEND to user
@@ -87,7 +87,6 @@ router.post("/register", async (req, res) => {
   const password = req.body.password;
   const displayName = req.body.displayName;
 
-  console.log(email, password, displayName);
   try {
     // Create a Firebase Record
     const userRecord = await auth.createUser({
@@ -106,8 +105,12 @@ router.post("/register", async (req, res) => {
 
     return res.status(200).send();
   } catch (err) {
-    console.log("May error pre");
-    return res.status(400).send("Can't create user record in firebase.");
+    console.log(
+      "Could not create the account. May be a Firebase or MongoDB issue."
+    );
+    return res
+      .status(400)
+      .send("Can't create user record in firebase/mongodb.");
   }
   // Create Firebase Record
   // await auth
