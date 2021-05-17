@@ -14,6 +14,7 @@ import {
   Profile,
   Page404,
   ProductPage,
+  AccountSettings,
 } from "./pages";
 
 import PrivateRoute from "./components/PrivateRoute.js";
@@ -54,6 +55,7 @@ function App() {
             <Route exact path="/products" component={Products} />
             <Route path="/about" component={About} />
             <PrivateRoute path="/profile" component={Profile} />
+            <PrivateRoute path="/accountSettings" component={AccountSettings} />
             <Route path="/tokenTest" component={TokenTestForm} />
             <Route path="*" component={Page404} />
           </Switch>

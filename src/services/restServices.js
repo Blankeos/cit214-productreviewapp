@@ -62,6 +62,19 @@ export const addNewUser = async (createToken, email, password, displayName) => {
   return res.data;
 };
 
+export const addReview = async (createToken, productID, rating, review) => {
+  const url = "/api/addReview";
+  const header = await createToken();
+  const payload = {
+    productID,
+    rating,
+    review,
+  };
+
+  const res = await axios.post(url, payload, header);
+  return res.data;
+};
+
 export const addToPhonebook = async (createToken, name, number) => {
   const url = "/api/testToken";
   const header = await createToken();
@@ -76,17 +89,3 @@ export const addToPhonebook = async (createToken, name, number) => {
     console.error(e);
   }
 };
-
-export const addUser = async (createToken, name) => {
-  const url = "/api/";
-};
-
-// export const getPhonebookEntries = async () => {
-//     const header = await createToken();
-//   try {
-//       const res = await axios.get(url, header);
-//       return res.data;
-//     } catch (e) {
-//       console.error(e);
-//     }
-// }

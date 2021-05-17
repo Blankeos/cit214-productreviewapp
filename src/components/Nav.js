@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from "react";
+
+// Context API & Hooks
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+
+// Services
+import { toast } from "react-toastify";
+
+// Components
+import NavSearch from "./NavSearch";
+import AuthRender from "./AuthRender";
+import DropDown from "./DropDown.js";
+
+// Icons
 import Logo from "../assets/imgs/cafely_logo.svg";
 import { RiSearch2Line } from "react-icons/ri";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { GoSignOut } from "react-icons/go";
 import { SiCoffeescript } from "react-icons/si";
-import DropDown from "./DropDown.js";
-
-import { toast } from "react-toastify";
-
-import NavSearch from "./NavSearch";
-import AuthRender from "./AuthRender";
+import { FaUserCog } from "react-icons/fa";
 
 const Nav = () => {
   const history = useHistory();
@@ -174,8 +181,8 @@ const Nav = () => {
               <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
                 <Link onClick={handleMenuButton} to="/review">
                   <li
-                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 hover:text-primary ${
-                      locationIsMatch("review") ? "text-primary" : ""
+                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 md:hover:text-primary ${
+                      locationIsMatch("review") ? "md:text-primary" : ""
                     }`}
                   >
                     Review
@@ -183,8 +190,8 @@ const Nav = () => {
                 </Link>
                 <Link onClick={handleMenuButton} to="/products">
                   <li
-                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 hover:text-primary ${
-                      locationIsMatch("products") ? "text-primary" : ""
+                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 md:hover:text-primary ${
+                      locationIsMatch("products") ? "md:text-primary" : ""
                     }`}
                   >
                     Products
@@ -192,8 +199,8 @@ const Nav = () => {
                 </Link>
                 <Link onClick={handleMenuButton} to="/about">
                   <li
-                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 hover:text-primary ${
-                      locationIsMatch("about") ? "text-primary" : ""
+                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 md:hover:text-primary ${
+                      locationIsMatch("about") ? "md:text-primary" : ""
                     }`}
                   >
                     About
@@ -243,23 +250,33 @@ const Nav = () => {
 
               {/* UserButton */}
               <AuthRender>
-                <DropDown
-                  menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75"
-                  label={<SiCoffeescript className="text-white" />}
-                  items={[
-                    {
-                      icon: <BsFillPersonFill className="text-primary" />,
-                      label: "Profile",
-                      route: "/profile",
-                    },
-                    {
-                      icon: <GoSignOut className="text-primary" />,
-                      label: "Sign Out",
-                      route: "/logout",
-                      onClick: handleLogout,
-                    },
-                  ]}
-                />
+                <div className="flex items-center space-x-5">
+                  <p className="text-sm text-gray-700 overflow-hidden whitespace-nowrap">
+                    {currentUser && currentUser.displayName}
+                  </p>
+                  <DropDown
+                    menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75"
+                    label={<SiCoffeescript className="text-white" />}
+                    items={[
+                      {
+                        icon: <BsFillPersonFill className="text-primary" />,
+                        label: "Profile",
+                        route: "/profile",
+                      },
+                      {
+                        icon: <FaUserCog className="text-primary" />,
+                        label: "Account Settings",
+                        route: "/accountSettings",
+                      },
+                      {
+                        icon: <GoSignOut className="text-primary" />,
+                        label: "Sign Out",
+                        route: "/logout",
+                        onClick: handleLogout,
+                      },
+                    ]}
+                  />
+                </div>
               </AuthRender>
             </ul>
           </div>

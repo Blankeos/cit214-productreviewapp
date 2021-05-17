@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 
-const StarRating = ({ rating, setRating, ...rest }) => {
+const StarRating = ({ rating, setRating, disabled = false, ...rest }) => {
   const [hover, setHover] = useState(null);
 
   return (
@@ -9,14 +9,20 @@ const StarRating = ({ rating, setRating, ...rest }) => {
       {[...Array(5)].map((star, i) => {
         const ratingValue = i + 1;
         let color;
-        if (hover) {
-          color =
-            ratingValue <= (hover || rating)
-              ? "text-yellow-400"
-              : "text-gray-200";
+        if (!disabled) {
+          if (hover) {
+            color =
+              ratingValue <= (hover || rating)
+                ? "text-yellow-400"
+                : "text-gray-200";
+          } else {
+            color =
+              ratingValue <= (hover || rating)
+                ? "text-primary"
+                : "text-gray-200";
+          }
         } else {
-          color =
-            ratingValue <= (hover || rating) ? "text-primary" : "text-gray-200";
+          color = "text-gray-200 opacity-40";
         }
         return (
           <label
@@ -28,12 +34,14 @@ const StarRating = ({ rating, setRating, ...rest }) => {
               name="rating"
               className="hidden"
               value={ratingValue}
+              disabled={disabled}
               onClick={() => setRating(ratingValue)}
             />
             <FaStar
               className={
-                "active:text-yellow-300 cursor-pointer transition ease-in-out " +
-                color
+                `${
+                  !disabled && "active:text-yellow-300"
+                }  cursor-pointer transition ease-in-out ` + color
               }
               size="2.5em"
               onMouseEnter={() => setHover(ratingValue)}
@@ -42,19 +50,8 @@ const StarRating = ({ rating, setRating, ...rest }) => {
           </label>
         );
       })}
-      <div className="pl-2">
-        <p className="text-gray-400 text-sm">{ratingLabel[rating]}</p>
-      </div>
     </div>
   );
-};
-
-const ratingLabel = {
-  1: <p className="text-red-500">Totally unsatisfied</p>,
-  2: <p className="text-red-500">I don't like it</p>,
-  3: <p className="text-primary">It's okay, I guess</p>,
-  4: <p className="text-green-400">It's pretty good</p>,
-  5: <p className="text-green-400">I love it!</p>,
 };
 
 // const Star = (props) => {

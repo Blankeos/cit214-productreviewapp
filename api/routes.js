@@ -5,6 +5,7 @@ const router = express.Router();
 // Model imports:
 const Product = require("../lib/models/products.js");
 const User = require("../lib/models/user");
+const Rating = require("../lib/models/rating");
 
 // Firebase imports:
 const auth = require("../lib/admin");
@@ -80,6 +81,75 @@ router.get("/profile", async (req, res) => {
 });
 
 // Routes: POST
+router.post("/addReview", async (req, res) => {
+  const currentUser = req.currentUser;
+  const productID = req.body.productID;
+  const rating = req.body.rating;
+  const review = req.body.review;
+
+  if (!productID)
+    return res.status(400).send("Bad Request. Product ID is empty.");
+  if (!rating) return res.status(400).send("Bad Request. Rating is empty.");
+
+  if (currentUser) {
+    // Authorized
+    let userRecord;
+    try {
+      // FETCH User Record
+      userRecord = await auth.getUser(currentUser.uid); // Firebase Record
+    } catch (err) {
+      console.log(err.message);
+      return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
+    }
+
+    try {
+      // FETCH Rating Document and check if user.uid & productid have one document already
+      ratingDocument = await Rating.findOne({
+        userUID: currentUser.uid,
+        productID: productID,
+      }); // MongoDB Document
+
+      // if userDocument is null, let's create a new document
+      if (!ratingDocument) {
+        // No existing review found. CREATE one.
+        await Rating.create({
+          userUID: userRecord.uid,
+          productID: productID,
+          rating: rating,
+          review: review,
+          updated: Date.now,
+        });
+        return res
+          .status(201)
+          .send(
+            "No existing review for this specific product by this user yet. New review has been created."
+          );
+      } else {
+        // Existing review found. Update it.
+        await Rating.updateOne(
+          {
+            userUID: userRecord.uid,
+            productID: productID,
+          },
+          {
+            userUID: userRecord.uid,
+            productID: productID,
+            rating: rating,
+            review: review,
+            updated: Date.now,
+          }
+        );
+        return res
+          .status(201)
+          .send("Existing review found. Review has been updated.");
+      }
+    } catch (err) {
+      console.log(err.message);
+      return res.status(400).send("Failed to create/update review.");
+    }
+  }
+  return res.status(401).send("Not authorized.");
+});
 router.post("/testToken", async (req, res) => {
   const currentUser = req.currentUser;
   if (currentUser) {
@@ -93,7 +163,7 @@ router.post("/testToken", async (req, res) => {
     if (currentUser) {
       console.log("Authenticated UID:", currentUser.uid);
 
-      return res.status(200).send("Nice");
+      return res.status(201).send("Nice");
       // return res.send("Hi, from within the /testToken router POST");
     }
   }
@@ -121,7 +191,7 @@ router.post("/register", async (req, res) => {
       bio: `Nice to meet you here on Cafe.ly! I'm ${userRecord.displayName}.`,
     });
 
-    return res.status(200).send();
+    return res.status(201).send("Account is created! Nice job.");
   } catch (err) {
     console.log(
       "Could not create the account. May be a Firebase or MongoDB issue."
@@ -130,38 +200,16 @@ router.post("/register", async (req, res) => {
       .status(400)
       .send("Can't create user record in firebase/mongodb.");
   }
-  // Create Firebase Record
-  // await auth
-  //   .createUser({
-  //     email: email,
-  //     emailVerified: false,
-  //     phoneNumber: null,
-  //     password: password,
-  //     displayName: displayName,
-  //     photoURL: null,
-  //     disabled: false,
-  //   })
-  //   .then((userRecord) => {
-  //     console.log("Successfully created record.");
-  //     User.create({
-  //       uid: userRecord.uid,
-  //       bio: `Nice to meet you here on Cafe.ly! I'm ${userRecord.displayName}.`,
-  //     })
-  //       .then(() => {
-  //         console.log("Created new user!");
-  //         return res.status(200).send();
-  //       })
-  //       .catch((err) => {
-  //         console.log("Failed to create user in Mongo.");
-  //         return res.status(400).send("Failed to add document in MongoDB");
-  //       });
-  //   })
-  //   .catch((err) => {
-  //     console.log("Failed to add record to Firebase");
-  //     return res.status(400).send("Failed to add record in Firebase");
-  //   });
-  // return res.status(400).send("Server failed.");
 });
+
+// const updateAverageRatings = (productID) => {
+
+//   Product.updateOne({productID: productID},
+//     {
+//       averageRating:
+//     }
+//     )
+// }
 
 // router.post("/api/login", (req, res) => {
 //   const user = new User({
