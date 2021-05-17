@@ -16,6 +16,24 @@ router.get("/products", async (req, res) => {
   res.send(allProducts);
 });
 
+router.get("/productSearch", async (req, res) => {
+  let searchResults;
+
+  searchResults = await Product.find(
+    { $text: { $search: req.query.name } },
+    { score: { $meta: "textScore" } }
+  ).sort({ score: { $meta: "textScore" } });
+
+  // if search results don't have length (they're empty)
+  if (!searchResults.length) {
+    searchResults = await Product.find({
+      name: { $regex: req.query.name, $options: "i" },
+    });
+  }
+
+  res.send(searchResults);
+});
+
 router.get("/products/:id", async (req, res) => {
   // returns a specific product from a database using id
   const product = await Product.findOne({ _id: req.params.id });
@@ -27,22 +45,35 @@ router.get("/profile", async (req, res) => {
   const currentUser = req.currentUser;
 
   if (currentUser) {
+    let userRecord;
+    let userDocument;
     try {
       // FETCH User Record
-      const userRecord = await auth.getUser(currentUser.uid); // Firebase Record
-      const userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
-
-      // CREATE the object to send to user
+      userRecord = await auth.getUser(currentUser.uid); // Firebase Record
+    } catch (err) {
+      console.log(err.message);
+      return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
+    }
+    try {
+      // Fetch User Document
+      userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
+    } catch (err) {
+      console.log(err.message);
+      return res.status(400).send("Failed to fetch userDocument. (MongoDB)");
+    }
+    try {
+      // CREATE the object to SEND to user
       const result = {
         uid: userRecord.uid,
         displayName: userRecord.displayName,
         bio: userDocument.bio,
       };
+
       // SUCCESS
       return res.send(result);
     } catch (err) {
       console.log(err.message);
-      return res.status(400).send("Failed to add record");
+      return res.status(400).send("Failed to send profile result.");
     }
   }
   return res.status(401).send("Not authorized.");
@@ -74,7 +105,6 @@ router.post("/register", async (req, res) => {
   const password = req.body.password;
   const displayName = req.body.displayName;
 
-  console.log(email, password, displayName);
   try {
     // Create a Firebase Record
     const userRecord = await auth.createUser({
@@ -93,8 +123,12 @@ router.post("/register", async (req, res) => {
 
     return res.status(200).send();
   } catch (err) {
-    console.log("May error pre");
-    return res.status(400).send("Can't create user record in firebase.");
+    console.log(
+      "Could not create the account. May be a Firebase or MongoDB issue."
+    );
+    return res
+      .status(400)
+      .send("Can't create user record in firebase/mongodb.");
   }
   // Create Firebase Record
   // await auth

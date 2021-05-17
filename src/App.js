@@ -1,4 +1,5 @@
-import "./App.css";
+import "./styles/App.css";
+import "./styles/select-search.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Nav from "./components/Nav";
@@ -37,6 +38,12 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <PrivateRoute
+              path="/review/:slug"
+              customToast={`😓 You need to login before review`}
+              toastDuration={2000}
+              component={Review}
+            />
             <PrivateRoute
               path="/review"
               customToast={`😓 You need to login before review`}
