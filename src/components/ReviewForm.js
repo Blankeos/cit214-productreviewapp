@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 
 // ContextAPI & Hooks
 import { useSelect } from "react-select-search";
-import { useParams } from "react-router";
+import { Link } from "react-router-dom";
+import { useParams, useHistory } from "react-router";
+import { useAuth } from "../contexts/AuthContext";
 
 // Components
 import StarRating from "./StarRating";
@@ -10,43 +12,79 @@ import SelectSearch from "react-select-search";
 import AsyncSlect from "react-select/async";
 import Select from "react-select";
 import StarMeter from "./StarMeter";
+import ErrorJSX from "./ErrorJSX";
 
 // Services
 import fuzzySearch from "../services/fuzzySearch";
-import { getAllProducts, getOneProduct } from "../services/restServices";
+import { toast } from "react-toastify";
+import {
+  getAllProducts,
+  getOneProduct,
+  addReview,
+} from "../services/restServices";
 
 // Icons
-import { MdRateReview } from "react-icons/md";
+import { MdRateReview, MdError } from "react-icons/md";
 import AnimatedLoadingIcon from "./AnimatedLoadingIcon";
 
 const ReviewForm = () => {
   // Data States
   const [products, setProducts] = useState(null);
   const { slug } = useParams();
+  const { createToken, currentUser } = useAuth();
+  const history = useHistory();
 
   // Field States
   const [selectedOption, setSelectedOption] = useState(null);
   const [rating, setRating] = useState(null);
   const [review, setReview] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [state, setState] = useState({
-    productName: "",
-    productReview: "",
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-  const handleChange = (event, fieldName) => {
-    setState((prevState) => {
-      return { ...prevState, [fieldName]: event.target.value };
-    });
-  };
+    // Null Error Check
+    if (!selectedOption) {
+      toast.error(
+        ErrorJSX(<MdError size="1.3em" />, `Product field is empty.`),
+        {
+          autoClose: 5000,
+        }
+      );
+      setLoading(false);
+      return;
+    }
+    if (!rating) {
+      toast.error(
+        ErrorJSX(<MdError size="1.3em" />, `Rating field is empty.`),
+        {
+          autoClose: 5000,
+        }
+      );
+      setLoading(false);
+      return;
+    }
 
-  const submitReview = () => {
-    console.log(state);
+    // Submit
+    try {
+      await addReview(createToken, selectedOption.value, rating, review);
+      history.push(`/products/${selectedOption.value}`);
+      toast.success(`😃 Thanks for reviewing, ${currentUser.displayName}!`, {
+        autoClose: 5000,
+      });
+    } catch {
+      toast.error(
+        ErrorJSX(<MdError size="1.3em" />, "Failed to post review."),
+        {
+          autoClose: 5000,
+        }
+      );
+    }
+    setLoading(false);
   };
 
   const fetchProducts = async () => {
-    console.log(slug);
-
     if (slug) {
       const defaultOption = await getOneProduct(slug);
       const selectedOption = createProductOption(
@@ -102,19 +140,69 @@ const ReviewForm = () => {
           />
         )}
         {/* Rating Input */}
-        <h2 className="text-xl text-gray-600">Rating</h2>
-        <StarRating rating={rating} setRating={setRating} />
+        <div className="flex space-x-2 items-center">
+          <h2 className="text-xl text-gray-600">Rating</h2>
+          <p className="sm:hidden text-gray-400 text-sm">
+            {ratingLabel[rating]}
+          </p>
+        </div>
+        <div className="flex space-x-2 items-center">
+          <StarRating
+            rating={rating}
+            setRating={setRating}
+            disabled={!products}
+          />
+          <p className="hidden sm:block text-gray-400 text-sm">
+            {ratingLabel[rating]}
+          </p>
+        </div>
         {/* Review Input */}
         <h2 className="text-xl text-gray-600">Review</h2>
         <textarea
           className="border border-gray-300 rounded-sm p-2 h-36 max-h-48 inpfield-transition"
           style={{ minHeight: "9rem" }}
           placeholder="Describe your experience."
-          onChange={(event) => handleChange(event, "productReview")}
+          onChange={(event) => setReview(event.target.value)}
         />
+        {/* <button
+          className="default-btn"
+          type="submit"
+          onClick={(e) => submit(e)}
+          disabled={loading}
+        >
+          {loading ? (
+            <div className="flex space-x-2 justify-center">
+              <span>
+                <AnimatedLoadingIcon size="1.4em" />
+              </span>
+              <span>Logging in...</span>
+            </div>
+          ) : (
+            "Login"
+          )}
+        </button> */}
         <div>
-          <button className="default-btn" type="submit" onClick={submitReview}>
-            Post My Review
+          <button
+            className="default-btn"
+            disabled={!products || loading}
+            type="submit"
+            onClick={handleSubmit}
+          >
+            {loading ? (
+              <div className="flex space-x-2 justify-center">
+                <span>
+                  <AnimatedLoadingIcon size="1.4em" />
+                </span>
+                <span>Posting...</span>
+              </div>
+            ) : (
+              <>
+                {"Post My "}
+                <span className="font-semibold">
+                  {review ? "Review" : "Rating"}
+                </span>
+              </>
+            )}
           </button>
         </div>
       </form>
@@ -122,6 +210,7 @@ const ReviewForm = () => {
       {/* Product Info */}
       {selectedOption ? (
         <ProductInfo
+          productID={selectedOption.value}
           productName={selectedOption.label}
           imageUrl={selectedOption.image}
         />
@@ -133,6 +222,7 @@ const ReviewForm = () => {
 };
 
 const ProductInfo = ({
+  productID,
   productName,
   rating,
   ratingCount,
@@ -176,7 +266,16 @@ const ProductInfo = ({
         <div className="flex flex-col w-10/12 space-y-4 md:p-2 justify-between">
           {/* ProductName could be a link */}
           <h2 className="text-xl md:text-2xl font-extrabold w-full text-gray-700">
-            {productName ? productName : "Product Name Not Found"}
+            {productName ? (
+              <Link
+                className="hover:text-gray-600 transition ease-in-out"
+                to={`/products/${productID}`}
+              >
+                {productName}
+              </Link>
+            ) : (
+              "Product Name Not Found"
+            )}
             <div className="pt-2">
               <StarMeter rating={rating ? rating : 0} />
             </div>
@@ -194,6 +293,14 @@ const ProductInfo = ({
       </div>
     </div>
   );
+};
+
+const ratingLabel = {
+  1: <p className="text-red-500">Totally unsatisfied</p>,
+  2: <p className="text-red-500">I don't like it</p>,
+  3: <p className="text-primary">It's okay, I guess</p>,
+  4: <p className="text-green-400">It's pretty good</p>,
+  5: <p className="text-green-400">I love it!</p>,
 };
 
 const ImageLoadingSkeleton = () => {
