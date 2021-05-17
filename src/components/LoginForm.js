@@ -51,16 +51,16 @@ const LoginForm = () => {
   return (
     <>
       {/* Page Container */}
-      <div className="flex-grow p-10">
+      <div className="flex-grow pb-14 sm:p-10">
         {/* Login Form Container */}
         <div
-          className="flex max-w-6xl mx-auto rounded-2xl shadow-md overflow-hidden"
+          className="flex flex-col sm:flex-row max-w-6xl mx-auto sm:rounded-2xl shadow-md overflow-hidden rounded-b-2xl"
           style={{
-            height: "560px",
+            minHeight: "560px",
           }}
         >
           {/* Form */}
-          <form className="flex flex-col bg-white w-3/6 p-12 border-t border-l border-b rounded-tl-2xl rounded-bl-2xl">
+          <form className="flex flex-col bg-white sm:w-3/6 p-12 sm:border-t sm:border-l sm:border-b sm:rounded-tl-2xl sm:rounded-bl-2xl order-last sm:order-first">
             {/* Heading */}
             <h2 className="flex font-bold text-gray-600 space-x-2 text-2xl mb-16">
               <GiCoffeeBeans className="relative transform translate-y-1 text-primary" />
@@ -104,14 +104,14 @@ const LoginForm = () => {
                   "Login"
                 )}
               </button>
-              <div className="flex flex-col text-xxs space-y-1 text-gray-400 font-semibold">
+              <div className="flex flex-col text-xxs space-y-1 pt-8 text-gray-400 font-semibold">
                 <Link to="/register">CREATE ACCOUNT</Link>
                 <Link to="/register">CAN'T SIGN IN?</Link>
               </div>
             </div>
           </form>
           {/* Image */}
-          <div className="bg-yellow-300 w-full bg-login-img"></div>
+          <div className="bg-yellow-300 w-full bg-login-img h-48 bg-center sm:h-auto bg-cover"></div>
         </div>
       </div>
     </>
