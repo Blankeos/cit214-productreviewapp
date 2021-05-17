@@ -112,7 +112,7 @@ const ProductPage = () => {
               </h1>
               <p className="">{product && product.description}</p>
             </div>
-            <Link to="/review/productId">
+            <Link to={product && `/review/${product._id}`}>
               <button className="flex items-center space-x-1 bg-darkGray text-white px-4 py-4 rounded-md mt-8 transform hover:translate-y-1 transition ease-in-out">
                 <MdRateReview size="1.2em" />
                 <span>Rate This Product</span>
@@ -122,48 +122,6 @@ const ProductPage = () => {
         </div>
       </div>
     </PageContainer>
-    // <PageContainer className="bg-purple-200 text-gray-800">
-    //   <div className="max-w-6xl mx-auto">
-    //     {/* Container */}
-    //     <div
-    //       className="flex bg-red-500 rounded-md overflow-hidden shadow-md"
-    //       style={{
-    //         minHeight: "24rem",
-    //       }}
-    //     >
-    //       {/* Image */}
-    //       <div className="flex justify-center items-center w-6/12 h-full bg-gray-300 overflow-hidden">
-    //         {product ? (
-    //           <img
-    //             className="bg-gray-300 object-center object-cover w-full h-full"
-    //             src={product.images[0]}
-    //             alt="Product"
-    //           ></img>
-    //         ) : (
-    //           "Loading Image..."
-    //         )}
-    //       </div>
-    //       {/* Body */}
-    //       <div className="bg-primary flex flex-col py-12 px-12 justify-between w-6/12 h-full">
-    //         <div className="flex flex-col space-y-8">
-    //           <h1 className="font-extrabold text-5xl">
-    //             {product ? product.name : "Loading Product Name..."}
-    //           </h1>
-    //           <p>
-    //             {product
-    //               ? product.description
-    //               : "Loading Product Description..."}
-    //           </p>
-    //         </div>
-    //         <Link to="/review/productId">
-    //           <button className="bg-darkGray text-primary px-4 py-3 rounded-md">
-    //             Rate This Product
-    //           </button>
-    //         </Link>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </PageContainer>
   );
 };
 
