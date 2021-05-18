@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
+
+// Context API & Hooks
+import { Link } from "react-router-dom";
+
+// Services
 import axios from "axios";
 
-import { Link } from "react-router-dom";
+// Components
+import StarMeter from "../components/StarMeter";
+import PageContainer from "../components/PageContainer";
+
+// Icons
 import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoIosSad } from "react-icons/io";
-import StarMeter from "../components/StarMeter";
-import PageContainer from "../components/PageContainer";
 
 const Products = () => {
   const [products, setProducts] = useState(null);
@@ -133,20 +140,40 @@ export const ProductCard = ({ productData, ...rest }) => {
         {/* Stars */}
         <div className="absolute top-0 right-0 p-2 flex space-x-2 items-end">
           <StarMeter
-            rating={4.3}
+            rating={
+              productData && productData.averageRating
+                ? productData.averageRating
+                : 0
+            }
             iconSize="1.2em"
             // shadeClass="text-yellow-400"
             lightClass="text-white"
           />
-          <span className="text-white text-xs">4.1</span>
+          <span className="text-white text-xs">
+            {productData && productData.averageRating
+              ? productData.averageRating.toFixed(1)
+              : 0}
+          </span>
         </div>
         {/* Body */}
         <div className="flex flex-col p-2 bg-white group-hover:text-white flex-grow group-hover:bg-gray-900 transition-all duration-300">
           <h3 className="relative font-bold text-sm">
             {productData.name ? productData.name : "No Name Found"}
           </h3>
-          <p className="text-xs">18 Reviews</p>
-          <p className="text-xs">25 Ratings</p>
+          <p className="text-xs">
+            {productData && productData.reviewCount
+              ? `${productData.reviewCount} ${
+                  productData.reviewCount > 0 ? "Reviews" : "Review"
+                }`
+              : "No Reviews"}
+          </p>
+          <p className="text-xs">
+            {productData && productData.ratingCount
+              ? `${productData.ratingCount} ${
+                  productData.ratingCount > 0 ? "Ratings" : "Rating"
+                }`
+              : "No Ratings"}
+          </p>
         </div>
       </div>
     </Link>
