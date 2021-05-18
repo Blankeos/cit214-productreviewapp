@@ -22,6 +22,7 @@ module.exports = {
       },
       transitionProperty: {
         width: "width",
+        height: "height",
         borderRadius: "rounded",
       },
       backgroundImage: (theme) => ({
