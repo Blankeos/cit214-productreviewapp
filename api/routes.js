@@ -1,7 +1,7 @@
 // Express imports:
 const express = require("express");
 const router = express.Router();
-
+const ObjectId = require("mongoose").Types.ObjectId;
 // Model imports:
 const Product = require("../lib/models/products.js");
 const User = require("../lib/models/user");
@@ -48,6 +48,7 @@ router.get("/profile", async (req, res) => {
   if (currentUser) {
     let userRecord;
     let userDocument;
+    let userRatings;
     try {
       // FETCH User Record
       userRecord = await auth.getUser(currentUser.uid); // Firebase Record
@@ -63,11 +64,26 @@ router.get("/profile", async (req, res) => {
       return res.status(400).send("Failed to fetch userDocument. (MongoDB)");
     }
     try {
+      // Fetch User's Reviews
+      userRatings = await Rating.find({ userUID: currentUser.uid })
+        .sort({
+          updated: "desc",
+        })
+        .populate("productID", ["name", "images"]);
+    } catch (err) {
+      console.log(err.message);
+      return res
+        .status(400)
+        .send("Failed to fetch user's ratings & reviews. (MongoDB)");
+    }
+
+    try {
       // CREATE the object to SEND to user
       const result = {
         uid: userRecord.uid,
         displayName: userRecord.displayName,
         bio: userDocument.bio,
+        userRatings: userRatings,
       };
 
       // SUCCESS
@@ -117,7 +133,6 @@ router.post("/addReview", async (req, res) => {
           productID: productID,
           rating: rating,
           review: review,
-          updated: Date.now,
         });
         return res
           .status(201)
@@ -136,9 +151,11 @@ router.post("/addReview", async (req, res) => {
             productID: productID,
             rating: rating,
             review: review,
-            updated: Date.now,
           }
         );
+
+        await updateAverageRatings(productID);
+
         return res
           .status(201)
           .send("Existing review found. Review has been updated.");
@@ -202,14 +219,40 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// const updateAverageRatings = (productID) => {
+// Utility Functions
+const updateAverageRatings = async (_productID) => {
+  const productID = ObjectId(_productID); // convert string to ObjectID
+  const aggregateQuery = await Rating.aggregate([
+    {
+      $match: { productID: productID },
+    },
+    {
+      $group: {
+        _id: "$productID",
+        averageRating: {
+          $avg: "$rating",
+        },
+      },
+    },
+  ]);
 
-//   Product.updateOne({productID: productID},
-//     {
-//       averageRating:
-//     }
-//     )
-// }
+  console.log(aggregateQuery);
+
+  await Product.updateOne(
+    { _id: productID },
+    {
+      $set: {
+        averageRating: aggregateQuery[0].averageRating,
+      },
+    }
+  )
+    .then(() => {
+      console.log("Successfully Updated Average Ratings.");
+    })
+    .catch(() => {
+      console.log("Failed to Update Average Ratings.");
+    });
+};
 
 // router.post("/api/login", (req, res) => {
 //   const user = new User({
