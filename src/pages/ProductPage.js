@@ -5,8 +5,13 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
+// Services
+import { getOneProductAndReviews } from "../services/restServices";
+
 // Components
 import PageContainer from "../components/PageContainer";
+import ProductPageStats from "../components/ProductPage/ProductPageStats";
+import ProductReviews from "../components/ProductPage/ProductReviews";
 
 // Icons
 import { MdRateReview } from "react-icons/md";
@@ -14,6 +19,7 @@ import { MdRateReview } from "react-icons/md";
 const ProductPage = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
+  const [productRatings, setProductRatings] = useState(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   function handleChangeImage(imageIndex) {
@@ -21,18 +27,9 @@ const ProductPage = () => {
   }
 
   async function fetchData() {
-    await axios
-      .get(`/api/products/${slug}`, {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((response) => {
-        setProduct(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const result = await getOneProductAndReviews(slug);
+    setProduct(result.product);
+    setProductRatings(result.productRatings);
   }
 
   useEffect(() => {
@@ -121,6 +118,9 @@ const ProductPage = () => {
           </div>
         </div>
       </div>
+
+      <ProductPageStats productData={product} />
+      <ProductReviews data={productRatings} />
     </PageContainer>
   );
 };
