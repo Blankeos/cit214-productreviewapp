@@ -58,7 +58,11 @@ export default function HorizontalProductCard({
             </div>
           </div>
           <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-400">
-            <p>{`${reviews} reviews`}</p>
+            <p>{`${
+              productData && productData.reviewCount
+                ? productData.reviewCount
+                : 0
+            } reviews`}</p>
             <div className="flex space-x-1 items-center">
               <StarMeter
                 rating={
@@ -72,7 +76,11 @@ export default function HorizontalProductCard({
                 productData && productData.averageRating
                   ? productData.averageRating.toFixed(1)
                   : 0
-              } (${ratingNum})`}</span>
+              } (${
+                productData && productData.ratingCount
+                  ? productData.ratingCount
+                  : 0
+              })`}</span>
             </div>
           </div>
         </div>
