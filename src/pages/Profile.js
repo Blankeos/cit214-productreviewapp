@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { getProfile } from "../services/restServices";
 
 // Components
-import ActivityCard from "../components/ActivityCard";
+import ActivityCard, { ActivityCardSkeleton } from "../components/ActivityCard";
 import PageContainer from "../components/PageContainer";
 
 // Icons
@@ -22,6 +22,7 @@ const Profile = () => {
 
   async function fetchData() {
     const result = await getProfile(createToken);
+    console.log(result);
     setProfile(result);
   }
 
@@ -57,11 +58,18 @@ const Profile = () => {
           <div className="flex flex-col max-w-xl mx-auto items-center gap-3 rounded">
             <h1 className="font-bold text-4xl my-20 mb-14">Activity</h1>
             <div className="flex flex-col w-full gap-3">
-              <ActivityCard />
-              <ActivityCard />
-              <ActivityCard />
-              <ActivityCard />
-              <ActivityCard />
+              {profile ? (
+                profile.userRatings.map((userRating) => (
+                  <ActivityCard key={userRating._id} reviewData={userRating} />
+                ))
+              ) : (
+                <>
+                  <ActivityCardSkeleton />
+                  <ActivityCardSkeleton />
+                  <ActivityCardSkeleton />
+                  <ActivityCardSkeleton />
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -108,8 +116,12 @@ const ProfileHeader = ({ profileData, ...rest }) => {
             <p className="text-gray-600">Reviews</p>
           </div>
           <div className="flex flex-col items-center">
-            <h3 className="text-4xl font-bold">0</h3>
-            <p className="text-gray-600">Ratings</p>
+            <h3 className="text-4xl font-bold">
+              {profileData.userRatings.length}
+            </h3>
+            <p className="text-gray-600">
+              {profileData.userRatings.length > 1 ? "Ratings" : "Rating"}
+            </p>
           </div>
         </div>
       </div>
