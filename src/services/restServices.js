@@ -84,18 +84,3 @@ export const addReview = async (createToken, productID, rating, review) => {
   const res = await axios.post(url, payload, header);
   return res.data;
 };
-
-export const addToPhonebook = async (createToken, name, number) => {
-  const url = "/api/testToken";
-  const header = await createToken();
-  const payload = {
-    name,
-    number,
-  };
-  try {
-    const res = await axios.post(url, payload, header);
-    return res.data;
-  } catch (e) {
-    console.error(e);
-  }
-};
