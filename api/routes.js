@@ -13,7 +13,18 @@ const auth = require("../lib/admin");
 // Routes: GET
 router.get("/products", async (req, res) => {
   // returns all products in database
-  const allProducts = await Product.find({});
+  let allProducts;
+  if (req.query.sortByRating == -1) {
+    allProducts = await Product.find({}).sort({ averageRating: -1 });
+    console.log("Descending sort Products.");
+  } else if (req.query.sortByRating == 1) {
+    allProducts = await Product.find({}).sort({ averageRating: 1 });
+    console.log("Ascending sort Products.");
+  } else {
+    allProducts = await Product.find({});
+    console.log(typeof req.query.sortByRating);
+  }
+
   res.send(allProducts);
 });
 

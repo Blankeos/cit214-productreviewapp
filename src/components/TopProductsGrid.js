@@ -4,34 +4,40 @@ import HorizontalProductCard from "./HorizontalProductCard";
 import HorizontalProductCardSkeleton from "./Skeletons/HorizontalProductCardSkeleton";
 import { Link } from "react-router-dom";
 
+// Services
+import { getAllProducts } from "../services/restServices";
+
 export default function TopProductsGrid() {
   const [products, setProducts] = useState(null);
 
   async function fetchData() {
-    await axios
-      .get("/api/products", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((response) => {
-        const results = response.data.map((product) => {
-          return {
-            ...product,
-          };
-        });
-        setProducts(results);
-        console.log(results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const results = await getAllProducts(-1);
+    setProducts(results);
+    console.log(results);
+    // await axios
+    //   .get("/api/products", {
+    //     headers: {
+    //       "Access-Control-Allow-Origin": "*",
+    //     },
+    //   })
+    //   .then((response) => {
+    //     const results = response.data.map((product) => {
+    //       return {
+    //         ...product,
+    //       };
+    //     });
+    //     setProducts(results);
+    //     console.log(results);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   }
 
   useEffect(() => {
     const unsubscribe = fetchData(); //subscribe
     return unsubscribe; //unsubscribe
-  }, [products]);
+  }, []);
 
   return (
     <div>

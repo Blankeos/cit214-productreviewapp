@@ -12,8 +12,10 @@ export const getProfile = async (createToken) => {
   }
 };
 
-export const getAllProducts = async () => {
-  const url = "/api/products";
+export const getAllProducts = async (sortingOrder) => {
+  const url = `/api/products${
+    sortingOrder ? `?sortByRating=${sortingOrder}` : ""
+  }`;
   try {
     const res = await axios.get(url);
     const results = res.data.map((product) => {
