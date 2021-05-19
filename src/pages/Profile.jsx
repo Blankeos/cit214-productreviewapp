@@ -112,7 +112,12 @@ const ProfileHeader = ({ profileData, ...rest }) => {
         {/* Reviews and Ratings Count */}
         <div className="pt-8 flex items-center  sm:space-x-28 space-x-20 sm:flex-row">
           <div className="flex flex-col items-center">
-            <h3 className="text-4xl font-bold">0</h3>
+            <h3 className="text-4xl font-bold">
+              {profileData &&
+                profileData.userRatings.filter((userRating) => {
+                  return userRating.review;
+                }).length}
+            </h3>
             <p className="text-gray-600">Reviews</p>
           </div>
           <div className="flex flex-col items-center">

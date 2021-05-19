@@ -21,20 +21,22 @@ const ActivityCard = ({ reviewData, ...rest }) => {
         <div className="p-5 py-3 flex-grow flex-col flex justify-between">
           <div>
             {/* Upper Part */}
-            <div className="flex mb-1 space-x-5 items-center">
+            <div className="flex mb-1 space-x-5 justify-between">
               <div className="font-bold text-lg">
                 {reviewData
                   ? reviewData.productID.name
                   : "Product Name Not Found"}
               </div>
-              <div className="flex items-center space-x-1">
-                <StarMeter
-                  rating={reviewData ? reviewData.rating : 0}
-                  iconSize="1.2em"
-                />
-                <span className="text-xs text-gray-400">
-                  {reviewData ? reviewData.rating : 0}
-                </span>
+              <div>
+                <div className="flex items-center space-x-1">
+                  <StarMeter
+                    rating={reviewData ? reviewData.rating : 0}
+                    iconSize="1.2em"
+                  />
+                  <span className="text-xs text-gray-400">
+                    {reviewData ? reviewData.rating : 0}
+                  </span>
+                </div>
               </div>
             </div>
             {/* Written Review */}
@@ -43,7 +45,7 @@ const ActivityCard = ({ reviewData, ...rest }) => {
             </p>
           </div>
           <p className="text-gray-400 text-xs">
-            {reviewData && Date(reviewData.updated)}
+            {reviewData && new Date(reviewData.updated).toLocaleString()}
           </p>
         </div>
       </div>
@@ -65,7 +67,7 @@ export const ActivityCardSkeleton = () => {
       <div className="p-5 py-3 flex-grow flex-col flex justify-between">
         <div>
           {/* Upper Part */}
-          <div className="flex mb-1 space-x-5 items-center">
+          <div className="flex mb-1 space-x-5 items-center justify-between">
             <div
               className="font-bold text-lg bg-gray-400 rounded text-gray-400 animate-pulse"
               style={{

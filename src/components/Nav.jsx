@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 // Components
 import NavSearch from "./NavSearch";
 import AuthRender from "./AuthRender";
-import DropDown from "./DropDown.js";
+import DropDown from "./DropDown";
 
 // Icons
 import Logo from "../assets/imgs/cafely_logo.svg";
