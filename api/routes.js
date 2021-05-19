@@ -150,6 +150,7 @@ router.post("/addReview", async (req, res) => {
       return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
     }
 
+    let resMessage = "";
     try {
       // FETCH Rating Document and check if user.uid & productid have one document already
       ratingDocument = await Rating.findOne({
@@ -166,11 +167,7 @@ router.post("/addReview", async (req, res) => {
           rating: rating,
           review: review,
         });
-        return res
-          .status(201)
-          .send(
-            "No existing review for this specific product by this user yet. New review has been created."
-          );
+        resMessage = "Created a new review for this product by this user.";
       } else {
         // Existing review found. Update it.
         await Rating.updateOne(
@@ -183,15 +180,14 @@ router.post("/addReview", async (req, res) => {
             productID: productID,
             rating: rating,
             review: review,
+            updated: Date.now(),
           }
         );
-
-        await updateAverageRatings(productID);
-
-        return res
-          .status(201)
-          .send("Existing review found. Review has been updated.");
+        resMessage = "Existing review found. Review has been updated.";
       }
+      await updateAverageRatings(productID);
+
+      return res.status(201).send(resMessage);
     } catch (err) {
       console.log(err.message);
       return res.status(400).send("Failed to create/update review.");
