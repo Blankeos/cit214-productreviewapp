@@ -21,6 +21,7 @@ export default function TopProductsGrid() {
           };
         });
         setProducts(results);
+        console.log(results);
       })
       .catch((error) => {
         console.log(error);

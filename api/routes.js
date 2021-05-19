@@ -1,7 +1,7 @@
 // Express imports:
 const express = require("express");
 const router = express.Router();
-
+const ObjectId = require("mongoose").Types.ObjectId;
 // Model imports:
 const Product = require("../lib/models/products.js");
 const User = require("../lib/models/user");
@@ -17,6 +17,7 @@ router.get("/products", async (req, res) => {
   res.send(allProducts);
 });
 
+//  Obsolete
 router.get("/productSearch", async (req, res) => {
   let searchResults;
 
@@ -37,8 +38,39 @@ router.get("/productSearch", async (req, res) => {
 
 router.get("/products/:id", async (req, res) => {
   // returns a specific product from a database using id
-  const product = await Product.findOne({ _id: req.params.id });
-  res.send(product);
+  const productID = req.params.id;
+  const product = await Product.findOne({ _id: productID });
+
+  return res.send(product);
+});
+
+router.get("/productsAndRatings/:id", async (req, res) => {
+  // returns a specific product from a database using id
+  const productID = ObjectId(req.params.id);
+  const product = await Product.findOne({ _id: productID });
+
+  const productRatings = await Rating.aggregate([
+    {
+      $match: { productID: productID },
+    },
+    {
+      $sort: { updated: -1 },
+    },
+    {
+      $lookup: {
+        from: "users",
+        localField: "userUID",
+        foreignField: "uid",
+        as: "user",
+      },
+    },
+  ]);
+
+  const result = {
+    product,
+    productRatings,
+  };
+  res.send(result);
 });
 
 router.get("/profile", async (req, res) => {
@@ -48,6 +80,7 @@ router.get("/profile", async (req, res) => {
   if (currentUser) {
     let userRecord;
     let userDocument;
+    let userRatings;
     try {
       // FETCH User Record
       userRecord = await auth.getUser(currentUser.uid); // Firebase Record
@@ -63,11 +96,26 @@ router.get("/profile", async (req, res) => {
       return res.status(400).send("Failed to fetch userDocument. (MongoDB)");
     }
     try {
+      // Fetch User's Reviews
+      userRatings = await Rating.find({ userUID: currentUser.uid })
+        .sort({
+          updated: "desc",
+        })
+        .populate("productID", ["name", "images"]);
+    } catch (err) {
+      console.log(err.message);
+      return res
+        .status(400)
+        .send("Failed to fetch user's ratings & reviews. (MongoDB)");
+    }
+
+    try {
       // CREATE the object to SEND to user
       const result = {
         uid: userRecord.uid,
         displayName: userRecord.displayName,
         bio: userDocument.bio,
+        userRatings: userRatings,
       };
 
       // SUCCESS
@@ -117,7 +165,6 @@ router.post("/addReview", async (req, res) => {
           productID: productID,
           rating: rating,
           review: review,
-          updated: Date.now,
         });
         return res
           .status(201)
@@ -136,9 +183,11 @@ router.post("/addReview", async (req, res) => {
             productID: productID,
             rating: rating,
             review: review,
-            updated: Date.now,
           }
         );
+
+        await updateAverageRatings(productID);
+
         return res
           .status(201)
           .send("Existing review found. Review has been updated.");
@@ -188,7 +237,8 @@ router.post("/register", async (req, res) => {
     // Create a MongoDB Document
     await User.create({
       uid: userRecord.uid,
-      bio: `Nice to meet you here on Cafe.ly! I'm ${userRecord.displayName}.`,
+      displayName: userRecord.displayName,
+      bio: `👋 Nice to meet you here on Cafe.ly! I'm ${userRecord.displayName}.`,
     });
 
     return res.status(201).send("Account is created! Nice job.");
@@ -202,14 +252,106 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// const updateAverageRatings = (productID) => {
+// Utility Functions
+const updateAverageRatings = async (_productID) => {
+  const productID = ObjectId(_productID); // convert string to ObjectID
+  const averageRatingQuery = await Rating.aggregate([
+    {
+      $match: { productID: productID },
+    },
+    {
+      $group: {
+        _id: "$productID",
+        averageRating: {
+          $avg: "$rating",
+        },
+        ratingCount: {
+          $sum: 1,
+        },
+      },
+    },
+  ]);
 
-//   Product.updateOne({productID: productID},
-//     {
-//       averageRating:
-//     }
-//     )
-// }
+  const reviewCountQuery = await aggregateReviewCount(_productID);
+
+  console.log("Average Rating:", averageRatingQuery[0].averageRating);
+  console.log("Rating Count", averageRatingQuery[0].ratingCount);
+  console.log("Review Count", reviewCountQuery[0].reviewCount);
+
+  await Product.updateOne(
+    { _id: productID },
+    {
+      $set: {
+        ratingCount: averageRatingQuery[0].ratingCount,
+        reviewCount: reviewCountQuery[0].reviewCount,
+        averageRating: averageRatingQuery[0].averageRating,
+      },
+    }
+  )
+    .then(() => {
+      console.log("Successfully Updated Average Ratings.");
+    })
+    .catch(() => {
+      console.log("Failed to Update Average Ratings.");
+    });
+};
+
+const aggregateReviewCount = async (_productID) => {
+  const productID = ObjectId(_productID);
+  const reviewCountQuery = await Rating.aggregate([
+    {
+      $match: { productID: productID },
+    },
+    {
+      $match: {
+        review: { $ne: null },
+        $expr: { $gt: [{ $strLenCP: "$review" }, 0] },
+      },
+    },
+    {
+      $group: {
+        _id: "$productID",
+        reviewCount: {
+          $sum: 1,
+        },
+      },
+    },
+  ]);
+  return reviewCountQuery;
+};
+
+router.get("/updateUserInfo", async (req, res) => {
+  await updateAllUserInfo();
+  // res.send(output);
+  res.send("Successfully finished updating them users yo.");
+});
+
+const updateAllUserInfo = async () => {
+  const allUsers = await User.find({});
+
+  console.log(typeof allUsers);
+  // return allUsers;
+  allUsers.forEach(async (user) => {
+    try {
+      let firebaseUser = await auth.getUser(user.uid);
+      console.log(`Found ${firebaseUser.displayName}`);
+
+      await User.updateOne(
+        { uid: user.uid },
+        {
+          $set: {
+            photoURL: firebaseUser.photoURL,
+            displayName: firebaseUser.displayName,
+          },
+        }
+      );
+
+      console.log(`Updated ${firebaseUser.displayName}`);
+    } catch (err) {
+      console.log(err.message);
+    }
+  });
+};
 
 // router.post("/api/login", (req, res) => {
 //   const user = new User({

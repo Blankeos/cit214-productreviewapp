@@ -58,10 +58,29 @@ export default function HorizontalProductCard({
             </div>
           </div>
           <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-400">
-            <p>{`${reviews} reviews`}</p>
+            <p>{`${
+              productData && productData.reviewCount
+                ? productData.reviewCount
+                : 0
+            } reviews`}</p>
             <div className="flex space-x-1 items-center">
-              <StarMeter rating={rating} iconSize="1.4em" />
-              <span className="">{`${rating.toFixed(1)} (${ratingNum})`}</span>
+              <StarMeter
+                rating={
+                  productData && productData.averageRating
+                    ? productData.averageRating
+                    : 0
+                }
+                iconSize="1.4em"
+              />
+              <span className="">{`${
+                productData && productData.averageRating
+                  ? productData.averageRating.toFixed(1)
+                  : 0
+              } (${
+                productData && productData.ratingCount
+                  ? productData.ratingCount
+                  : 0
+              })`}</span>
             </div>
           </div>
         </div>

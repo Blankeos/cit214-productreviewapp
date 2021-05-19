@@ -1,26 +1,124 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import StarMeter from "./StarMeter";
 
-const ActivityCard = () => {
+const ActivityCard = ({ reviewData, ...rest }) => {
   return (
-    <div className="flex border h-32 w-full rounded-md shadow-md overflow-hidden">
+    <Link to={`/products/${reviewData.productID._id}`}>
+      <div className="flex border h-32 w-full rounded-md shadow-md overflow-hidden">
+        {/* Product Image */}
+        <div
+          className="hidden sm:flex h-32 w-32 bg-gray-300 flex-shrink-0"
+          style={{
+            backgroundImage: `url('${
+              reviewData && reviewData.productID.images[0]
+            }')`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+          }}
+        ></div>
+        {/* Body */}
+        <div className="p-5 py-3 flex-grow flex-col flex justify-between">
+          <div>
+            {/* Upper Part */}
+            <div className="flex mb-1 space-x-5 items-center">
+              <div className="font-bold text-lg">
+                {reviewData
+                  ? reviewData.productID.name
+                  : "Product Name Not Found"}
+              </div>
+              <div className="flex items-center space-x-1">
+                <StarMeter
+                  rating={reviewData ? reviewData.rating : 0}
+                  iconSize="1.2em"
+                />
+                <span className="text-xs text-gray-400">
+                  {reviewData ? reviewData.rating : 0}
+                </span>
+              </div>
+            </div>
+            {/* Written Review */}
+            <p className="text-gray-600 text-sm">
+              {reviewData && reviewData.review}
+            </p>
+          </div>
+          <p className="text-gray-400 text-xs">
+            {reviewData && Date(reviewData.updated)}
+          </p>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+export const ActivityCardSkeleton = () => {
+  return (
+    <div className="flex border h-32 w-full rounded-md shadow-md overflow-hidden select-none">
       {/* Product Image */}
-      <div className="hidden sm:flex h-32 w-32 bg-black flex-shrink-0"></div>
+      <div
+        className="hidden sm:flex h-32 w-32 bg-gray-400 flex-shrink-0 animate-pulse"
+        style={{
+          animationDuration: "1s",
+        }}
+      ></div>
       {/* Body */}
       <div className="p-5 py-3 flex-grow flex-col flex justify-between">
         <div>
           {/* Upper Part */}
           <div className="flex mb-1 space-x-5 items-center">
-            <div className="font-bold text-lg">Product Name</div>
-            <StarMeter rating={3} iconSize="1.2em" />
+            <div
+              className="font-bold text-lg bg-gray-400 rounded text-gray-400 animate-pulse"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "0.2s",
+              }}
+            >
+              Product Name
+            </div>
+            <div
+              className="flex items-center space-x-1 animate-pulse"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "0.4s",
+              }}
+            >
+              <StarMeter iconSize="1.2em" />
+              <span className="text-xs text-gray-200 bg-gray-200 rounded">
+                00
+              </span>
+            </div>
           </div>
           {/* Written Review */}
-          <p className="text-gray-600 text-sm">
-            Space, the final frontier. These are the voyages of the Starship
-            Enterprise...
-          </p>
+          <div className="flex flex-col space-y-1">
+            <p
+              className="animate-pulse text-gray-200 text-sm bg-gray-200 w-8/12 rounded h-4"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "0.4s",
+              }}
+            >
+              -
+            </p>
+            <p
+              className="animate-pulse text-gray-200 text-sm bg-gray-200 w-5/12 rounded h-4"
+              style={{
+                animationDuration: "1s",
+                animationDelay: "0.6s",
+              }}
+            >
+              -
+            </p>
+          </div>
         </div>
-        <p className="text-gray-400 text-xs">December 4</p>
+        <p
+          className="text-gray-200 text-xs bg-gray-200 animate-pulse h-3 w-3/12 rounded"
+          style={{
+            animationDuration: "1s",
+            animationDelay: "0.8s",
+          }}
+        >
+          The date today
+        </p>
       </div>
     </div>
   );

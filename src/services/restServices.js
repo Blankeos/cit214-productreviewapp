@@ -37,6 +37,16 @@ export const getOneProduct = async (productID) => {
   }
 };
 
+export const getOneProductAndReviews = async (productID) => {
+  const url = `/api/productsAndRatings/${productID}`;
+  try {
+    const res = await axios.get(url);
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 // idk obsolete lang ni guro...
 export const searchProductWithText = async (createToken, inputText) => {
   const url = `/api/products?name=${inputText}`;

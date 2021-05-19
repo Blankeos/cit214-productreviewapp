@@ -90,7 +90,7 @@ const ReviewForm = () => {
       const selectedOption = createProductOption(
         defaultOption.name,
         defaultOption._id,
-        defaultOption.images[0]
+        defaultOption
       );
       setSelectedOption(selectedOption);
       console.log("Fetched Default Option!");
@@ -212,7 +212,7 @@ const ReviewForm = () => {
         <ProductInfo
           productID={selectedOption.value}
           productName={selectedOption.label}
-          imageUrl={selectedOption.image}
+          productData={selectedOption.productData}
         />
       ) : (
         <ProductInfoSkeleton />
@@ -221,15 +221,7 @@ const ReviewForm = () => {
   );
 };
 
-const ProductInfo = ({
-  productID,
-  productName,
-  rating,
-  ratingCount,
-  reviewCount,
-  imageUrl,
-  ...rest
-}) => {
+const ProductInfo = ({ productID, productName, productData, ...rest }) => {
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
   const handleOnLoad = () => {
     setImageIsLoaded(true);
@@ -248,14 +240,14 @@ const ProductInfo = ({
         <div
           className="relative rounded-xl lg:rounded-none flex-shrink-0 w-32 h-32 lg:w-full lg:h-64 md:w-56 md:h-56 flex justify-center items-center"
           style={{
-            backgroundImage: `url(${imageUrl && imageUrl})`,
+            backgroundImage: `url(${productData && productData.images[0]})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
         >
           {!imageIsLoaded && <ImageLoadingSkeleton />}
           <img
-            src={`url(${imageUrl && imageUrl})`}
+            src={`url(${productData && productData.images[0]})`}
             className="hidden object-cover object-center h-auto w-full"
             onLoad={handleOnLoad}
             onError={handleOnLoad}
@@ -276,17 +268,34 @@ const ProductInfo = ({
             ) : (
               "Product Name Not Found"
             )}
-            <div className="pt-2">
-              <StarMeter rating={rating ? rating : 0} />
+            <div className="pt-2 flex space-x-2 items-center">
+              <StarMeter
+                rating={
+                  productData && productData.averageRating
+                    ? productData.averageRating
+                    : 0
+                }
+              />
+              <span className="font-normal text-sm text-gray-400">
+                {productData && productData.averageRating
+                  ? productData.averageRating.toFixed(1)
+                  : 0}
+              </span>
             </div>
           </h2>
           {/* Review and Rating Sound */}
           <div className="w-full space-y-2 text-gray-400">
             <div className="" style={{ animationDelay: "1.2s" }}>
-              {ratingCount ? ratingCount : 0} Ratings
+              {productData && productData.ratingCount
+                ? productData.ratingCount
+                : 0}{" "}
+              Ratings
             </div>
             <div className="" style={{ animationDelay: "1.6s" }}>
-              {reviewCount ? reviewCount : 0} Reviews
+              {productData && productData.reviewCount
+                ? productData.reviewCount
+                : 0}{" "}
+              Reviews
             </div>
           </div>
         </div>
@@ -347,11 +356,11 @@ const ProductInfoSkeleton = () => {
   );
 };
 
-const createProductOption = (productName, productID, productImageUrl) => {
+const createProductOption = (productName, productID, productData) => {
   return {
     label: productName,
     value: productID,
-    image: productImageUrl,
+    productData: productData,
   };
 };
 const ProductSearchSkeleton = ({ customTheme, defaultOptionName, ...rest }) => {
@@ -380,7 +389,7 @@ const ProductSearch = ({
 
   useEffect(() => {
     const productOptions = products.map((product, i) => {
-      return createProductOption(product.name, product._id, product.images[0]);
+      return createProductOption(product.name, product._id, product);
     });
     setOptions(productOptions);
   }, [products]);
