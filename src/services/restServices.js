@@ -1,11 +1,11 @@
 import axios from "axios";
 
 // GET requests
-export const getProfile = async (createToken) => {
-  const url = "/api/profile";
-  const header = await createToken();
+export const getProfile = async (uid) => {
+  const url = `/api/profile/${uid}`;
+
   try {
-    const res = await axios.get(url, header);
+    const res = await axios.get(url);
     return res.data;
   } catch (e) {
     console.error(e);
