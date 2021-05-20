@@ -46,7 +46,10 @@ const About = () => {
               <TeamMember
                 name="CJ Rubinos"
                 title="Front-End Developer"
-                imageSource="https://scontent.fceb2-1.fna.fbcdn.net/v/t1.18169-9/13873075_119110735197762_7846843027922971199_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFED6FkdEfVpaadL8a5U4yJYibmsADzurFiJuawAPO6sbSABASxqKyBDiHzsG_iJPoiYJUT4TnapWmiLp3BovqV&_nc_ohc=5TNi0bvYbd8AX-iJk-3&_nc_ht=scontent.fceb2-1.fna&oh=de232d9152dfe08ae0eec6761524c1c0&oe=60C328A4"
+                imageSource={
+                  "https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/team_images/frontend_developer.png"
+                }
+                // imageSource="https://scontent.fceb2-1.fna.fbcdn.net/v/t1.18169-9/13873075_119110735197762_7846843027922971199_n.jpg?_nc_cat=101&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFED6FkdEfVpaadL8a5U4yJYibmsADzurFiJuawAPO6sbSABASxqKyBDiHzsG_iJPoiYJUT4TnapWmiLp3BovqV&_nc_ohc=5TNi0bvYbd8AX-iJk-3&_nc_ht=scontent.fceb2-1.fna&oh=de232d9152dfe08ae0eec6761524c1c0&oe=60C328A4"
               />
               <TeamMember
                 name="Jiezel Maglalang"
