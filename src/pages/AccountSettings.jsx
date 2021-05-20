@@ -100,7 +100,7 @@ const AccountSettings = () => {
             </h1>
             {/* Profile Picture */}
             <h2 className="text-xl">Profile Picture</h2>
-            <div className="py-4 flex space-x-4">
+            <div className="pb-4 flex space-x-4">
               <div className="h-40 w-40 relative flex-shrink-0 overflow-hidden rounded-full">
                 {photoURL && (
                   <img
@@ -126,7 +126,7 @@ const AccountSettings = () => {
                 ></input>
                 <label
                   for="photoUpload"
-                  className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer ${
+                  className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none ${
                     true && "opacity-50"
                   }`}
                 >
@@ -136,7 +136,7 @@ const AccountSettings = () => {
                 <button
                   type="button"
                   disabled={loading}
-                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out"
+                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out select-none"
                   onClick={() => setIsOpen(true)}
                 >
                   Use a Link
