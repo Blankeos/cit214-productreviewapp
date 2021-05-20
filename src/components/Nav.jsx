@@ -20,6 +20,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import { GoSignOut } from "react-icons/go";
 import { SiCoffeescript } from "react-icons/si";
 import { FaUserCog } from "react-icons/fa";
+import DefaultPhoto from "./ProductPage/DefaultPhoto";
 
 const Nav = () => {
   const history = useHistory();
@@ -255,8 +256,23 @@ const Nav = () => {
                     {currentUser && currentUser.displayName}
                   </p>
                   <DropDown
-                    menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75"
-                    label={<SiCoffeescript className="text-white" />}
+                    menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75 relative overflow-hidden"
+                    label={
+                      currentUser && currentUser.photoURL ? (
+                        currentUser.photoURL && (
+                          <div
+                            className="w-full h-full absolute"
+                            style={{
+                              backgroundImage: `url('${currentUser.photoURL}')`,
+                              backgroundSize: "cover",
+                              backgroundPosition: "center",
+                            }}
+                          ></div>
+                        )
+                      ) : (
+                        <DefaultPhoto size="1em" />
+                      )
+                    }
                     items={[
                       {
                         icon: <BsFillPersonFill className="text-primary" />,
