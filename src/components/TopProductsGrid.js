@@ -14,24 +14,6 @@ export default function TopProductsGrid() {
     const results = await getAllProducts(-1);
     setProducts(results);
     console.log(results);
-    // await axios
-    //   .get("/api/products", {
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //   })
-    //   .then((response) => {
-    //     const results = response.data.map((product) => {
-    //       return {
-    //         ...product,
-    //       };
-    //     });
-    //     setProducts(results);
-    //     console.log(results);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }
 
   useEffect(() => {
