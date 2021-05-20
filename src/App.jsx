@@ -26,8 +26,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ScrollToTop from "./components/ScrollToTop";
 
-import TokenTestForm from "./TokenTestForm"; // TEST please delete later
-
 function App() {
   return (
     <AuthProvider>
@@ -56,7 +54,6 @@ function App() {
             <Route path="/about" component={About} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/accountSettings" component={AccountSettings} />
-            <Route path="/tokenTest" component={TokenTestForm} />
             <Route path="*" component={Page404} />
           </Switch>
           <ToastContainer position="bottom-right" />

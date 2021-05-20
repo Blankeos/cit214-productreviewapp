@@ -86,7 +86,7 @@ const ReviewCard = ({ reviewData, ...rest }) => {
           </p>
         </div>
         <p className="text-gray-400 text-xs pt-2">
-          {reviewData && Date(reviewData.updated)}
+          {reviewData && new Date(reviewData.updated).toLocaleString()}
         </p>
       </div>
     </div>

@@ -13,7 +13,18 @@ const auth = require("../lib/admin");
 // Routes: GET
 router.get("/products", async (req, res) => {
   // returns all products in database
-  const allProducts = await Product.find({});
+  let allProducts;
+  if (req.query.sortByRating == -1) {
+    allProducts = await Product.find({}).sort({ averageRating: -1 });
+    console.log("Descending sort Products.");
+  } else if (req.query.sortByRating == 1) {
+    allProducts = await Product.find({}).sort({ averageRating: 1 });
+    console.log("Ascending sort Products.");
+  } else {
+    allProducts = await Product.find({});
+    console.log(typeof req.query.sortByRating);
+  }
+
   res.send(allProducts);
 });
 
@@ -115,6 +126,7 @@ router.get("/profile", async (req, res) => {
         uid: userRecord.uid,
         displayName: userRecord.displayName,
         bio: userDocument.bio,
+        photoURL: userDocument.photoURL,
         userRatings: userRatings,
       };
 
@@ -150,6 +162,7 @@ router.post("/addReview", async (req, res) => {
       return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
     }
 
+    let resMessage = "";
     try {
       // FETCH Rating Document and check if user.uid & productid have one document already
       ratingDocument = await Rating.findOne({
@@ -166,11 +179,7 @@ router.post("/addReview", async (req, res) => {
           rating: rating,
           review: review,
         });
-        return res
-          .status(201)
-          .send(
-            "No existing review for this specific product by this user yet. New review has been created."
-          );
+        resMessage = "Created a new review for this product by this user.";
       } else {
         // Existing review found. Update it.
         await Rating.updateOne(
@@ -183,15 +192,14 @@ router.post("/addReview", async (req, res) => {
             productID: productID,
             rating: rating,
             review: review,
+            updated: Date.now(),
           }
         );
-
-        await updateAverageRatings(productID);
-
-        return res
-          .status(201)
-          .send("Existing review found. Review has been updated.");
+        resMessage = "Existing review found. Review has been updated.";
       }
+      await updateAverageRatings(productID);
+
+      return res.status(201).send(resMessage);
     } catch (err) {
       console.log(err.message);
       return res.status(400).send("Failed to create/update review.");
@@ -216,6 +224,41 @@ router.post("/testToken", async (req, res) => {
       // return res.send("Hi, from within the /testToken router POST");
     }
   }
+  return res.status(403).send("Not authorized");
+});
+
+router.post("/updateProfile", async (req, res) => {
+  const currentUser = req.currentUser;
+  const displayName = req.body.displayName;
+  const bio = req.body.bio;
+  const photoURL = req.body.photoURL;
+
+  if (currentUser) {
+    // Authorized
+    await auth
+      .updateUser(currentUser.uid, {
+        displayName: displayName,
+        photoURL: photoURL,
+      })
+      .then((ur) => {
+        console.log("successfully updated firebase.");
+      })
+      .catch((err) => {
+        console.log("Failed to update user (FIREBASE).", err);
+      });
+    await User.updateOne(
+      { uid: currentUser.uid },
+      {
+        displayName: displayName,
+        bio: bio,
+        photoURL: photoURL,
+      }
+    ).catch((err) => {
+      console.log("Failed to update user (MongoDB).", err);
+    });
+    return res.status(201).send("Successfully updated user.");
+  }
+
   return res.status(403).send("Not authorized");
 });
 

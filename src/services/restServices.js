@@ -12,8 +12,10 @@ export const getProfile = async (createToken) => {
   }
 };
 
-export const getAllProducts = async () => {
-  const url = "/api/products";
+export const getAllProducts = async (sortingOrder) => {
+  const url = `/api/products${
+    sortingOrder ? `?sortByRating=${sortingOrder}` : ""
+  }`;
   try {
     const res = await axios.get(url);
     const results = res.data.map((product) => {
@@ -85,17 +87,20 @@ export const addReview = async (createToken, productID, rating, review) => {
   return res.data;
 };
 
-export const addToPhonebook = async (createToken, name, number) => {
-  const url = "/api/testToken";
+export const updateProfile = async (
+  createToken,
+  displayName,
+  bio,
+  photoURL
+) => {
+  const url = "/api/updateProfile";
   const header = await createToken();
   const payload = {
-    name,
-    number,
+    displayName,
+    bio,
+    photoURL,
   };
-  try {
-    const res = await axios.post(url, payload, header);
-    return res.data;
-  } catch (e) {
-    console.error(e);
-  }
+
+  const res = await axios.post(url, payload, header);
+  return res.data;
 };
