@@ -146,7 +146,7 @@ const AccountSettings = () => {
             {/* Display Name */}
             <h2 className="text-xl">Display Name</h2>
             <input
-              className="max-w-sm border border-gray-300 rounded-sm p-2 inpfield-transition"
+              className="text-sm text-gray-500 max-w-sm border border-gray-300 rounded-sm p-2 inpfield-transition"
               placeholder={loading && "Fetching data..."}
               defaultValue={displayName && displayName}
               disabled={loading}
@@ -154,7 +154,7 @@ const AccountSettings = () => {
             />
             <h2 className="text-xl">Bio</h2>
             <textarea
-              className="max-w-sm border border-gray-300 rounded-sm p-2 inpfield-transition"
+              className="text-sm text-gray-500 max-w-sm border border-gray-300 rounded-sm p-2 inpfield-transition"
               placeholder={loading && "Fetching data..."}
               defaultValue={bio && bio}
               style={{
