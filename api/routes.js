@@ -84,61 +84,61 @@ router.get("/productsAndRatings/:id", async (req, res) => {
   res.send(result);
 });
 
-router.get("/profile", async (req, res) => {
-  // returns current user's profile details
-  const currentUser = req.currentUser;
+router.get("/profile/:uid", async (req, res) => {
+  const uid = req.params.uid;
 
-  if (currentUser) {
-    let userRecord;
-    let userDocument;
-    let userRatings;
-    try {
-      // FETCH User Record
-      userRecord = await auth.getUser(currentUser.uid); // Firebase Record
-    } catch (err) {
-      console.log(err.message);
-      return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
-    }
-    try {
-      // Fetch User Document
-      userDocument = await User.findOne({ uid: currentUser.uid }); // MongoDB Document
-    } catch (err) {
-      console.log(err.message);
-      return res.status(400).send("Failed to fetch userDocument. (MongoDB)");
-    }
-    try {
-      // Fetch User's Reviews
-      userRatings = await Rating.find({ userUID: currentUser.uid })
-        .sort({
-          updated: "desc",
-        })
-        .populate("productID", ["name", "images"]);
-    } catch (err) {
-      console.log(err.message);
-      return res
-        .status(400)
-        .send("Failed to fetch user's ratings & reviews. (MongoDB)");
-    }
-
-    try {
-      // CREATE the object to SEND to user
-      const result = {
-        uid: userRecord.uid,
-        displayName: userRecord.displayName,
-        bio: userDocument.bio,
-        photoURL: userDocument.photoURL,
-        userRatings: userRatings,
-      };
-
-      // SUCCESS
-      return res.send(result);
-    } catch (err) {
-      console.log(err.message);
-      return res.status(400).send("Failed to send profile result.");
-    }
-  }
-  return res.status(401).send("Not authorized.");
+  return await getProfile(uid, res);
 });
+
+const getProfile = async (uid, res) => {
+  let userRecord;
+  let userDocument;
+  let userRatings;
+  try {
+    // FETCH User Record
+    userRecord = await auth.getUser(uid); // Firebase Record
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).send("Failed to fetch userRecord. (FIREBASE)");
+  }
+  try {
+    // Fetch User Document
+    userDocument = await User.findOne({ uid: uid }); // MongoDB Document
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).send("Failed to fetch userDocument. (MongoDB)");
+  }
+  try {
+    // Fetch User's Reviews
+    userRatings = await Rating.find({ userUID: uid })
+      .sort({
+        updated: "desc",
+      })
+      .populate("productID", ["name", "images"]);
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(400)
+      .send("Failed to fetch user's ratings & reviews. (MongoDB)");
+  }
+
+  try {
+    // CREATE the object to SEND to user
+    const result = {
+      uid: userRecord.uid,
+      displayName: userRecord.displayName,
+      bio: userDocument.bio,
+      photoURL: userDocument.photoURL,
+      userRatings: userRatings,
+    };
+
+    // SUCCESS
+    return res.send(result);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(400).send("Failed to send profile result.");
+  }
+};
 
 // Routes: POST
 router.post("/addReview", async (req, res) => {
