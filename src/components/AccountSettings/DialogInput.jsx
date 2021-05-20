@@ -20,6 +20,7 @@ export default function MyModal({ isOpen, setIsOpen, onSave, ...rest }) {
           onClose={closeModal}
           open={isOpen}
         >
+          <div className="absolute bg-black w-full h-full transition duration-500 opacity-20"></div>
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -64,7 +65,7 @@ export default function MyModal({ isOpen, setIsOpen, onSave, ...rest }) {
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-yellow-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className="inline-flex justify-center px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-yellow-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 transform  active:scale-90"
                     onClick={() => {
                       closeModal();
                       onSave && onSave(input);
