@@ -13,6 +13,7 @@ import PageContainer from "../components/PageContainer";
 // Icons
 import { FiEdit } from "react-icons/fi";
 import { SiCoffeescript } from "react-icons/si";
+import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
 
 //------------------
 
@@ -84,10 +85,21 @@ const ProfileHeader = ({ profileData, ...rest }) => {
       {/* Profile Header Section */}
       <div className="flex flex-wrap w-full flex-col items-center px-4 space-y-5 mx-auto overflow-hidden text-center">
         {/* Profile Photo */}
-        <div className="flex items-center justify-center h-36 w-36 rounded-full bg-primary shadow">
-          {profileData && !profileData.photoUrl && (
-            <SiCoffeescript size="3.3em" className="text-white" />
-          )}
+        <div className="border-8 border-white rounded-full">
+          <div className="flex relative overflow-hidden items-center justify-center h-36 w-36 rounded-full bg-white shadow">
+            {profileData && profileData.photoURL ? (
+              <div
+                className="absolute w-full h-full"
+                style={{
+                  backgroundImage: `url('${profileData.photoURL}')`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                }}
+              ></div>
+            ) : (
+              <DefaultPhoto size="3.3em" />
+            )}
+          </div>
         </div>
 
         <h1 className="font-bold text-xl">
