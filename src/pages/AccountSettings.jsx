@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // ContextAPI & Hooks
 import { useAuth } from "../contexts/AuthContext";
 
+// Components
+import DialogInput from "../components/AccountSettings/DialogInput";
+
 // Services
 import { getProfile, updateProfile } from "../services/restServices";
 import { toast } from "react-toastify";
@@ -20,7 +23,11 @@ const AccountSettings = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Form Data
+  // Modal Sates
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Form States
+  const [photoURL, setPhotoURL] = useState(null);
   const [displayName, setDisplayName] = useState(null);
   const [bio, setBio] = useState(null);
 
@@ -32,6 +39,7 @@ const AccountSettings = () => {
     // Set form states
     setDisplayName(result.displayName);
     setBio(result.bio);
+    setPhotoURL(result.photoURL);
 
     console.log(result);
     setLoading(false);
@@ -42,7 +50,12 @@ const AccountSettings = () => {
     setLoading(true);
 
     try {
-      const result = await updateProfile(createToken, displayName, bio);
+      const result = await updateProfile(
+        createToken,
+        displayName,
+        bio,
+        photoURL
+      );
       toast.success(
         `🤠 Successfully updated your profile. Refreshing to show changes...`,
         {
@@ -70,6 +83,11 @@ const AccountSettings = () => {
     <>
       {/* Page Container */}
       <div className="flex-grow text-gray-700 pb-14 p-10">
+        <DialogInput
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          onSave={(value) => setPhotoURL(value)}
+        />
         <div className="max-w-6xl mx-auto">
           {/* Form */}
           <form
@@ -83,26 +101,43 @@ const AccountSettings = () => {
             {/* Profile Picture */}
             <h2 className="text-xl">Profile Picture</h2>
             <div className="py-4 flex space-x-4">
-              <div
-                className="h-40 w-40 flex-shrink-0 overflow-hidden rounded-full"
-                style={{
-                  backgroundImage: `url('${
-                    profile && profile.photoURL && profile.photoURL
-                  }')`,
-                }}
-              >
-                {profile && !profile.photoURL && <DefaultPhoto size="3.5em" />}
+              <div className="h-40 w-40 relative flex-shrink-0 overflow-hidden rounded-full">
+                {photoURL && (
+                  <img
+                    src={photoURL && photoURL}
+                    className="absolute object-cover object-center w-full h-full"
+                    onError={() => {
+                      setPhotoURL(null);
+                      toast.error(`😥 Photo given is invalid`, {
+                        autoClose: 5000,
+                      });
+                    }}
+                  ></img>
+                )}
+                {profile && !photoURL && <DefaultPhoto size="3.5em" />}
               </div>
               <div className="flex space-y-5 flex-col justify-center">
-                <button
-                  disabled={loading}
-                  className="text-white px-5 p-3 bg-primary border border-primary rounded-md disabled:opacity-50"
+                <input
+                  type="file"
+                  id="photoUpload"
+                  accept="image/*"
+                  className="hidden"
+                  disabled={true}
+                ></input>
+                <label
+                  for="photoUpload"
+                  className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer ${
+                    true && "opacity-50"
+                  }`}
                 >
-                  Upload a New Photo
-                </button>
+                  Upload a Photo
+                </label>
+
                 <button
+                  type="button"
                   disabled={loading}
-                  className="text-primary p-3 border border-primary rounded-md disabled:opacity-50"
+                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out"
+                  onClick={() => setIsOpen(true)}
                 >
                   Use a Link
                 </button>
