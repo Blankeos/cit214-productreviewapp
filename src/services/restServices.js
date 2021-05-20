@@ -86,3 +86,15 @@ export const addReview = async (createToken, productID, rating, review) => {
   const res = await axios.post(url, payload, header);
   return res.data;
 };
+
+export const updateProfile = async (createToken, displayName, bio) => {
+  const url = "/api/updateProfile";
+  const header = await createToken();
+  const payload = {
+    displayName,
+    bio,
+  };
+
+  const res = await axios.post(url, payload, header);
+  return res.data;
+};

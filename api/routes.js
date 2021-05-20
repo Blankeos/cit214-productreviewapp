@@ -226,6 +226,38 @@ router.post("/testToken", async (req, res) => {
   return res.status(403).send("Not authorized");
 });
 
+router.post("/updateProfile", async (req, res) => {
+  const currentUser = req.currentUser;
+  const displayName = req.body.displayName;
+  const bio = req.body.bio;
+
+  if (currentUser) {
+    // Authorized
+    await auth
+      .updateUser(currentUser.uid, {
+        displayName: displayName,
+      })
+      .then((ur) => {
+        console.log("successfully updated firebase.");
+      })
+      .catch((err) => {
+        console.log("Failed to update user (FIREBASE).", err);
+      });
+    await User.updateOne(
+      { uid: currentUser.uid },
+      {
+        displayName: displayName,
+        bio: bio,
+      }
+    ).catch((err) => {
+      console.log("Failed to update user (MongoDB).", err);
+    });
+    return res.status(201).send("Successfully updated user.");
+  }
+
+  return res.status(403).send("Not authorized");
+});
+
 router.post("/register", async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;

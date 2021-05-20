@@ -4,32 +4,78 @@ import React, { useState, useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 // Services
-import { getProfile } from "../services/restServices";
+import { getProfile, updateProfile } from "../services/restServices";
+import { toast } from "react-toastify";
 
 // Icons
 import { FaUserCog } from "react-icons/fa";
 import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
+import AnimatedLoadingIcon from "../components/AnimatedLoadingIcon";
 
 const AccountSettings = () => {
   // Data
-  const [profile, setProfile] = useState(null);
   const { createToken } = useAuth();
+
+  // States
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  // Form Data
+  const [displayName, setDisplayName] = useState(null);
+  const [bio, setBio] = useState(null);
+
   const fetchData = async () => {
+    setLoading(true);
     const result = await getProfile(createToken);
     setProfile(result);
+
+    // Set form states
+    setDisplayName(result.displayName);
+    setBio(result.bio);
+
     console.log(result);
+    setLoading(false);
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const result = await updateProfile(createToken, displayName, bio);
+      toast.success(
+        `🤠 Successfully updated your profile. Refreshing to show changes...`,
+        {
+          autoClose: 5000,
+        }
+      );
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+      console.log(result);
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    setLoading(false);
+  };
+
   useEffect(() => {
     const unsubscribe = fetchData();
     return unsubscribe;
   }, []);
+
   return (
     <>
       {/* Page Container */}
       <div className="flex-grow text-gray-700 pb-14 p-10">
         <div className="max-w-6xl mx-auto">
           {/* Form */}
-          <form className="flex flex-col space-y-3 shadow-xl rounded-2xl border-t border-l border-r p-12 overflow-hidden">
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col space-y-3 shadow-xl rounded-2xl border-t border-l border-r p-12 overflow-hidden"
+          >
             <h1 className="pb-5 font-extrabold text-2xl flex space-x-4 items-center">
               <FaUserCog size="1.5em" className="text-primary" />
               <span>Account Settings</span>
@@ -48,10 +94,16 @@ const AccountSettings = () => {
                 {profile && !profile.photoURL && <DefaultPhoto size="3.5em" />}
               </div>
               <div className="flex space-y-5 flex-col justify-center">
-                <button className="text-white px-5 p-3 bg-primary border border-primary rounded-md">
+                <button
+                  disabled={loading}
+                  className="text-white px-5 p-3 bg-primary border border-primary rounded-md disabled:opacity-50"
+                >
                   Upload a New Photo
                 </button>
-                <button className="text-primary p-3 border border-primary rounded-md">
+                <button
+                  disabled={loading}
+                  className="text-primary p-3 border border-primary rounded-md disabled:opacity-50"
+                >
                   Use a Link
                 </button>
               </div>
@@ -60,19 +112,39 @@ const AccountSettings = () => {
             <h2 className="text-xl">Display Name</h2>
             <input
               className="max-w-sm border border-gray-300 rounded-sm p-2 inpfield-transition"
-              placeholder=""
-              defaultValue={profile && profile.displayName}
+              placeholder={loading && "Fetching data..."}
+              defaultValue={displayName && displayName}
+              disabled={loading}
+              onChange={(e) => setDisplayName(e.target.value)}
             />
             <h2 className="text-xl">Bio</h2>
             <textarea
               className="max-w-sm border border-gray-300 rounded-sm p-2 inpfield-transition"
-              placeholder=""
-              defaultValue={profile && profile.bio && profile.bio}
+              placeholder={loading && "Fetching data..."}
+              defaultValue={bio && bio}
               style={{
                 minHeight: "7rem",
                 maxHeight: "10rem",
               }}
+              disabled={loading}
+              onChange={(e) => setBio(e.target.value)}
             />
+            <div>
+              <button className="default-btn" disabled={loading} type="submit">
+                {loading ? (
+                  <div className="flex space-x-2 justify-center">
+                    <span>
+                      <AnimatedLoadingIcon size="1.4em" />
+                    </span>
+                    <span>
+                      {loading && profile ? "Updating..." : "Please wait..."}
+                    </span>
+                  </div>
+                ) : (
+                  <span>Update my profile</span>
+                )}
+              </button>
+            </div>
           </form>
         </div>
       </div>
