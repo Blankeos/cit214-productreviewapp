@@ -15,9 +15,14 @@ import { FaUserCog } from "react-icons/fa";
 import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
 import AnimatedLoadingIcon from "../components/AnimatedLoadingIcon";
 
+// TippyJS
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optional
+import "tippy.js/animations/scale.css";
+
 const AccountSettings = () => {
   // Data
-  const { createToken } = useAuth();
+  const { createToken, currentUser } = useAuth();
 
   // States
   const [profile, setProfile] = useState(null);
@@ -33,7 +38,7 @@ const AccountSettings = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    const result = await getProfile(createToken);
+    const result = await getProfile(currentUser.uid);
     setProfile(result);
 
     // Set form states
@@ -124,14 +129,21 @@ const AccountSettings = () => {
                   className="hidden"
                   disabled={true}
                 ></input>
-                <label
-                  for="photoUpload"
-                  className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none ${
-                    true && "opacity-50"
-                  }`}
+                <Tippy
+                  animation="scale"
+                  inertia={true}
+                  content="😓 Sorry, this feature is disabled for now..."
+                  placement="top"
                 >
-                  Upload a Photo
-                </label>
+                  <label
+                    for="photoUpload"
+                    className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none ${
+                      true && "opacity-50"
+                    }`}
+                  >
+                    Upload a Photo
+                  </label>
+                </Tippy>
 
                 <button
                   type="button"
