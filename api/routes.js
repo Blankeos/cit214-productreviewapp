@@ -126,6 +126,7 @@ router.get("/profile", async (req, res) => {
         uid: userRecord.uid,
         displayName: userRecord.displayName,
         bio: userDocument.bio,
+        photoURL: userDocument.photoURL,
         userRatings: userRatings,
       };
 
@@ -230,12 +231,14 @@ router.post("/updateProfile", async (req, res) => {
   const currentUser = req.currentUser;
   const displayName = req.body.displayName;
   const bio = req.body.bio;
+  const photoURL = req.body.photoURL;
 
   if (currentUser) {
     // Authorized
     await auth
       .updateUser(currentUser.uid, {
         displayName: displayName,
+        photoURL: photoURL,
       })
       .then((ur) => {
         console.log("successfully updated firebase.");
@@ -248,6 +251,7 @@ router.post("/updateProfile", async (req, res) => {
       {
         displayName: displayName,
         bio: bio,
+        photoURL: photoURL,
       }
     ).catch((err) => {
       console.log("Failed to update user (MongoDB).", err);
