@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 
 // Icons
 import { FaUserCog } from "react-icons/fa";
+import { AiOutlineLink, AiOutlineCloudUpload } from "react-icons/ai";
 import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
 import AnimatedLoadingIcon from "../components/AnimatedLoadingIcon";
 
@@ -132,26 +133,38 @@ const AccountSettings = () => {
                 <Tippy
                   animation="scale"
                   inertia={true}
-                  content="😓 Sorry, this feature is disabled for now..."
-                  placement="top"
+                  content={
+                    <span>
+                      😓 <b>Darn, Sorry!</b>
+                      <br />
+                      This feature is
+                      <br />
+                      disabled for now.
+                      <br />
+                      Try using link instead.
+                    </span>
+                  }
+                  placement="left"
                 >
                   <label
                     for="photoUpload"
-                    className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none ${
+                    className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none flex items-center space-x-1 justify-center ${
                       true && "opacity-50"
                     }`}
                   >
-                    Upload a Photo
+                    <AiOutlineCloudUpload />
+                    <span>Upload own Photo</span>
                   </label>
                 </Tippy>
 
                 <button
                   type="button"
                   disabled={loading}
-                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out select-none"
+                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out select-none flex items-center space-x-1 justify-center"
                   onClick={() => setIsOpen(true)}
                 >
-                  Use a Link
+                  <AiOutlineLink />
+                  <span>Upload using Link</span>
                 </button>
               </div>
             </div>
