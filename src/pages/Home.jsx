@@ -1,9 +1,7 @@
 import React from "react";
 import { AiOutlineArrowDown } from "react-icons/ai";
-import PageContainer from "../components/PageContainer";
 
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
-import CafelyLogo2 from "../assets/imgs/cafely-graphic-logotype.svg";
 import TopProductsGrid from "../components/TopProductsGrid";
 
 const Home = () => {
