@@ -412,50 +412,5 @@ const ProductSearch = ({
     </>
   );
 };
-// const ProductSearch = ({ options, value, multiple, disabled }) => {
-//   const [snapshot, valueProps, optionProps] = useSelect({
-//     options,
-//     value,
-//     multiple,
-//     disabled,
-//   });
-
-//   return (
-//     <div class="bg-gray-300 w-full">
-//       <button {...valueProps}>{snapshot.displayValue}</button>
-//       {snapshot.focus && (
-//         <ul>
-//           {snapshot.options.map((option) => (
-//             <li key={option.value}>
-//               <button {...optionProps} value={option.value}>
-//                 {option.name}
-//               </button>
-//             </li>
-//           ))}
-//         </ul>
-//       )}
-//     </div>
-//   );
-// };
-
-// export const ProductSearch = () => {
-//   const countries = [
-//     { name: "Swedish", value: "sv" },
-//     { name: "English", value: "en" },
-//   ];
-//   return (
-//     <SelectSearch
-//       options={countries}
-//       search
-//       filterOptions={fuzzySearch}
-//       emptyMessage={() => (
-//         <div style={{ textAlign: "center", fontSize: "0.8em" }}>
-//           Not found renderer
-//         </div>
-//       )}
-//       placeholder="Select your country"
-//     />
-//   );
-// };
 
 export default ReviewForm;
