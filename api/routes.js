@@ -22,7 +22,6 @@ router.get("/products", async (req, res) => {
     console.log("Ascending sort Products.");
   } else {
     allProducts = await Product.find({});
-    console.log(typeof req.query.sortByRating);
   }
 
   res.send(allProducts);
@@ -365,7 +364,7 @@ const aggregateReviewCount = async (_productID) => {
 
 router.get("/updateUserInfo", async (req, res) => {
   await updateAllUserInfo();
-  // res.send(output);
+  // res.send(output);w
   res.send("Successfully finished updating them users yo.");
 });
 
