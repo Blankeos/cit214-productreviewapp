@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
+// Components
 import HorizontalProductCard from "./HorizontalProductCard";
 import HorizontalProductCardSkeleton from "./Skeletons/HorizontalProductCardSkeleton";
-import { Link } from "react-router-dom";
 
 // Services
 import { getAllProducts } from "../services/restServices";

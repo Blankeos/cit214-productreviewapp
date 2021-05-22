@@ -1,10 +1,5 @@
 import React from "react";
 
-// about the company
-// contact us
-// social media
-// address
-
 const About = () => {
   return (
     <>
