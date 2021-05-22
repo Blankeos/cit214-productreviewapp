@@ -16,6 +16,11 @@ import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoIosSad } from "react-icons/io";
 
+// TippyJS
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optional
+import "tippy.js/animations/scale.css";
+
 const Products = () => {
   const [products, setProducts] = useState(null);
   const [queriedProducts, setQueriedProducts] = useState("");
@@ -79,9 +84,24 @@ const Products = () => {
                 ></input>
                 {/* <BsX className="" /> */}
               </div>
-              <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
-                Add a Product
-              </button>
+              <Tippy
+                animation="scale"
+                inertia={true}
+                content={
+                  <span>
+                    😓 <b>Darn, Sorry!</b>
+                    <br />
+                    This feature is not
+                    <br />
+                    available for now.
+                  </span>
+                }
+                placement="bottom"
+              >
+                <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
+                  Add a Product
+                </button>
+              </Tippy>
             </div>
           </div>
           <div className="w-56 h-1 hidden md:block"></div>
@@ -123,9 +143,24 @@ const Products = () => {
                 <span> Can't Find A Specific Product?</span>
               </h2>
               <p className="text-xs">Contribute to our database.</p>
-              <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
-                Add a Product
-              </button>
+              <Tippy
+                animation="scale"
+                inertia={true}
+                content={
+                  <span>
+                    😓 <b>Darn, Sorry!</b>
+                    <br />
+                    This feature is not
+                    <br />
+                    available for now.
+                  </span>
+                }
+                placement="bottom"
+              >
+                <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
+                  Add a Product
+                </button>
+              </Tippy>
             </div>
           </div>
         </div>
