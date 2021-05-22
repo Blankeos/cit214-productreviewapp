@@ -1,16 +1,18 @@
 import Fuse from "fuse.js";
 
-export default function fuzzySearch(options) {
-  const fuse = new Fuse(options, {
-    keys: ["name", "groupName", "items.name"],
+export default function fuzzySearch(list) {
+  const fuse = new Fuse(list, {
+    keys: ["name", "description"],
     threshold: 0.3,
+    includeScore: true,
   });
 
-  return (value) => {
+  function search(value) {
+    console.log(value);
     if (!value.length) {
-      return options;
+      return list;
     }
-
     return fuse.search(value);
-  };
+  }
+  return search;
 }
