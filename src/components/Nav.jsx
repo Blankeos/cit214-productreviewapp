@@ -18,7 +18,6 @@ import { RiSearch2Line } from "react-icons/ri";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import { BsFillPersonFill } from "react-icons/bs";
 import { GoSignOut } from "react-icons/go";
-import { SiCoffeescript } from "react-icons/si";
 import { FaUserCog } from "react-icons/fa";
 import DefaultPhoto from "./ProductPage/DefaultPhoto";
 
