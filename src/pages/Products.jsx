@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Services
-import axios from "axios";
+import { getAllProducts } from "../services/restServices";
+import Fuse from "fuse.js";
 
 // Components
 import StarMeter from "../components/StarMeter";
@@ -17,31 +18,42 @@ import { IoIosSad } from "react-icons/io";
 
 const Products = () => {
   const [products, setProducts] = useState(null);
+  const [queriedProducts, setQueriedProducts] = useState("");
+
+  const [fuse, setFuse] = useState(null);
 
   async function fetchData() {
-    await axios
-      .get("/api/products", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((response) => {
-        const results = response.data.map((product) => {
-          return {
-            ...product,
-          };
-        });
-        setProducts(results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const results = await getAllProducts();
+    setProducts(results);
+
+    const fuseObject = new Fuse(results, {
+      keys: ["name", "description"],
+    });
+
+    setFuse(fuseObject);
   }
+
+  const fuzzySearch = (value) => {
+    if (value.length <= 0) {
+      return products.map((product) => ({ item: product }));
+    }
+    return fuse.search(value);
+  };
+
+  const handleSearch = (value) => {
+    if (fuse) {
+      setQueriedProducts(fuzzySearch(value));
+    }
+  };
+
+  useEffect(() => {
+    console.log(products ? products : "Products don't exist yo");
+  }, [products]);
 
   useEffect(() => {
     const unsubscribe = fetchData(); //subscribe
     return unsubscribe; //unsubscribe
-  }, [products]);
+  }, []);
 
   return (
     <PageContainer>
@@ -61,6 +73,9 @@ const Products = () => {
                 <input
                   className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
                   placeholder="What are you looking for?"
+                  onChange={(e) => {
+                    handleSearch(e.target.value);
+                  }}
                 ></input>
                 {/* <BsX className="" /> */}
               </div>
@@ -77,10 +92,13 @@ const Products = () => {
           <div className="flex-grow w-8/12">
             {/* Product Grid */}
             <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
-              {products ? (
-                products.map((product) => {
+              {queriedProducts ? (
+                queriedProducts.slice(0, 10).map((product) => {
                   return (
-                    <ProductCard key={product._id} productData={product} />
+                    <ProductCard
+                      key={product.item._id}
+                      productData={product.item}
+                    />
                   );
                 })
               ) : (
