@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 
 // Context API
 import { useAuth } from "../contexts/AuthContext";
+import { useParams } from "react-router-dom";
 
 // Services
 import { getProfile } from "../services/restServices";
 
 // Components
 import ActivityCard, { ActivityCardSkeleton } from "../components/ActivityCard";
-import PageContainer from "../components/PageContainer";
 
 // Icons
 import { FiEdit } from "react-icons/fi";
-import { SiCoffeescript } from "react-icons/si";
 import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
 
 //------------------
 
 const Profile = () => {
-  const { createToken } = useAuth();
+  const { currentUser } = useAuth();
+  const { uidSlug } = useParams();
   const [profile, setProfile] = useState(null);
 
   async function fetchData() {
-    const result = await getProfile(createToken);
+    const result = await getProfile(uidSlug ? uidSlug : currentUser.uid);
     console.log(result);
     setProfile(result);
   }
@@ -103,7 +103,9 @@ const ProfileHeader = ({ profileData, ...rest }) => {
         </div>
 
         <h1 className="font-bold text-xl">
-          {profileData ? profileData.displayName : `Barrack Obama`}
+          {profileData && profileData.displayName
+            ? profileData.displayName
+            : `Barrack Obama`}
         </h1>
         {/* Edit Profile Button */}
         <button className="hidden items-center space-x-2 p-2 px-3 text-xs text-white bg-darkGray self-center rounded-md outline-none focus:outline-none transform transition hover:scale-110 active:scale-75">

@@ -12,12 +12,18 @@ import { toast } from "react-toastify";
 
 // Icons
 import { FaUserCog } from "react-icons/fa";
+import { AiOutlineLink, AiOutlineCloudUpload } from "react-icons/ai";
 import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
 import AnimatedLoadingIcon from "../components/AnimatedLoadingIcon";
 
+// TippyJS
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optional
+import "tippy.js/animations/scale.css";
+
 const AccountSettings = () => {
   // Data
-  const { createToken } = useAuth();
+  const { createToken, currentUser } = useAuth();
 
   // States
   const [profile, setProfile] = useState(null);
@@ -33,7 +39,7 @@ const AccountSettings = () => {
 
   const fetchData = async () => {
     setLoading(true);
-    const result = await getProfile(createToken);
+    const result = await getProfile(currentUser.uid);
     setProfile(result);
 
     // Set form states
@@ -100,7 +106,7 @@ const AccountSettings = () => {
             </h1>
             {/* Profile Picture */}
             <h2 className="text-xl">Profile Picture</h2>
-            <div className="py-4 flex space-x-4">
+            <div className="pb-4 flex space-x-4">
               <div className="h-40 w-40 relative flex-shrink-0 overflow-hidden rounded-full">
                 {photoURL && (
                   <img
@@ -124,22 +130,41 @@ const AccountSettings = () => {
                   className="hidden"
                   disabled={true}
                 ></input>
-                <label
-                  for="photoUpload"
-                  className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer ${
-                    true && "opacity-50"
-                  }`}
+                <Tippy
+                  animation="scale"
+                  inertia={true}
+                  content={
+                    <span>
+                      😓 <b>Darn, Sorry!</b>
+                      <br />
+                      This feature is
+                      <br />
+                      disabled for now.
+                      <br />
+                      Try using link instead.
+                    </span>
+                  }
+                  placement="left"
                 >
-                  Upload a Photo
-                </label>
+                  <label
+                    for="photoUpload"
+                    className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none flex items-center space-x-1 justify-center ${
+                      true && "opacity-50"
+                    }`}
+                  >
+                    <AiOutlineCloudUpload />
+                    <span>Upload own Photo</span>
+                  </label>
+                </Tippy>
 
                 <button
                   type="button"
                   disabled={loading}
-                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out"
+                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out select-none flex items-center space-x-1 justify-center"
                   onClick={() => setIsOpen(true)}
                 >
-                  Use a Link
+                  <AiOutlineLink />
+                  <span>Upload using Link</span>
                 </button>
               </div>
             </div>

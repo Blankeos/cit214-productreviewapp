@@ -52,6 +52,7 @@ function App() {
             <Route path="/products/:slug" component={ProductPage} />
             <Route exact path="/products" component={Products} />
             <Route path="/about" component={About} />
+            <PrivateRoute path="/profile/:uidSlug" component={Profile} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/accountSettings" component={AccountSettings} />
             <Route path="*" component={Page404} />

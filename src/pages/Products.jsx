@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Services
-import axios from "axios";
+import { getAllProducts } from "../services/restServices";
+import Fuse from "fuse.js";
 
 // Components
 import StarMeter from "../components/StarMeter";
@@ -15,33 +16,49 @@ import { RiSearch2Line } from "react-icons/ri";
 import { GiShoppingBag } from "react-icons/gi";
 import { IoIosSad } from "react-icons/io";
 
+// TippyJS
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optional
+import "tippy.js/animations/scale.css";
+
 const Products = () => {
   const [products, setProducts] = useState(null);
+  const [queriedProducts, setQueriedProducts] = useState("");
+
+  const [fuse, setFuse] = useState(null);
 
   async function fetchData() {
-    await axios
-      .get("/api/products", {
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-        },
-      })
-      .then((response) => {
-        const results = response.data.map((product) => {
-          return {
-            ...product,
-          };
-        });
-        setProducts(results);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const results = await getAllProducts();
+    setProducts(results);
+
+    const fuseObject = new Fuse(results, {
+      keys: ["name", "description"],
+    });
+
+    setFuse(fuseObject);
   }
+
+  const fuzzySearch = (value) => {
+    if (value.length <= 0) {
+      return products.map((product) => ({ item: product }));
+    }
+    return fuse.search(value);
+  };
+
+  const handleSearch = (value) => {
+    if (fuse) {
+      setQueriedProducts(fuzzySearch(value));
+    }
+  };
+
+  useEffect(() => {
+    console.log(products ? products : "Products don't exist yo");
+  }, [products]);
 
   useEffect(() => {
     const unsubscribe = fetchData(); //subscribe
     return unsubscribe; //unsubscribe
-  }, [products]);
+  }, []);
 
   return (
     <PageContainer>
@@ -61,12 +78,30 @@ const Products = () => {
                 <input
                   className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
                   placeholder="What are you looking for?"
+                  onChange={(e) => {
+                    handleSearch(e.target.value);
+                  }}
                 ></input>
                 {/* <BsX className="" /> */}
               </div>
-              <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
-                Add a Product
-              </button>
+              <Tippy
+                animation="scale"
+                inertia={true}
+                content={
+                  <span>
+                    😓 <b>Darn, Sorry!</b>
+                    <br />
+                    This feature is not
+                    <br />
+                    available for now.
+                  </span>
+                }
+                placement="bottom"
+              >
+                <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
+                  Add a Product
+                </button>
+              </Tippy>
             </div>
           </div>
           <div className="w-56 h-1 hidden md:block"></div>
@@ -77,10 +112,13 @@ const Products = () => {
           <div className="flex-grow w-8/12">
             {/* Product Grid */}
             <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
-              {products ? (
-                products.map((product) => {
+              {queriedProducts ? (
+                queriedProducts.slice(0, 10).map((product) => {
                   return (
-                    <ProductCard key={product._id} productData={product} />
+                    <ProductCard
+                      key={product.item._id}
+                      productData={product.item}
+                    />
                   );
                 })
               ) : (
@@ -105,9 +143,24 @@ const Products = () => {
                 <span> Can't Find A Specific Product?</span>
               </h2>
               <p className="text-xs">Contribute to our database.</p>
-              <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
-                Add a Product
-              </button>
+              <Tippy
+                animation="scale"
+                inertia={true}
+                content={
+                  <span>
+                    😓 <b>Darn, Sorry!</b>
+                    <br />
+                    This feature is not
+                    <br />
+                    available for now.
+                  </span>
+                }
+                placement="bottom"
+              >
+                <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
+                  Add a Product
+                </button>
+              </Tippy>
             </div>
           </div>
         </div>

@@ -1,6 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
+// Icons
+import { AiOutlineLink } from "react-icons/ai";
+
 export default function MyModal({ isOpen, setIsOpen, onSave, ...rest }) {
   const [input, setInput] = useState(null);
   function closeModal() {
@@ -20,6 +23,7 @@ export default function MyModal({ isOpen, setIsOpen, onSave, ...rest }) {
           onClose={closeModal}
           open={isOpen}
         >
+          <div className="absolute bg-black w-full h-full transition duration-500 opacity-20"></div>
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={Fragment}
@@ -50,8 +54,12 @@ export default function MyModal({ isOpen, setIsOpen, onSave, ...rest }) {
               leaveTo="opacity-0 scale-95"
             >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl border border-gray-100 rounded-2xl">
-                <Dialog.Title as="h3" className="leading-6 text-gray-600">
-                  Use a Link
+                <Dialog.Title
+                  as="h3"
+                  className="leading-6 text-gray-600 flex space-x-1 items-center"
+                >
+                  <AiOutlineLink />
+                  <span>Upload using Link</span>
                 </Dialog.Title>
                 <div className="mt-2">
                   <input
@@ -64,7 +72,7 @@ export default function MyModal({ isOpen, setIsOpen, onSave, ...rest }) {
                 <div className="mt-4">
                   <button
                     type="button"
-                    className="inline-flex justify-center px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-yellow-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    className="inline-flex justify-center px-4 py-2 text-sm text-white bg-primary rounded-md hover:bg-yellow-500 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 transform  active:scale-90"
                     onClick={() => {
                       closeModal();
                       onSave && onSave(input);

@@ -36,31 +36,34 @@ const ReviewCard = ({ reviewData, ...rest }) => {
         minHeight: "11rem",
       }}
     >
-      {/* <div>{JSON.stringify(reviewData)}</div> */}
       <div className="flex p-3 items-center space-x-3">
         {/* Product Image */}
-        <div
-          className="overflow-hidden sm:flex h-16 w-16 bg-gray-300 flex-shrink-0 rounded-full"
-          style={{
-            backgroundImage: `url('${
-              reviewData &&
-              reviewData.user[0].photoURL &&
-              reviewData.user[0].photoURL
-            }')`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-          }}
-        >
-          {reviewData && !reviewData.user[0].photoURL && (
-            <DefaultPhoto className="bg-primary text-white" />
-          )}
-        </div>
+        <Link to={reviewData && `/profile/${reviewData.user[0].uid}`}>
+          <div
+            className="overflow-hidden sm:flex h-16 w-16 bg-gray-300 flex-shrink-0 rounded-full"
+            style={{
+              backgroundImage: `url('${
+                reviewData &&
+                reviewData.user[0].photoURL &&
+                reviewData.user[0].photoURL
+              }')`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+            }}
+          >
+            {reviewData && !reviewData.user[0].photoURL && (
+              <DefaultPhoto className="bg-primary text-white" />
+            )}
+          </div>
+        </Link>
         {/* Name and Rating */}
         <div className="flex flex-col space-y-0.5">
           <div className="font-bold text-lg">
-            {reviewData && reviewData.user[0].displayName
-              ? reviewData.user[0].displayName
-              : "Display Name Not Found"}
+            <Link to={reviewData && `/profile/${reviewData.user[0].uid}`}>
+              {reviewData && reviewData.user[0].displayName
+                ? reviewData.user[0].displayName
+                : "Display Name Not Found"}
+            </Link>
           </div>
           <div className="flex items-center space-x-1">
             <StarMeter
