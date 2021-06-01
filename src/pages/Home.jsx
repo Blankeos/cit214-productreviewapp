@@ -1,6 +1,8 @@
 import React from "react";
-import { AiOutlineArrowDown } from "react-icons/ai";
 
+// Icons
+import { AiOutlineArrowDown } from "react-icons/ai";
+import { CgMouse } from "react-icons/bi";
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
 import TopProductsGrid from "../components/TopProductsGrid";
 
@@ -19,7 +21,8 @@ const Home = () => {
                   Defining the best coffee experience. In culture, in taste.
                 </i>
               </p>
-              <button className="text-sm animate-bounce default-btn flex items-center justify-center">
+              <button className="text-sm animate-bounce flex items-center justify-center">
+                <CgMouse size="1.3em" />
                 <span>Browse Now</span>
                 <AiOutlineArrowDown
                   className="transform translate-x-1"
