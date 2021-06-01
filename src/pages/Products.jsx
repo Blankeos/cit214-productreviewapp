@@ -33,6 +33,7 @@ const Products = () => {
 
     const fuseObject = new Fuse(results, {
       keys: ["name", "description"],
+      threshold: 0.3,
     });
 
     setFuse(fuseObject);
