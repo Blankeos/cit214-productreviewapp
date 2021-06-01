@@ -33,10 +33,11 @@ const Products = () => {
 
     const fuseObject = new Fuse(results, {
       keys: ["name", "description"],
-      threshold: 0.3,
+      threshold: 0.4,
     });
 
     setFuse(fuseObject);
+    setQueriedProducts(fuseObject.search("")); // same as fuzzySearch function. Only used to intialize so queriedProducts is not null.
   }
 
   const fuzzySearch = (value) => {
