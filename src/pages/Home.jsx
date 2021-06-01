@@ -2,8 +2,10 @@ import React from "react";
 
 // Icons
 import { AiOutlineArrowDown } from "react-icons/ai";
-import { CgMouse } from "react-icons/bi";
+import { CgMouse } from "react-icons/cg";
 import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
+
+// Components
 import TopProductsGrid from "../components/TopProductsGrid";
 
 const Home = () => {
