@@ -37,7 +37,6 @@ const Products = () => {
     });
 
     setFuse(fuseObject);
-    setQueriedProducts(fuseObject.search("")); // same as fuzzySearch function. Only used to intialize so queriedProducts is not null.
   }
 
   const fuzzySearch = (value) => {
@@ -55,6 +54,9 @@ const Products = () => {
 
   useEffect(() => {
     console.log(products ? products : "Products don't exist yo");
+    if (products) {
+      setQueriedProducts(products.map((product) => ({ item: product }))); // intializes queried products
+    }
   }, [products]);
 
   useEffect(() => {
