@@ -246,12 +246,14 @@ const ProductInfo = ({ productID, productName, productData, ...rest }) => {
           }}
         >
           {!imageIsLoaded && <ImageLoadingSkeleton />}
-          <img
-            src={`url(${productData && productData.images[0]})`}
-            className="hidden object-cover object-center h-auto w-full"
-            onLoad={handleOnLoad}
-            onError={handleOnLoad}
-          ></img>
+          <Link to={`/products/${productID}`}>
+            <img
+              src={`url(${productData && productData.images[0]})`}
+              className="hidden object-cover object-center h-auto w-full"
+              onLoad={handleOnLoad}
+              onError={handleOnLoad}
+            ></img>
+          </Link>
         </div>
 
         {/* Content Div */}
@@ -260,7 +262,7 @@ const ProductInfo = ({ productID, productName, productData, ...rest }) => {
           <h2 className="text-xl md:text-2xl font-extrabold w-full text-gray-700">
             {productName ? (
               <Link
-                className="hover:text-gray-600 transition ease-in-out"
+                className="hover:text-primary transition ease-in-out"
                 to={`/products/${productID}`}
               >
                 {productName}
