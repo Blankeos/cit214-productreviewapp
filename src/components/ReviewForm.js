@@ -237,25 +237,24 @@ const ProductInfo = ({ productID, productName, productData, ...rest }) => {
     <div className="flex flex-row col-span-1 order-first lg:order-last lg:flex-col">
       <div className="overflow-hidden space-x-4 sm:w-full md:w-8/12 lg:w-full lg:flex-col lg:space-y-4 lg:space-x-0 lg:p-0 lg:pb-6 lg:items-center bg-white flex flex-row p-4 rounded-2xl border border-gray-100 shadow-xl">
         {/* Image Div */}
-        <Link to={`/products/${productID}`}>
-          <div
-            className="relative rounded-xl lg:rounded-none flex-shrink-0 w-32 h-32 lg:w-full lg:h-64 md:w-56 md:h-56 flex justify-center items-center"
-            style={{
-              backgroundImage: `url(${productData && productData.images[0]})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            {!imageIsLoaded && <ImageLoadingSkeleton />}
+        <div
+          className="relative rounded-xl lg:rounded-none flex-shrink-0 w-32 h-32 lg:w-full lg:h-64 md:w-56 md:h-56 flex justify-center items-center"
+          style={{
+            backgroundImage: `url(${productData && productData.images[0]})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        >
+          {!imageIsLoaded && <ImageLoadingSkeleton />}
+          <Link to={`/products/${productID}`} className="w-full h-full">
             <img
               src={`url(${productData && productData.images[0]})`}
               className="hidden object-cover object-center h-auto w-full"
               onLoad={handleOnLoad}
               onError={handleOnLoad}
             ></img>
-          </div>
-        </Link>
-
+          </Link>
+        </div>
         {/* Content Div */}
         <div className="flex flex-col w-10/12 space-y-4 md:p-2 justify-between">
           {/* ProductName could be a link */}
