@@ -116,7 +116,7 @@ const Products = () => {
           <div className="flex-grow w-8/12">
             {/* Product Grid */}
             <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
-              {queriedProducts ? (
+              {queriedProducts ? queriedProducts.length > 0 ? (
                 queriedProducts.slice(0, 10).map((product) => {
                   return (
                     <ProductCard
@@ -124,7 +124,9 @@ const Products = () => {
                       productData={product.item}
                     />
                   );
-                })
+                }) : (
+                  <p className="text-gray-500 col-span-full">No products of this name found :(</p>
+                )
               ) : (
                 <>
                   <ProductCardSkeleton />
