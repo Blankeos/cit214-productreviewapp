@@ -34,6 +34,7 @@ const ProductPageStats = ({ productData, ...rest }) => {
           <StarMeter
             iconSize="3em"
             shadeClass="text-yellow-300"
+            lightClass="text-white"
             rating={
               productData && productData.averageRating
                 ? productData.averageRating
