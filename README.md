@@ -36,6 +36,8 @@ Cafe.ly is a _full-stack web-application_ project deployed on Vercel that makes 
 ## :magnet: Other Stuff
 
 - [Image Repository](https://github.com/seajayrubynose/cafely-pictures)
+- [User Manual - Website](https://cafely-manual.vercel.app/)
+- [User Manual - Repository](https://github.com/seajayrubynose/cafely-manual)
 
 <hr>
 
