@@ -15,12 +15,20 @@ const Home = () => {
       <div
         className="absolute w-full mx-auto overflow-hidden"
         style={{
-          backgroundImage: `url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F6NlmBQLhWy2QM%2Fsource.gif&f=1&nofb=1')`,
-          backgroundPosition: "center",
-          backgroundSize: "cover",
           height: "26rem",
         }}
       >
+        {/* Coffee image */}
+        <div
+          className="absolute w-full h-full"
+          style={{
+            backgroundImage: `url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F6NlmBQLhWy2QM%2Fsource.gif&f=1&nofb=1')`,
+            backgroundPosition: "center",
+            backgroundSize: "cover",
+            transform: "scaleX(-1)",
+            WebkitTransform: "scaleX(-1)",
+          }}
+        ></div>
         {/* Black opaque covering the bg image */}
         <div className="absolute bg-gradient-to-bl from-gray-700 to-darkGray w-full h-full opacity-60"></div>
         <div className="flex mx-auto max-w-4xl h-full relative">
