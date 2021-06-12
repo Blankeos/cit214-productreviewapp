@@ -113,7 +113,7 @@ const ProfileHeader = ({ profileData, ...rest }) => {
         </button>
         {/* Bio */}
         <div className="flex flex-col relative border border-gray-100 max-w-2xl overflow-hidden rounded-md">
-          <p className="text-center text-sm text-gray-600 p-5">
+          <div className="text-center text-sm text-gray-600 p-5 whitespace-pre">
             {profileData
               ? profileData.bio
               : `That is the true genius of America - a faith in simple dreams, an
@@ -121,7 +121,7 @@ const ProfileHeader = ({ profileData, ...rest }) => {
               moments - a moment when our nation is at war, our economy is in
               turmoil, and the American promise has been threatened once more.
               We did not go by choice, we went because of necessity.`}
-          </p>
+          </div>
         </div>
         {/* Reviews and Ratings Count */}
         <div className="pt-8 flex items-center  sm:space-x-28 space-x-20 sm:flex-row">
