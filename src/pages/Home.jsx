@@ -20,7 +20,7 @@ const Home = () => {
       >
         {/* Coffee image */}
         <div
-          className="absolute w-full h-full"
+          className="absolute w-full h-full bg-gray-800"
           style={{
             backgroundImage: `url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F6NlmBQLhWy2QM%2Fsource.gif&f=1&nofb=1')`,
             backgroundPosition: "center",
@@ -34,7 +34,9 @@ const Home = () => {
         <div className="flex mx-auto max-w-4xl h-full relative">
           <div className="p-10 pr-16 py-20 h-full text-white relative">
             <div className="">
-              <h1 className="text-4xl font-black">What's the best for you?</h1>
+              <h1 className="text-4xl font-black text-yellow-400">
+                What's the best for you?
+              </h1>
               <p className="mt-5 mb-8 font-light text-xl">
                 ☕{" "}
                 <i>
