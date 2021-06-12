@@ -82,7 +82,7 @@ const Nav = () => {
       )}
 
       {/* Default NavBar Container */}
-      <nav className="sticky top-0 bg-white shadow-lg z-10">
+      <nav className="sticky top-0 bg-white shadow-lg z-20">
         <div
           className="h-16 md:h-28 flex justify-between items-center w-full py-5 px-8 md:py-8 md:max-w-6xl mx-auto"
           style={{
