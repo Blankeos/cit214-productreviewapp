@@ -12,7 +12,17 @@ const Home = () => {
   return (
     <div className="flex flex-col flex-grow h-full overflow-hidden">
       {/* Hero Section */}
-      <div className="bg-gradient-to-bl from-gray-700 to-darkGray w-full h-96 mx-auto">
+      <div
+        className="absolute w-full mx-auto overflow-hidden"
+        style={{
+          backgroundImage: `url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmedia.giphy.com%2Fmedia%2F6NlmBQLhWy2QM%2Fsource.gif&f=1&nofb=1')`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          height: "26rem",
+        }}
+      >
+        {/* Black opaque covering the bg image */}
+        <div className="absolute bg-gradient-to-bl from-gray-700 to-darkGray w-full h-full opacity-60"></div>
         <div className="flex mx-auto max-w-4xl h-full relative">
           <div className="p-10 pr-16 py-20 h-full text-white relative">
             <div className="">
@@ -23,7 +33,7 @@ const Home = () => {
                   Defining the best coffee experience. In culture, in taste.
                 </i>
               </p>
-              <button className="text-sm animate-bounce flex items-center justify-center">
+              <button className="text-sm animate-bounce flex space-x-1 items-center justify-center outline-none focus:outline-none">
                 <CgMouse size="1.3em" />
                 <span>Browse Now</span>
                 <AiOutlineArrowDown
@@ -33,7 +43,8 @@ const Home = () => {
               </button>
             </div>
           </div>
-          <div className="hidden sm:block w-96 transform sm:-translate-x-8">
+          {/* Hero Image */}
+          <div className="relative z-10 hidden sm:block w-96 transform sm:-translate-x-8">
             <div className="animate-pulse absolute transform translate-x-4 -rotate-12 w-96 h-96 bg-primary shadow-md rounded-2xl"></div>
             <img
               src={CafelyLogo1}
@@ -52,8 +63,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <div className="relative h-96" style={{ zIndex: -100 }}></div>
       {/* Other Sections */}
-      <div className="flex flex-col flex-grow h-full bg-darkGray">
+      <div className="relative z-0 flex flex-col flex-grow h-full">
         {/* Other Sections Starts Here */}
         <div className="bg-white flex-grow h-full rounded-t-3xl pt-16 px-2 sm:px-8 pb-24">
           <div className="max-w-6xl mx-auto grid grid-cols-3 gap-5 text-gray-800">
