@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  font-family: sans-serif, "Arial", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
-    "Fira Sans", "Droid Sans", "Helvetica Neue", -apple-system,
+  font-family: sans-serif, "Arial", "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", -apple-system,
     BlinkMacSystemFont;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -41,4 +41,17 @@ body {
 
 .inpfield-transition {
   @apply outline-none transition duration-200 focus:ring-primary focus:ring-2 focus:border-opacity-0 focus:shadow-sm;
+}
+
+.productpage-image-container {
+  @apply border-r border-t border-l relative flex w-full bg-gray-50 shadow-md rounded-md overflow-hidden;
+  min-height: unset;
+  max-height: 28rem;
+}
+
+/* Equivalent of :md for tailwind */
+@media (min-width: 768px) {
+  .productpage-image-container {
+    min-height: 24rem;
+  }
 }
