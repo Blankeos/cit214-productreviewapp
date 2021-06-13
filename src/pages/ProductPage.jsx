@@ -39,22 +39,16 @@ const ProductPage = () => {
   return (
     <PageContainer className="bg-white text-gray-800">
       <div className="max-w-6xl mx-auto">
-        {/* Container */}
+        {/* Header Container */}
         <div
-          className="flex w-full h-full space-x-2"
+          className="flex w-full h-full flex-col space-y-2 md:flex-row md:space-x-2"
           style={{
             minHeight: "24rem",
           }}
         >
           {/* Image Container */}
-          <div
-            className="border-r border-t border-l relative flex w-full bg-gray-50 shadow-md rounded-md overflow-hidden"
-            style={{
-              minHeight: "24rem",
-              maxHeight: "28rem",
-            }}
-          >
-            {/* Ang Image mismo */}
+          <div className="productpage-image-container">
+            {/* Main Image */}
             <div class="relative flex-grow w-full h-full flex-shrink-0">
               {product && (
                 <>
@@ -69,17 +63,6 @@ const ProductPage = () => {
                       filter: `blur(5px)`,
                     }}
                   ></div>
-                  {/* <div
-                    className="absolute top-0 left-0 w-full h-full"
-                    style={{
-                      backgroundImage: `url(${
-                        product && product.images[currentImageIndex]
-                      })`,
-                      backgroundSize: "1rem",
-                      backgroundPosition: "center",
-                      zIndex: "-1",
-                    }}
-                  ></div> */}
                   <img
                     className="relative object-center object-cover md:object-contain h-full w-full"
                     src={product.images[currentImageIndex]}
@@ -101,7 +84,7 @@ const ProductPage = () => {
             </div>
           </div>
           {/* Product Description Body */}
-          <div className="w-8/12 p-8 md:p-12 flex flex-col justify-between rounded-md bg-white shadow-md text-sm flex-wrap border">
+          <div className="md:w-8/12 p-8 md:p-12 flex flex-col justify-between rounded-md bg-white shadow-md text-sm flex-wrap border">
             <div className="flex flex-col space-y-3">
               <h1 className="font-extrabold text-3xl">
                 {product && product.name}
@@ -109,7 +92,7 @@ const ProductPage = () => {
               <p className="">{product && product.description}</p>
             </div>
             <Link to={product && `/review/${product._id}`}>
-              <button className="flex items-center space-x-1 bg-darkGray text-white px-4 py-4 rounded-md mt-8 transform hover:translate-y-1 transition ease-in-out">
+              <button className="flex items-center space-x-1 bg-primary text-white px-4 py-4 rounded-md mt-8 transform hover:translate-y-1 transition ease-in-out">
                 <MdRateReview size="1.2em" />
                 <span>Rate This Product</span>
               </button>
