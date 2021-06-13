@@ -7,7 +7,7 @@ import { FaGithub } from "react-icons/fa";
 
 export default function Footer() {
   return (
-    <div className="bg-darkGray w-full text-white flex flex-col space-y-5 items-center py-6">
+    <div className="bg-gray-800 w-full text-primary flex flex-col space-y-5 items-center py-6">
       <a
         href="https://github.com/Blankeos/cit214-productreviewapp"
         target="_blank"
