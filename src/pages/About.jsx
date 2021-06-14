@@ -16,9 +16,9 @@ const About = () => {
           ></div>
           <div className="bg-black opacity-60 w-full h-full absolute"></div>
           <div className="h-full flex items-end max-w-6xl mx-auto">
-            <div className="relative px-20 py-10 items-end text-white">
+            <div className="relative px-20 py-10 items-end text-white overflow-hidden">
               <div className="absolute w-5 h-8 bg-primary transform -translate-x-10 translate-y-2"></div>
-              <h1 className="font-black text-6xl mb-5">
+              <h1 className="font-black text-5xl md:text-6xl mb-5">
                 What is
                 <br />
                 Cafely?

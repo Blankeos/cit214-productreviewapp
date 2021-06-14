@@ -5,7 +5,7 @@ import StarMeter from "./StarMeter";
 const ActivityCard = ({ reviewData, ...rest }) => {
   return (
     <Link to={`/products/${reviewData.productID._id}`}>
-      <div className="flex border h-32 w-full rounded-md shadow-md overflow-hidden">
+      <div className="flex border-t border-r h-32 w-full rounded-md shadow-md overflow-hidden">
         {/* Product Image */}
         <div
           className="hidden sm:flex h-32 w-32 bg-gray-300 flex-shrink-0"
