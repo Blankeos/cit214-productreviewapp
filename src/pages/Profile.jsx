@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 
 // Services
 import { getProfile } from "../services/restServices";
+import { Helmet } from "react-helmet";
 
 // Components
 import ActivityCard, { ActivityCardSkeleton } from "../components/ActivityCard";
@@ -33,49 +34,70 @@ const Profile = () => {
   }, []);
 
   return (
-    <div className="relative flex flex-col text-gray-800 w-full flex-grow h-full">
-      {/* Cover Photo */}
-      <div className="absolute top-0 h-32 w-full">
-        <div
-          className="bg-gray-200 h-full w-full"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=956&q=80')`,
-            backgroundPosition: "center",
-            backgroundSize: "cover",
-            zIndex: "0",
-          }}
-        ></div>
-      </div>
-      {/* Body */}
-      <div className="relative px-2 sm:px-8 pt-12 pb-24">
-        {profile ? (
-          <ProfileHeader profileData={profile} />
-        ) : (
-          <ProfileHeaderSkeleton />
-        )}
-        {/* Container // it's supposed to be white yes... */}
-        <div className="max-w-6xl mx-auto relative">
-          {/* Activity Section */}
-          <div className="flex flex-col max-w-xl mx-auto items-center gap-3 rounded">
-            <h1 className="font-bold text-4xl my-20 mb-14">Activity</h1>
-            <div className="flex flex-col w-full gap-3">
-              {profile ? (
-                profile.userRatings.map((userRating) => (
-                  <ActivityCard key={userRating._id} reviewData={userRating} />
-                ))
-              ) : (
-                <>
-                  <ActivityCardSkeleton />
-                  <ActivityCardSkeleton />
-                  <ActivityCardSkeleton />
-                  <ActivityCardSkeleton />
-                </>
-              )}
+    <>
+      <Helmet>
+        <title>{`Cafe.ly | ${
+          profile ? `${profile.displayName}'s` : " "
+        } Profile`}</title>
+        <meta
+          name="title"
+          content={`Cafe.ly | ${
+            profile ? `${profile.displayName}'s` : " "
+          } Profile`}
+        />
+        <meta
+          name="description"
+          content={profile ? profile.bio : "A Cafe.ly Profile"}
+        />
+      </Helmet>
+
+      <div className="relative flex flex-col text-gray-800 w-full flex-grow h-full">
+        {/* Cover Photo */}
+        <div className="absolute top-0 h-32 w-full">
+          <div
+            className="bg-gray-200 h-full w-full"
+            style={{
+              backgroundImage: `url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=956&q=80')`,
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              zIndex: "0",
+            }}
+          ></div>
+        </div>
+        {/* Body */}
+        <div className="relative px-2 sm:px-8 pt-12 pb-24">
+          {profile ? (
+            <ProfileHeader profileData={profile} />
+          ) : (
+            <ProfileHeaderSkeleton />
+          )}
+          {/* Container // it's supposed to be white yes... */}
+          <div className="max-w-6xl mx-auto relative">
+            {/* Activity Section */}
+            <div className="flex flex-col max-w-xl mx-auto items-center gap-3 rounded">
+              <h1 className="font-bold text-4xl my-20 mb-14">Activity</h1>
+              <div className="flex flex-col w-full gap-3">
+                {profile ? (
+                  profile.userRatings.map((userRating) => (
+                    <ActivityCard
+                      key={userRating._id}
+                      reviewData={userRating}
+                    />
+                  ))
+                ) : (
+                  <>
+                    <ActivityCardSkeleton />
+                    <ActivityCardSkeleton />
+                    <ActivityCardSkeleton />
+                    <ActivityCardSkeleton />
+                  </>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

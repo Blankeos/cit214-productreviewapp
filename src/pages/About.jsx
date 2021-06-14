@@ -1,8 +1,18 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const About = () => {
   return (
     <>
+      <Helmet>
+        <title>Cafe.ly | About</title>
+        <meta name="title" content="Cafe.ly | About" />
+        <meta
+          name="description"
+          content="User Reviews and Recommendations of Best Tasting Coffee at Cafe.ly. Defining the best coffee experience. In culture, in taste!"
+        />
+      </Helmet>
+
       <div className="flex flex-col flex-grow h-full bg-gray-500">
         {/* Header Section */}
         <div className="relative h-96 w-full">

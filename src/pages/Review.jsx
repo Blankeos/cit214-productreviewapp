@@ -1,6 +1,6 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import ReviewForm from "../components/ReviewForm.js";
-
 // input: product drop-down / product search
 // input: 5 star-rating
 // input: optional review (text-area)
@@ -12,12 +12,17 @@ import ReviewForm from "../components/ReviewForm.js";
 
 const Review = () => {
   return (
-    <div className="mt-10">
-      {/* <h1 className="px-8 text-4xl text-blue-500 md:max-w-6xl mx-auto mb-5">
-        Review
-      </h1> */}
-      <ReviewForm />
-    </div>
+    <>
+      <Helmet>
+        <title>Cafe.ly | Review</title>
+        <meta name="title" content="Cafe.ly | Review" />
+        <meta name="description" content="Post a new review on Cafe.ly" />
+      </Helmet>
+
+      <div className="mt-10">
+        <ReviewForm />
+      </div>
+    </>
   );
 };
 

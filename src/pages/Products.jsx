@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 // Services
 import { getAllProducts } from "../services/restServices";
 import Fuse from "fuse.js";
+import { Helmet } from "react-helmet";
 
 // Components
 import StarMeter from "../components/StarMeter";
@@ -65,118 +66,126 @@ const Products = () => {
   }, []);
 
   return (
-    <PageContainer>
-      {/* Container */}
-      <div className="max-w-6xl mx-auto">
-        {/* Product Search Section */}
-        <div className="flex flex-wrap w-full gap-5">
-          <div className="flex-grow">
-            <h1 className="font-extrabold text-3xl mb-5 flex space-x-3">
-              <GiShoppingBag className="text-primary" />
-              <span>Products</span>
-            </h1>
-            {/* Search Bar */}
-            <div className="flex w-full mb-5 gap-2">
-              <div className="flex-grow flex space-x-1 items-center bg-white p-2 rounded text-gray-600 shadow-md border border-gray-100">
-                <RiSearch2Line className="mx-0.5" />
-                <input
-                  className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
-                  placeholder="What are you looking for?"
-                  onChange={(e) => {
-                    handleSearch(e.target.value);
-                  }}
-                ></input>
-                {/* <BsX className="" /> */}
+    <>
+      <Helmet>
+        <title>Cafe.ly | Products</title>
+        <meta name="title" content="Cafe.ly | Products" />
+        <meta name="description" content="Browse all products on Cafe.ly!" />
+      </Helmet>
+
+      <PageContainer>
+        {/* Container */}
+        <div className="max-w-6xl mx-auto">
+          {/* Product Search Section */}
+          <div className="flex flex-wrap w-full gap-5">
+            <div className="flex-grow">
+              <h1 className="font-extrabold text-3xl mb-5 flex space-x-3">
+                <GiShoppingBag className="text-primary" />
+                <span>Products</span>
+              </h1>
+              {/* Search Bar */}
+              <div className="flex w-full mb-5 gap-2">
+                <div className="flex-grow flex space-x-1 items-center bg-white p-2 rounded text-gray-600 shadow-md border border-gray-100">
+                  <RiSearch2Line className="mx-0.5" />
+                  <input
+                    className="flex-grow p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm"
+                    placeholder="What are you looking for?"
+                    onChange={(e) => {
+                      handleSearch(e.target.value);
+                    }}
+                  ></input>
+                  {/* <BsX className="" /> */}
+                </div>
+                <Tippy
+                  animation="scale"
+                  inertia={true}
+                  content={
+                    <span>
+                      😓 <b>Darn, Sorry!</b>
+                      <br />
+                      This feature is not
+                      <br />
+                      available for now.
+                    </span>
+                  }
+                  placement="bottom"
+                >
+                  <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
+                    Add a Product
+                  </button>
+                </Tippy>
               </div>
-              <Tippy
-                animation="scale"
-                inertia={true}
-                content={
-                  <span>
-                    😓 <b>Darn, Sorry!</b>
-                    <br />
-                    This feature is not
-                    <br />
-                    available for now.
-                  </span>
-                }
-                placement="bottom"
-              >
-                <button className="hidden sm:block md:hidden bg-primary px-3 rounded text-white shadow-md">
-                  Add a Product
-                </button>
-              </Tippy>
             </div>
+            <div className="w-56 h-1 hidden md:block"></div>
           </div>
-          <div className="w-56 h-1 hidden md:block"></div>
-        </div>
-        {/* Page Grid */}
-        <div className="flex flex-wrap w-full gap-5">
-          {/* Primary Left Bar */}
-          <div className="flex-grow w-8/12">
-            {/* Product Grid */}
-            <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
-              {queriedProducts ? (
-                queriedProducts.length ? (
-                  queriedProducts.slice(0, 10).map((product) => {
-                    return (
-                      <ProductCard
-                        key={product.item._id}
-                        productData={product.item}
-                      />
-                    );
-                  })
+          {/* Page Grid */}
+          <div className="flex flex-wrap w-full gap-5">
+            {/* Primary Left Bar */}
+            <div className="flex-grow w-8/12">
+              {/* Product Grid */}
+              <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
+                {queriedProducts ? (
+                  queriedProducts.length ? (
+                    queriedProducts.slice(0, 10).map((product) => {
+                      return (
+                        <ProductCard
+                          key={product.item._id}
+                          productData={product.item}
+                        />
+                      );
+                    })
+                  ) : (
+                    <p className="text-gray-500 col-span-full">
+                      No products of this name found :(
+                    </p>
+                  )
                 ) : (
-                  <p className="text-gray-500 col-span-full">
-                    No products of this name found :(
-                  </p>
-                )
-              ) : (
-                <>
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton />
-                  <ProductCardSkeleton className="hidden lg:block" />
-                  <ProductCardSkeleton className="hidden lg:block" />
-                </>
-              )}
+                  <>
+                    <ProductCardSkeleton />
+                    <ProductCardSkeleton />
+                    <ProductCardSkeleton />
+                    <ProductCardSkeleton />
+                    <ProductCardSkeleton className="hidden lg:block" />
+                    <ProductCardSkeleton className="hidden lg:block" />
+                  </>
+                )}
+              </div>
             </div>
-          </div>
-          <div className="break md:hidden" />
-          {/* Right SideBar */}
-          <div className="w-56 flex">
-            {/* Can't Find Your Product? */}
-            <div className="bg-white w-56 h-64 p-5 rounded-2xl shadow-md border border-gray-100 flex flex-col space-y-3">
-              <h2 className="font-extrabold text-2xl inline">
-                <IoIosSad className="" size="1.5em" />
-                <span> Can't Find A Specific Product?</span>
-              </h2>
-              <p className="text-xs">Contribute to our database.</p>
-              <Tippy
-                animation="scale"
-                inertia={true}
-                content={
-                  <span>
-                    😓 <b>Darn, Sorry!</b>
-                    <br />
-                    This feature is not
-                    <br />
-                    available for now.
-                  </span>
-                }
-                placement="bottom"
-              >
-                <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
-                  Add a Product
-                </button>
-              </Tippy>
+            <div className="break md:hidden" />
+            {/* Right SideBar */}
+            <div className="w-56 flex">
+              {/* Can't Find Your Product? */}
+              <div className="bg-white w-56 h-64 p-5 rounded-2xl shadow-md border border-gray-100 flex flex-col space-y-3">
+                <h2 className="font-extrabold text-2xl inline">
+                  <IoIosSad className="" size="1.5em" />
+                  <span> Can't Find A Specific Product?</span>
+                </h2>
+                <p className="text-xs">Contribute to our database.</p>
+                <Tippy
+                  animation="scale"
+                  inertia={true}
+                  content={
+                    <span>
+                      😓 <b>Darn, Sorry!</b>
+                      <br />
+                      This feature is not
+                      <br />
+                      available for now.
+                    </span>
+                  }
+                  placement="bottom"
+                >
+                  <button className="select-none rounded outline-none border-2 border-primary text-primary flex-grow hover:bg-primary hover:text-white transition-all focus:ring-0 focus:outline-none">
+                    Add a Product
+                  </button>
+                </Tippy>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* <ProductGrid /> */}
-    </PageContainer>
+        {/* <ProductGrid /> */}
+      </PageContainer>
+    </>
   );
 };
 
