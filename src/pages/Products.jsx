@@ -121,8 +121,8 @@ const Products = () => {
                   queriedProducts.slice(0, 10).map((product) => {
                     return (
                       <ProductCard
-                      key={product.item._id}
-                      productData={product.item}
+                        key={product.item._id}
+                        productData={product.item}
                       />
                     );
                   })
@@ -140,7 +140,7 @@ const Products = () => {
                   <ProductCardSkeleton className="hidden lg:block" />
                   <ProductCardSkeleton className="hidden lg:block" />
                 </>
-             )}
+              )}
             </div>
           </div>
           <div className="break md:hidden" />
@@ -219,7 +219,7 @@ export const ProductCard = ({ productData, ...rest }) => {
           </span>
         </div>
         {/* Body */}
-        <div className="flex flex-col p-2 bg-white group-hover:text-white flex-grow group-hover:bg-gray-900 transition-all duration-300">
+        <div className="flex flex-col p-2 bg-white group-hover:text-white flex-grow group-hover:bg-primary transition-all duration-300">
           <h3 className="relative font-bold text-sm">
             {productData.name ? productData.name : "No Name Found"}
           </h3>
