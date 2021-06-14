@@ -113,7 +113,7 @@ const ProfileHeader = ({ profileData, ...rest }) => {
         </button>
         {/* Bio */}
         <div className="flex flex-col relative border border-gray-100 max-w-2xl overflow-hidden rounded-md">
-          <div className="text-center text-sm text-gray-600 p-5 whitespace-pre">
+          <div className="text-center text-sm text-gray-600 p-5 whitespace-pre-wrap">
             {profileData
               ? profileData.bio
               : `That is the true genius of America - a faith in simple dreams, an
