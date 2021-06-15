@@ -61,7 +61,7 @@ const ProductPage = () => {
 
       <ProductReviews
         data={productRatings}
-        reviewLink={`/review/${product._id}`}
+        reviewLink={product && `/review/${product._id}`}
       />
     </PageContainer>
   );

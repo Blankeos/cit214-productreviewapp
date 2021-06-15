@@ -18,18 +18,25 @@ const ProductReviews = ({ data, reviewLink, ...rest }) => {
         </h2>
         {/* List starts here... */}
         <div className="flex flex-col w-full max-w-3xl gap-5">
-          {data && data.length > 0 ? (
-            data.map((reviewData) => {
-              return <ReviewCard reviewData={reviewData} />;
-            })
+          {data ? (
+            data.length > 0 ? (
+              data.map((reviewData) => {
+                return <ReviewCard reviewData={reviewData} />;
+              })
+            ) : (
+              <div className="flex flex-col space-y-2 items-center text-center text-sm text-gray-500">
+                <p>No reviews found for this product yet</p>
+                <Link className="text-primary" to={reviewLink}>
+                  Be the first to write one!
+                </Link>
+              </div>
+            )
           ) : (
-            <div className="flex flex-col space-y-2 items-center text-center text-sm text-gray-500">
-              <p>No reviews found for this product yet.</p>
-              <Link className="text-primary" to={reviewLink}>
-                Be the first to write one!
-              </Link>
-            </div>
+            <p>bump</p>
           )}
+        </div>
+        <div className="flex flex-col w-full max-w-3xl gap-5">
+          <ReviewCardSkeleton />
         </div>
       </div>
     </div>
@@ -129,6 +136,47 @@ const ShowMoreText = ({ text, charLimit, buttonClass, ...rest }) => {
         text
       )}
     </>
+  );
+};
+
+export const ReviewCardSkeleton = () => {
+  return (
+    <div
+      className="select-none flex flex-col w-full rounded-md shadow-md overflow-hidden border-t border-l border-r transition-height"
+      style={{
+        minHeight: "11rem",
+      }}
+    >
+      <div className="flex p-3 items-center space-x-3">
+        {/* Product Image */}
+        <div className="overflow-hidden sm:flex h-16 w-16 bg-gray-300 flex-shrink-0 rounded-full"></div>
+        {/* Name and Rating */}
+        <div className="flex flex-col space-y-0.5">
+          <div className="font-bold text-lg bg-gray-400 text-gray-400 rounded h-6 overflow-hidden">
+            Display Name
+          </div>
+          <div className="flex items-center space-x-1">
+            <StarMeter rating={0} iconSize="1.2em" />
+            <span className="text-xs text-gray-200 bg-gray-200 rounded">
+              00.
+            </span>
+          </div>
+        </div>
+      </div>
+      {/* Body */}
+      <div className="p-5 py-3 flex-grow flex-col flex justify-between border-t">
+        <div>
+          {/* Written Review */}
+          <div className="text-gray-200 text-sm flex flex-col space-y-1">
+            <p className="bg-gray-200 rounded w-7/12 overflow-hidden h-4">.</p>
+            <p className="bg-gray-200 rounded w-5/12 overflow-hidden h-4">.</p>
+          </div>
+        </div>
+        <p className="text-gray-400 text-xs pt-2 bg-gray-300 overflow-hidden h-3 rounded w-28">
+          .
+        </p>
+      </div>
+    </div>
   );
 };
 
