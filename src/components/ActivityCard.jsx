@@ -5,10 +5,10 @@ import StarMeter from "./StarMeter";
 const ActivityCard = ({ reviewData, ...rest }) => {
   return (
     <Link to={`/products/${reviewData.productID._id}`}>
-      <div className="flex border-t border-r h-32 w-full rounded-md shadow-md overflow-hidden">
+      <div className="flex border-t border-r h-32 w-full rounded-md shadow-md  hover:shadow-lg transition overflow-hidden group">
         {/* Product Image */}
         <div
-          className="hidden sm:flex h-32 w-32 bg-gray-300 flex-shrink-0"
+          className="hidden sm:flex h-32 w-32 bg-white transition group-hover:bg-gray-50 border-r flex-shrink-0"
           style={{
             backgroundImage: `url('${
               reviewData && reviewData.productID.images[0]
@@ -18,11 +18,11 @@ const ActivityCard = ({ reviewData, ...rest }) => {
           }}
         ></div>
         {/* Body */}
-        <div className="p-5 py-3 flex-grow flex-col flex justify-between">
+        <div className="p-5 py-3 flex-grow flex-col flex justify-between group-hover:bg-gray-50 transition">
           <div>
             {/* Upper Part */}
             <div className="flex mb-1 space-x-5 justify-between">
-              <div className="font-bold text-lg">
+              <div className="font-bold text-lg group-hover:text-primary transition">
                 {reviewData
                   ? reviewData.productID.name
                   : "Product Name Not Found"}
