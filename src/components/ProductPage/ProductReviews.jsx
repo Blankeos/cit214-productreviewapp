@@ -9,7 +9,7 @@ import StarMeter from "../StarMeter";
 // Icons
 import DefaultPhoto from "./DefaultPhoto";
 
-const ProductReviews = ({ data, ...rest }) => {
+const ProductReviews = ({ data, reviewLink, ...rest }) => {
   return (
     <div className="max-w-5xl mx-auto py-10">
       <div className="flex flex-col items-center text-gray-600 space-y-8">
@@ -18,10 +18,18 @@ const ProductReviews = ({ data, ...rest }) => {
         </h2>
         {/* List starts here... */}
         <div className="flex flex-col w-full max-w-3xl gap-5">
-          {data &&
+          {data && data.length > 0 ? (
             data.map((reviewData) => {
               return <ReviewCard reviewData={reviewData} />;
-            })}
+            })
+          ) : (
+            <div className="flex flex-col space-y-2 items-center text-center text-sm text-gray-500">
+              <p>No reviews found for this product yet.</p>
+              <Link className="text-primary" to={reviewLink}>
+                Be the first to write one!
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>
