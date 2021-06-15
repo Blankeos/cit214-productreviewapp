@@ -12,7 +12,9 @@ import PageContainer from "../components/PageContainer";
 import ProductPageHeader, {
   ProductPageHeaderSkeleton,
 } from "../components/ProductPage/ProductPageHeader";
-import ProductPageStats from "../components/ProductPage/ProductPageStats";
+import ProductPageStats, {
+  ProductPageStatsSkeleton,
+} from "../components/ProductPage/ProductPageStats";
 import ProductReviews from "../components/ProductPage/ProductReviews";
 
 const ProductPage = () => {
@@ -40,14 +42,23 @@ const ProductPage = () => {
     <PageContainer className="bg-white text-gray-800">
       <div className="max-w-6xl mx-auto">
         {/* Header Container */}
-        <ProductPageHeaderSkeleton />
-        <ProductPageHeader
-          product={product}
-          handleChangeImage={handleChangeImage}
-          currentImageIndex={currentImageIndex}
-        />
+        {product ? (
+          <>
+            <ProductPageHeader
+              product={product}
+              handleChangeImage={handleChangeImage}
+              currentImageIndex={currentImageIndex}
+            />
+            <ProductPageStats productData={product} />
+          </>
+        ) : (
+          <>
+            <ProductPageHeaderSkeleton />
+            <ProductPageStatsSkeleton />
+          </>
+        )}
       </div>
-      <ProductPageStats productData={product} />
+
       <ProductReviews data={productRatings} />
     </PageContainer>
   );
