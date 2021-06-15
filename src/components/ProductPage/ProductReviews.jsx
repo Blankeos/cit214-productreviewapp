@@ -32,12 +32,16 @@ const ProductReviews = ({ data, reviewLink, ...rest }) => {
               </div>
             )
           ) : (
-            <p>bump</p>
+            <div className="flex flex-col w-full max-w-3xl gap-5">
+              <ReviewCardSkeleton />
+              <ReviewCardSkeleton />
+              <ReviewCardSkeleton />
+            </div>
           )}
         </div>
-        <div className="flex flex-col w-full max-w-3xl gap-5">
+        {/* <div className="flex flex-col w-full max-w-3xl gap-5">
           <ReviewCardSkeleton />
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -168,8 +172,8 @@ export const ReviewCardSkeleton = () => {
         <div>
           {/* Written Review */}
           <div className="text-gray-200 text-sm flex flex-col space-y-1">
-            <p className="bg-gray-200 rounded w-7/12 overflow-hidden h-4">.</p>
-            <p className="bg-gray-200 rounded w-5/12 overflow-hidden h-4">.</p>
+            <p className="bg-gray-200 rounded w-7/12 overflow-hidden h-5">.</p>
+            <p className="bg-gray-200 rounded w-5/12 overflow-hidden h-5">.</p>
           </div>
         </div>
         <p className="text-gray-400 text-xs pt-2 bg-gray-300 overflow-hidden h-3 rounded w-28">
