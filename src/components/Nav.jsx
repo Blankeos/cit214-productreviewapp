@@ -16,10 +16,13 @@ import DropDown from "./DropDown";
 import Logo from "../assets/imgs/cafely_logo.svg";
 import { RiSearch2Line } from "react-icons/ri";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import { BsFillPersonFill } from "react-icons/bs";
+import { MdRateReview } from "react-icons/md";
+import { BsFillPersonFill, BsInfoCircleFill } from "react-icons/bs";
 import { GoSignOut } from "react-icons/go";
+import { GiShoppingBag } from "react-icons/gi";
 import { FaUserCog } from "react-icons/fa";
 import DefaultPhoto from "./ProductPage/DefaultPhoto";
+import NavLi from "./NavBar/NavLi";
 
 const Nav = () => {
   const history = useHistory();
@@ -28,9 +31,9 @@ const Nav = () => {
   const { logout, currentUser, authStateChecked } = useAuth();
   const [searchMode, setSearchMode] = useState(false);
   const [menuActive, setMenuActive] = useState({
-    state: false,
-    btnClass: "",
-    menuClass: "-translate-y-full",
+    state: true, // false
+    btnClass: "menu-btn-active", // ""
+    menuClass: "", // -translate-y-full
   });
 
   const locationIsMatch = (locationToMatchWith) => {
@@ -146,66 +149,120 @@ const Nav = () => {
                 />
               </div>
 
-              {/* Some contents from Rightmost that should appear in mobile. */}
-              <div className="md:hidden flex space-x-4">
-                {authStateChecked && !currentUser ? (
+              {/* Some contents from Rightmost that ONLY appear in mobile. */}
+              <div className="md:hidden flex w-full">
+                {authStateChecked &&
+                  (!currentUser ? (
+                    <div className="flex w-full justify-center space-x-4">
+                      <Link
+                        onClick={handleMenuButton}
+                        className="px-4 py-2 rounded-full border-gray-800 border-2 text-gray-800 hover:bg-gray-800 hover:text-primary"
+                        to="/login"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        onClick={handleMenuButton}
+                        className="px-4 py-2 rounded-full bg-gray-800 border-2 border-gray-800 text-primary hover:bg-gray-900 hover:border-gray-900"
+                        to="/register"
+                      >
+                        Register
+                      </Link>
+                    </div>
+                  ) : (
+                    <div className="px-2 w-full justify-center flex space-x-3 items-center overflow-hidden">
+                      {/* Photo */}
+                      <div
+                        className="w-16 h-16 rounded-full bg-white flex-shrink-0"
+                        style={{
+                          backgroundImage: `url('${currentUser.photoURL}')`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      ></div>
+                      {/* Profile Info */}
+                      <div className="flex-wrap">
+                        <h5 className="font-semibold">
+                          {currentUser.displayName}
+                        </h5>
+                        <p className="text-sm text-gray-700">
+                          {currentUser.email}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+
+              {/* Actual NavList */}
+              <ul className="flex flex-col w-full items-start px-8 text-center space-y-4 text-gray-800 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
+                {authStateChecked && currentUser && (
                   <>
                     <Link
+                      className="md:hidden"
                       onClick={handleMenuButton}
-                      className="px-4 py-2 rounded-full border-gray-700 border-2 text-gray-700 hover:bg-gray-700 hover:text-primary"
-                      to="/login"
+                      to="/profile"
                     >
-                      Login
+                      <NavLi
+                        icon={<BsFillPersonFill />}
+                        locationIsMatch={locationIsMatch}
+                      >
+                        Profile
+                      </NavLi>
                     </Link>
                     <Link
+                      className="md:hidden"
                       onClick={handleMenuButton}
-                      className="px-4 py-2 rounded-full bg-gray-700 border-2 border-gray-700 text-primary hover:bg-gray-800 hover:border-gray-800"
-                      to="/register"
+                      to="/accountSettings"
                     >
-                      Register
+                      <NavLi
+                        icon={<FaUserCog />}
+                        locationIsMatch={locationIsMatch}
+                      >
+                        Account Settings
+                      </NavLi>
                     </Link>
                   </>
-                ) : (
+                )}
+                <Link onClick={handleMenuButton} to="/review">
+                  <NavLi
+                    icon={<MdRateReview />}
+                    locationIsMatch={locationIsMatch}
+                  >
+                    Review
+                  </NavLi>
+                </Link>
+                <Link onClick={handleMenuButton} to="/products">
+                  <NavLi
+                    icon={<GiShoppingBag />}
+                    locationIsMatch={locationIsMatch}
+                  >
+                    Products
+                  </NavLi>
+                </Link>
+                <Link onClick={handleMenuButton} to="/about">
+                  <NavLi
+                    icon={<BsInfoCircleFill />}
+                    locationIsMatch={locationIsMatch}
+                  >
+                    About
+                  </NavLi>
+                </Link>
+                {authStateChecked && currentUser && (
                   <button
+                    className="md:hidden"
                     onClick={() => {
                       handleLogout();
                       handleMenuButton();
                     }}
                   >
-                    Logout
+                    <NavLi
+                      icon={<GoSignOut />}
+                      locationIsMatch={locationIsMatch}
+                    >
+                      Sign Out
+                    </NavLi>
                   </button>
                 )}
-              </div>
-
-              {/* Actual NavList */}
-              <ul className="flex flex-col items-stretch text-center space-y-4 text-gray-700 md:flex-row md:space-x-6 md:space-y-0 md:hidden lg:flex py-3.5">
-                <Link onClick={handleMenuButton} to="/review">
-                  <li
-                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 md:hover:text-primary ${
-                      locationIsMatch("review") ? "md:text-primary" : ""
-                    }`}
-                  >
-                    Review
-                  </li>
-                </Link>
-                <Link onClick={handleMenuButton} to="/products">
-                  <li
-                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 md:hover:text-primary ${
-                      locationIsMatch("products") ? "md:text-primary" : ""
-                    }`}
-                  >
-                    Products
-                  </li>
-                </Link>
-                <Link onClick={handleMenuButton} to="/about">
-                  <li
-                    className={`text-sm transform transition-all duration-150 ease-in-out hover:scale-105 active:scale-90 md:hover:text-primary ${
-                      locationIsMatch("about") ? "md:text-primary" : ""
-                    }`}
-                  >
-                    About
-                  </li>
-                </Link>
               </ul>
             </div>
           </div>
