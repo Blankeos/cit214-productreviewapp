@@ -205,6 +205,7 @@ const Nav = () => {
                       <NavLi
                         icon={<BsFillPersonFill />}
                         locationIsMatch={locationIsMatch}
+                        slugName="profile"
                       >
                         Profile
                       </NavLi>
@@ -217,6 +218,7 @@ const Nav = () => {
                       <NavLi
                         icon={<FaUserCog />}
                         locationIsMatch={locationIsMatch}
+                        slugName="accountSettings"
                       >
                         Account Settings
                       </NavLi>
@@ -227,6 +229,7 @@ const Nav = () => {
                   <NavLi
                     icon={<MdRateReview />}
                     locationIsMatch={locationIsMatch}
+                    slugName="review"
                   >
                     Review
                   </NavLi>
@@ -235,6 +238,7 @@ const Nav = () => {
                   <NavLi
                     icon={<GiShoppingBag />}
                     locationIsMatch={locationIsMatch}
+                    slugName="products"
                   >
                     Products
                   </NavLi>
@@ -243,6 +247,7 @@ const Nav = () => {
                   <NavLi
                     icon={<BsInfoCircleFill />}
                     locationIsMatch={locationIsMatch}
+                    slugName="about"
                   >
                     About
                   </NavLi>
