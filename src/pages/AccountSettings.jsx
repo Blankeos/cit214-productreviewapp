@@ -88,7 +88,7 @@ const AccountSettings = () => {
   return (
     <>
       {/* Page Container */}
-      <div className="flex-grow text-gray-700 pb-14 p-10">
+      <div className="flex-grow text-gray-700 pb-14 pt-5 p-2 md:p-10">
         <DialogInput
           isOpen={isOpen}
           setIsOpen={setIsOpen}
@@ -98,16 +98,18 @@ const AccountSettings = () => {
           {/* Form */}
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col space-y-3 shadow-xl rounded-2xl border-t border-l border-r p-12 overflow-hidden"
+            className="flex flex-col space-y-3 shadow-xl rounded-2xl border-t border-l border-r p-8 md:p-12 overflow-hidden"
           >
             <h1 className="pb-5 font-extrabold text-2xl flex space-x-4 items-center">
               <FaUserCog size="1.5em" className="text-primary" />
               <span>Account Settings</span>
             </h1>
-            {/* Profile Picture */}
+            {/* Profile Picture Section */}
             <h2 className="text-xl">Profile Picture</h2>
-            <div className="pb-4 flex space-x-4">
-              <div className="h-40 w-40 relative flex-shrink-0 overflow-hidden rounded-full">
+            {/* Profile Picture and 2 Buttons Container */}
+            <div className="pb-4 flex flex-col items-center md:flex-row md:space-x-4">
+              {/* Profile Picture */}
+              <div className="h-32 w-32 md:h-40 md:w-40 relative flex-shrink-0 overflow-hidden rounded-full">
                 {photoURL && (
                   <img
                     src={photoURL && photoURL}
@@ -122,48 +124,56 @@ const AccountSettings = () => {
                 )}
                 {profile && !photoURL && <DefaultPhoto size="3.5em" />}
               </div>
-              <div className="flex space-y-5 flex-col justify-center">
-                <input
-                  type="file"
-                  id="photoUpload"
-                  accept="image/*"
-                  className="hidden"
-                  disabled={true}
-                ></input>
-                <Tippy
-                  animation="scale"
-                  inertia={true}
-                  content={
-                    <span>
-                      😓 <b>Darn, Sorry!</b>
-                      <br />
-                      This feature is
-                      <br />
-                      disabled for now.
-                      <br />
-                      Try using link instead.
-                    </span>
-                  }
-                  placement="left"
-                >
-                  <label
-                    for="photoUpload"
-                    className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none flex items-center space-x-1 justify-center ${
-                      true && "opacity-50"
-                    }`}
+              {/* 2 Buttons Container */}
+              <div className="flex flex-row space-x-1 mt-5 md:mt-0 md:flex-col md:space-y-5 md:space-x-0 text-center md:text-left">
+                <div>
+                  <input
+                    type="file"
+                    id="photoUpload"
+                    accept="image/*"
+                    className="hidden"
+                    disabled={true}
+                  ></input>
+                  <Tippy
+                    animation="scale"
+                    inertia={true}
+                    content={
+                      <span>
+                        😓 <b>Darn, Sorry!</b>
+                        <br />
+                        This feature is
+                        <br />
+                        disabled for now.
+                        <br />
+                        Try using link instead.
+                      </span>
+                    }
+                    placement="left"
                   >
-                    <AiOutlineCloudUpload />
-                    <span>Upload own Photo</span>
-                  </label>
-                </Tippy>
+                    <label
+                      for="photoUpload"
+                      className={`text-white p-3 text-sm bg-primary border border-primary rounded-md disabled:opacity-50 cursor-pointer select-none flex flex-col md:flex-row items-center md:space-x-1 justify-center ${
+                        true && "opacity-50"
+                      }`}
+                    >
+                      <AiOutlineCloudUpload className="hidden md:block" />
+                      <AiOutlineCloudUpload
+                        className="block md:hidden"
+                        size="1.5em"
+                      />
+                      <span>Upload own Photo</span>
+                    </label>
+                  </Tippy>
+                </div>
 
                 <button
                   type="button"
                   disabled={loading}
-                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out select-none flex items-center space-x-1 justify-center"
+                  className="text-primary p-3 text-sm border border-primary rounded-md disabled:opacity-50 focus:outline-none transition hover:bg-primary hover:text-white transform active:scale-90 ease-in-out select-none flex flex-col md:flex-row items-center md:space-x-1 justify-center"
                   onClick={() => setIsOpen(true)}
                 >
-                  <AiOutlineLink />
+                  <AiOutlineLink className="hidden md:block" />
+                  <AiOutlineLink className="block md:hidden" size="1.5em" />
                   <span>Upload using Link</span>
                 </button>
               </div>
