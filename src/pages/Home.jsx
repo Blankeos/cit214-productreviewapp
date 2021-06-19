@@ -8,6 +8,7 @@ import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
 
 // Components
 import TopProductsGrid from "../components/TopProductsGrid";
+import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
 
 const Home = () => {
   return (
@@ -53,14 +54,24 @@ const Home = () => {
                     Defining the best coffee experience. In culture, in taste.
                   </i>
                 </p>
-                <button className="text-sm animate-bounce flex space-x-1 items-center justify-center outline-none focus:outline-none">
-                  <CgMouse size="1.3em" />
-                  <span>Browse Now</span>
-                  <AiOutlineArrowDown
-                    className="transform translate-x-1"
-                    size="1.3em"
-                  />
-                </button>
+                {/* Browse now button */}
+                <div className="flex flex-start cursor-pointer">
+                  <ScrollLink
+                    to="browse"
+                    spy={true}
+                    smooth={"easeOutQuint"}
+                    duration={800}
+                    offset={-110}
+                    className="text-sm animate-bounce flex space-x-1 items-center outline-none focus:outline-none"
+                  >
+                    <CgMouse size="1.3em" />
+                    <span>Browse Now</span>
+                    <AiOutlineArrowDown
+                      className="transform translate-x-1"
+                      size="1.3em"
+                    />
+                  </ScrollLink>
+                </div>
               </div>
             </div>
             {/* Hero Image */}
@@ -87,7 +98,10 @@ const Home = () => {
         {/* Other Sections */}
         <div className="relative z-0 flex flex-col flex-grow h-full">
           {/* Other Sections Starts Here */}
-          <div className="bg-white flex-grow h-full rounded-t-3xl pt-16 px-2 sm:px-8 pb-24">
+          <div
+            name="browse"
+            className="bg-white flex-grow h-full rounded-t-3xl pt-16 px-2 sm:px-8 pb-24"
+          >
             <div className="max-w-6xl mx-auto grid grid-cols-3 gap-5 text-gray-800">
               {/* Primary Left Bar */}
               <div className="col-span-full lg:col-span-2">
