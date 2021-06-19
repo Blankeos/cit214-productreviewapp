@@ -8,7 +8,7 @@ import CafelyLogo1 from "../assets/imgs/cafely-graphic-logo.svg";
 
 // Components
 import TopProductsGrid from "../components/TopProductsGrid";
-import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 
 const Home = () => {
   return (
@@ -59,9 +59,9 @@ const Home = () => {
                   <ScrollLink
                     to="browse"
                     spy={true}
-                    smooth={"easeOutQuint"}
-                    duration={800}
-                    offset={-110}
+                    smooth={true}
+                    duration={600}
+                    offset={-90}
                     className="text-sm animate-bounce flex space-x-1 items-center outline-none focus:outline-none"
                   >
                     <CgMouse size="1.3em" />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 // Context API & Hooks
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, matchPath, useHistory, useLocation } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 // Services
@@ -11,6 +11,7 @@ import { toast } from "react-toastify";
 import NavSearch from "./NavSearch";
 import AuthRender from "./AuthRender";
 import DropDown from "./DropDown";
+import { animateScroll as scroll } from "react-scroll";
 
 // Icons
 import Logo from "../assets/imgs/cafely_logo.svg";
@@ -31,9 +32,9 @@ const Nav = () => {
   const { logout, currentUser, authStateChecked } = useAuth();
   const [searchMode, setSearchMode] = useState(false);
   const [menuActive, setMenuActive] = useState({
-    state: true, // false
-    btnClass: "menu-btn-active", // ""
-    menuClass: "", // -translate-y-full
+    state: false,
+    btnClass: "",
+    menuClass: "-translate-y-full",
   });
 
   const locationIsMatch = (locationToMatchWith) => {
@@ -73,6 +74,14 @@ const Nav = () => {
     toast.warn("👋 You have logged out. See you later!", { autoClose: 5000 });
   };
 
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      scroll.scrollToTop();
+    } else {
+      history.push("/");
+    }
+  };
+
   return (
     <>
       {/* Search Mode NavBar */}
@@ -95,13 +104,13 @@ const Nav = () => {
           {/* The Leftmost Side */}
           <div className="flex md:space-x-4 items-center w-full mr-10">
             {/* The Logo */}
-            <Link to="/">
+            <button onClick={handleLogoClick} className="focus:outline-none">
               <img
                 alt="Cafely Logo"
                 className="w-16 h-16 md:w-20 md:h-20 relative transform -translate-y-1 transition duration-300 ease-out hover:scale-110 active:scale-90"
                 src={Logo}
               />
-            </Link>
+            </button>
 
             {/* Responsive Mobile Menu Content & Also the NavList */}
             <div
@@ -362,5 +371,4 @@ const Nav = () => {
     </>
   );
 };
-
 export default Nav;
