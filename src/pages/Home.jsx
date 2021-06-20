@@ -1,5 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { motion } from "framer-motion";
 
 // Icons
 import { AiOutlineArrowDown } from "react-icons/ai";
@@ -45,17 +46,32 @@ const Home = () => {
           <div className="flex mx-auto max-w-4xl h-full relative">
             <div className="p-10 pr-16 py-20 h-full text-white relative">
               <div className="">
-                <h1 className="text-4xl font-black text-yellow-400">
+                <motion.h1
+                  initial={{ x: "-100vw" }}
+                  animate={{ x: 0 }}
+                  transition={{ type: "spring", duration: 1, stiffness: 120 }}
+                  className="text-4xl font-black text-yellow-400"
+                >
                   What's the best for you?
-                </h1>
-                <p className="mt-5 mb-8 font-light text-xl">
+                </motion.h1>
+                <motion.p
+                  initial={{ x: "-100vw" }}
+                  transition={{ delay: 0.5, duration: 1, type: "spring" }}
+                  animate={{ x: 0 }}
+                  className="mt-5 mb-8 font-light text-xl"
+                >
                   ☕{" "}
                   <i>
                     Defining the best coffee experience. In culture, in taste.
                   </i>
-                </p>
+                </motion.p>
                 {/* Browse now button */}
-                <div className="flex flex-start cursor-pointer">
+                <motion.div
+                  initial={{ y: 500, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ type: "spring", duration: 2 }}
+                  className="flex flex-start cursor-pointer"
+                >
                   <ScrollLink
                     to="browse"
                     spy={true}
@@ -71,7 +87,7 @@ const Home = () => {
                       size="1.3em"
                     />
                   </ScrollLink>
-                </div>
+                </motion.div>
               </div>
             </div>
             {/* Hero Image */}
