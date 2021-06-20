@@ -66,11 +66,15 @@ const Home = () => {
                   </i>
                 </motion.p>
                 {/* Browse now button */}
-                <motion.div
+                <motion.button
                   initial={{ y: 500, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ type: "spring", duration: 2 }}
-                  className="flex flex-start cursor-pointer"
+                  whileHover={{
+                    transition: { duration: 1, type: "spring" },
+                    scale: 1.08,
+                  }}
+                  className="flex flex-start cursor-pointer outline-none focus:outline-none"
                 >
                   <ScrollLink
                     to="browse"
@@ -87,7 +91,7 @@ const Home = () => {
                       size="1.3em"
                     />
                   </ScrollLink>
-                </motion.div>
+                </motion.button>
               </div>
             </div>
             {/* Hero Image */}
