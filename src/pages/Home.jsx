@@ -47,17 +47,21 @@ const Home = () => {
             <div className="p-10 pr-16 py-20 h-full text-white relative">
               <div className="">
                 <motion.h1
-                  initial={{ x: "-100vw" }}
-                  animate={{ x: 0 }}
+                  initial={{ x: "-500", opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
                   transition={{ type: "spring", duration: 1, stiffness: 120 }}
                   className="text-4xl font-black text-yellow-400"
                 >
                   What's the best for you?
                 </motion.h1>
                 <motion.p
-                  initial={{ x: "-100vw" }}
-                  transition={{ delay: 0.5, duration: 1, type: "spring" }}
-                  animate={{ x: 0 }}
+                  initial={{ x: "-100vw", opacity: 0 }}
+                  transition={{
+                    delay: 0.5,
+                    duration: 1,
+                    type: "spring",
+                  }}
+                  animate={{ x: 0, opacity: 1 }}
                   className="mt-5 mb-8 font-light text-xl"
                 >
                   ☕{" "}
@@ -68,8 +72,12 @@ const Home = () => {
                 {/* Browse now button */}
                 <motion.button
                   initial={{ y: 500, opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
-                  transition={{ type: "spring", duration: 2 }}
+                  animate={{
+                    y: 0,
+                    opacity: 1,
+                    transition: { type: "spring", duration: 2 },
+                  }}
+                  transition={{ type: "spring" }}
                   whileHover={{
                     transition: { duration: 1, type: "spring" },
                     scale: 1.08,
