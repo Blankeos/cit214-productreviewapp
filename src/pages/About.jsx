@@ -106,9 +106,9 @@ const About = () => {
   );
 };
 
-const TeamMember = ({ name, title, imageSource, ...rest }) => {
+const TeamMember = ({ name, title, imageSource, delay = 0, ...rest }) => {
   const { ref, inView } = useInView({
-    threshold: 0.5,
+    threshold: 0.7,
   });
   const animation = useAnimation();
   const animation2 = useAnimation();
@@ -122,7 +122,7 @@ const TeamMember = ({ name, title, imageSource, ...rest }) => {
           type: "spring",
           duration: 1,
           stiffness: 100,
-          delay: rest.delay,
+          delay: delay,
         },
       });
       animation2.start({
@@ -130,7 +130,7 @@ const TeamMember = ({ name, title, imageSource, ...rest }) => {
         transition: {
           type: "spring",
           duration: 1,
-          delay: rest.delay + 0.5,
+          delay: delay + 0.5,
         },
       });
       animation3.start({
@@ -138,17 +138,14 @@ const TeamMember = ({ name, title, imageSource, ...rest }) => {
         transition: {
           type: "spring",
           duration: 1,
-          delay: rest.delay + 1,
+          delay: delay + 1,
         },
       });
     }
   }, [inView]);
   return (
-    <div className="flex flex-col h-96">
-      <div
-        ref={ref}
-        className="w-full flex-grow flex-shrink-0 overflow-hidden relative"
-      >
+    <div ref={ref} className="flex flex-col h-96">
+      <div className="w-full flex-grow flex-shrink-0 overflow-hidden relative">
         {/* Background */}
         <motion.div
           initial={{ height: "0%" }}
