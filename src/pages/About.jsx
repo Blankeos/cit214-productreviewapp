@@ -1,5 +1,8 @@
 import React from "react";
 import { Helmet } from "react-helmet";
+import { useInView } from "react-intersection-observer";
+import { motion, useAnimation } from "framer-motion";
+import { useEffect } from "react";
 
 const About = () => {
   return (
@@ -40,7 +43,23 @@ const About = () => {
         {/* Teams Section */}
         <div className="h-full flex flex-grow bg-gray-100">
           <div className="text-gray-800  mx-auto max-w-6xl flex-grow flex flex-col items-center pt-16 px-2 sm:px-8 pb-24">
-            <h2 className="font-extrabold text-5xl m-8">Meet the Team</h2>
+            <span className="overflow-hidden">
+              <motion.h2
+                initial={{ y: 100 }}
+                animate={{
+                  y: 0,
+                  transition: {
+                    duration: 1.2,
+                    type: "spring",
+                    delay: 0.5,
+                    stiffness: 200,
+                  },
+                }}
+                className="font-extrabold text-5xl m-8"
+              >
+                Meet the Team
+              </motion.h2>
+            </span>
             {/* Grids of the people */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 w-full p-5 sm:px-20">
               <TeamMember
@@ -51,6 +70,7 @@ const About = () => {
               <TeamMember
                 name="CJ Rubinos"
                 title="Front-End Developer"
+                delay={0.3}
                 imageSource={
                   "https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/team_images/frontend_developer.png"
                 }
@@ -64,6 +84,7 @@ const About = () => {
               <TeamMember
                 name="Gene Caleb Carbonilla"
                 title="Data Specialist"
+                delay={0.3}
                 imageSource="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/team_images/data_specialist.png"
               />
               <TeamMember
@@ -74,6 +95,7 @@ const About = () => {
               <TeamMember
                 name="Zhyray Remigio"
                 title="Documentation Specialist"
+                delay={0.3}
                 imageSource="https://raw.githubusercontent.com/seajayrubynose/cafely-pictures/master/team_images/documentation_specialist.png"
               />
             </div>
@@ -85,11 +107,39 @@ const About = () => {
 };
 
 const TeamMember = ({ name, title, imageSource, ...rest }) => {
+  const { ref, inView } = useInView({
+    threshold: 0.5,
+  });
+  const animation = useAnimation();
+
+  useEffect(() => {
+    if (inView) {
+      animation.start({
+        height: "83.333333%",
+        transition: {
+          type: "spring",
+          duration: 1,
+          stiffness: 100,
+          delay: rest.delay,
+        },
+      });
+    }
+    // if (!inView) {
+    //   animation.start({ height: "0%" });
+    // }
+  }, [inView]);
   return (
     <div className="flex flex-col h-96">
-      <div className="w-full flex-grow flex-shrink-0 overflow-hidden relative">
+      <div
+        ref={ref}
+        className="w-full flex-grow flex-shrink-0 overflow-hidden relative"
+      >
         {/* Background */}
-        <div className="absolute bottom-0 w-full h-5/6 bg-gradient-to-tl from-primary to-yellow-300"></div>
+        <motion.div
+          initial={{ height: "0%" }}
+          animate={animation}
+          className="absolute bottom-0 w-full h-5/6 bg-gradient-to-tl from-primary to-yellow-300"
+        ></motion.div>
         {/* Image */}
         <div
           className="w-full h-full absolute"
