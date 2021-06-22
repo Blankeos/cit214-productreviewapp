@@ -12,6 +12,7 @@ import NavSearch from "./NavSearch";
 import AuthRender from "./AuthRender";
 import DropDown from "./DropDown";
 import { animateScroll as scroll } from "react-scroll";
+import { motion } from "framer-motion";
 
 // Icons
 import Logo from "../assets/imgs/cafely_logo.svg";
@@ -322,46 +323,66 @@ const Nav = () => {
               {/* UserButton */}
               <AuthRender>
                 <div className="flex items-center space-x-5">
-                  <p className="text-sm text-gray-700 overflow-hidden whitespace-nowrap">
+                  <motion.p
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                      transition: { delay: 0.5, type: "spring" },
+                    }}
+                    className="text-sm text-gray-700 overflow-hidden whitespace-nowrap"
+                  >
                     {currentUser && currentUser.displayName}
-                  </p>
-                  <DropDown
-                    menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75 relative overflow-hidden"
-                    label={
-                      currentUser && currentUser.photoURL ? (
-                        currentUser.photoURL && (
-                          <div
-                            className="w-full h-full absolute"
-                            style={{
-                              backgroundImage: `url('${currentUser.photoURL}')`,
-                              backgroundSize: "cover",
-                              backgroundPosition: "center",
-                            }}
-                          ></div>
+                  </motion.p>
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{
+                      scale: 1,
+                      transition: {
+                        type: "spring",
+                        bounce: 0.6,
+                        duration: 1.5,
+                      },
+                    }}
+                  >
+                    <DropDown
+                      menuClass="bg-primary hover:bg-yellow-400 transition focus:ring-2 focus:ring-offset-2 focus:ring-primary transform active:scale-75 relative overflow-hidden"
+                      label={
+                        currentUser && currentUser.photoURL ? (
+                          currentUser.photoURL && (
+                            <div
+                              className="w-full h-full absolute"
+                              style={{
+                                backgroundImage: `url('${currentUser.photoURL}')`,
+                                backgroundSize: "cover",
+                                backgroundPosition: "center",
+                              }}
+                            ></div>
+                          )
+                        ) : (
+                          <DefaultPhoto size="1em" />
                         )
-                      ) : (
-                        <DefaultPhoto size="1em" />
-                      )
-                    }
-                    items={[
-                      {
-                        icon: <BsFillPersonFill className="text-primary" />,
-                        label: "Profile",
-                        route: "/profile",
-                      },
-                      {
-                        icon: <FaUserCog className="text-primary" />,
-                        label: "Account Settings",
-                        route: "/accountSettings",
-                      },
-                      {
-                        icon: <GoSignOut className="text-primary" />,
-                        label: "Sign Out",
-                        route: "/logout",
-                        onClick: handleLogout,
-                      },
-                    ]}
-                  />
+                      }
+                      items={[
+                        {
+                          icon: <BsFillPersonFill className="text-primary" />,
+                          label: "Profile",
+                          route: "/profile",
+                        },
+                        {
+                          icon: <FaUserCog className="text-primary" />,
+                          label: "Account Settings",
+                          route: "/accountSettings",
+                        },
+                        {
+                          icon: <GoSignOut className="text-primary" />,
+                          label: "Sign Out",
+                          route: "/logout",
+                          onClick: handleLogout,
+                        },
+                      ]}
+                    />
+                  </motion.span>
                 </div>
               </AuthRender>
             </ul>
