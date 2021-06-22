@@ -111,6 +111,8 @@ const TeamMember = ({ name, title, imageSource, ...rest }) => {
     threshold: 0.5,
   });
   const animation = useAnimation();
+  const animation2 = useAnimation();
+  const animation3 = useAnimation();
 
   useEffect(() => {
     if (inView) {
@@ -123,10 +125,23 @@ const TeamMember = ({ name, title, imageSource, ...rest }) => {
           delay: rest.delay,
         },
       });
+      animation2.start({
+        x: 0,
+        transition: {
+          type: "spring",
+          duration: 1,
+          delay: rest.delay + 0.5,
+        },
+      });
+      animation3.start({
+        y: 0,
+        transition: {
+          type: "spring",
+          duration: 1,
+          delay: rest.delay + 1,
+        },
+      });
     }
-    // if (!inView) {
-    //   animation.start({ height: "0%" });
-    // }
   }, [inView]);
   return (
     <div className="flex flex-col h-96">
@@ -151,9 +166,21 @@ const TeamMember = ({ name, title, imageSource, ...rest }) => {
           }}
         ></div>
       </div>
-      <div className="flex flex-col space-y-2 pt-5">
-        <h3 className="text-xl font-bold">{name}</h3>
-        <p className="uppercase text-sm text-gray-500">{title}</p>
+      <div className="flex flex-col space-y-2 pt-5 overflow-hidden">
+        <motion.h3
+          initial={{ x: "-100vh" }}
+          animate={animation2}
+          className="text-xl font-bold"
+        >
+          {name}
+        </motion.h3>
+        <motion.p
+          initial={{ y: 200 }}
+          animate={animation3}
+          className="uppercase text-sm text-gray-500"
+        >
+          {title}
+        </motion.p>
       </div>
     </div>
   );
