@@ -11,6 +11,7 @@ import { Helmet } from "react-helmet";
 // Components
 import StarMeter from "../components/StarMeter";
 import PageContainer from "../components/PageContainer";
+import FlipMove from "react-flip-move";
 
 // Icons
 import { RiSearch2Line } from "react-icons/ri";
@@ -126,14 +127,15 @@ const Products = () => {
               <div className="px-4 py-4 shadow-md rounded-2xl border border-gray-100 overflow-hidden bg-white grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 w-full">
                 {queriedProducts ? (
                   queriedProducts.length ? (
-                    queriedProducts.slice(0, 10).map((product) => {
-                      return (
-                        <ProductCard
-                          key={product.item._id}
-                          productData={product.item}
-                        />
-                      );
-                    })
+                    <FlipMove typeName={null}>
+                      {queriedProducts.slice(0, 10).map((product) => {
+                        return (
+                          <div key={product.item._id}>
+                            <ProductCard productData={product.item} />
+                          </div>
+                        );
+                      })}
+                    </FlipMove>
                   ) : (
                     <p className="text-gray-500 col-span-full">
                       No products of this name found :(
@@ -191,64 +193,66 @@ const Products = () => {
 
 export const ProductCard = ({ productData, ...rest }) => {
   return (
-    <Link to={`/products/${productData._id}`}>
-      <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group  overflow-hidden h-full">
-        {/* Product Image */}
-        <div className="relative w-full h-80 sm:h-40 md:h-48">
-          <div className="bg-gradient-to-t from-transparent via-transparent to-black opacity-70 w-full h-full absolute"></div>
-          <div
-            className="bg-gray-100 w-full h-full"
-            style={{
-              backgroundImage: `url(${
-                productData.images
-                  ? productData.images[0]
-                  : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
-              })`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          ></div>
+    <div>
+      <Link to={`/products/${productData._id}`}>
+        <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group  overflow-hidden h-full">
+          {/* Product Image */}
+          <div className="relative w-full h-80 sm:h-40 md:h-48">
+            <div className="bg-gradient-to-t from-transparent via-transparent to-black opacity-70 w-full h-full absolute"></div>
+            <div
+              className="bg-gray-100 w-full h-full"
+              style={{
+                backgroundImage: `url(${
+                  productData.images
+                    ? productData.images[0]
+                    : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
+                })`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            ></div>
+          </div>
+          {/* Stars */}
+          <div className="absolute top-0 right-0 p-2 flex space-x-2 items-end">
+            <StarMeter
+              rating={
+                productData && productData.averageRating
+                  ? productData.averageRating
+                  : 0
+              }
+              iconSize="1.2em"
+              // shadeClass="text-yellow-400"
+              lightClass="text-white"
+            />
+            <span className="text-white text-xs">
+              {productData && productData.averageRating
+                ? productData.averageRating.toFixed(1)
+                : 0}
+            </span>
+          </div>
+          {/* Body */}
+          <div className="flex flex-col p-2 bg-white group-hover:text-white flex-grow group-hover:bg-primary transition-all duration-300">
+            <h3 className="relative font-bold text-sm">
+              {productData.name ? productData.name : "No Name Found"}
+            </h3>
+            <p className="text-xs">
+              {productData && productData.reviewCount
+                ? `${productData.reviewCount} ${
+                    productData.reviewCount > 0 ? "Reviews" : "Review"
+                  }`
+                : "No Reviews"}
+            </p>
+            <p className="text-xs">
+              {productData && productData.ratingCount
+                ? `${productData.ratingCount} ${
+                    productData.ratingCount > 0 ? "Ratings" : "Rating"
+                  }`
+                : "No Ratings"}
+            </p>
+          </div>
         </div>
-        {/* Stars */}
-        <div className="absolute top-0 right-0 p-2 flex space-x-2 items-end">
-          <StarMeter
-            rating={
-              productData && productData.averageRating
-                ? productData.averageRating
-                : 0
-            }
-            iconSize="1.2em"
-            // shadeClass="text-yellow-400"
-            lightClass="text-white"
-          />
-          <span className="text-white text-xs">
-            {productData && productData.averageRating
-              ? productData.averageRating.toFixed(1)
-              : 0}
-          </span>
-        </div>
-        {/* Body */}
-        <div className="flex flex-col p-2 bg-white group-hover:text-white flex-grow group-hover:bg-primary transition-all duration-300">
-          <h3 className="relative font-bold text-sm">
-            {productData.name ? productData.name : "No Name Found"}
-          </h3>
-          <p className="text-xs">
-            {productData && productData.reviewCount
-              ? `${productData.reviewCount} ${
-                  productData.reviewCount > 0 ? "Reviews" : "Review"
-                }`
-              : "No Reviews"}
-          </p>
-          <p className="text-xs">
-            {productData && productData.ratingCount
-              ? `${productData.ratingCount} ${
-                  productData.ratingCount > 0 ? "Ratings" : "Rating"
-                }`
-              : "No Ratings"}
-          </p>
-        </div>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
