@@ -23,6 +23,7 @@ const Profile = () => {
   const [profile, setProfile] = useState(null);
 
   async function fetchData() {
+    setProfile(null);
     const result = await getProfile(uidSlug ? uidSlug : currentUser.uid);
     console.log(result);
     setProfile(result);
@@ -31,7 +32,7 @@ const Profile = () => {
   useEffect(() => {
     const unsubscribe = fetchData(); //subscribe
     return unsubscribe; //unsubscribe
-  }, []);
+  }, [uidSlug]);
 
   return (
     <>
