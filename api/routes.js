@@ -46,6 +46,43 @@ router.get("/productSearch", async (req, res) => {
   res.send(searchResults);
 });
 
+router.get("/search", async (req, res) => {
+  const query = req.query.query;
+  let userResults;
+  let productResults;
+
+  userResults = await User.find(
+    { $text: { $search: query } },
+    { score: { $meta: "textScore" } }
+  ).sort({ score: { $meta: "textScore" } });
+
+  // if search results don't have length (they're empty)
+  if (!userResults.length) {
+    userResults = await User.find({
+      displayName: { $regex: query, $options: "i" },
+    });
+  }
+
+  productResults = await Product.find(
+    { $text: { $search: query } },
+    { score: { $meta: "textScore" } }
+  ).sort({ score: { $meta: "textScore" } });
+
+  // if search results don't have length (they're empty)
+  if (!productResults.length) {
+    productResults = await Product.find({
+      name: { $regex: query, $options: "i" },
+    });
+  }
+
+  const searchResults = {
+    userResults,
+    productResults,
+  };
+
+  return res.send(searchResults);
+});
+
 router.get("/products/:id", async (req, res) => {
   // returns a specific product from a database using id
   const productID = req.params.id;
