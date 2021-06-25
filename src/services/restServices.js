@@ -61,6 +61,17 @@ export const searchProductWithText = async (createToken, inputText) => {
   }
 };
 
+export const search = async (inputText) => {
+  const url = `/api/search?query=${inputText}`;
+
+  try {
+    const res = await axios.get(url);
+    return res.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 // POST requests
 export const addNewUser = async (createToken, email, password, displayName) => {
   const url = "/api/register";
