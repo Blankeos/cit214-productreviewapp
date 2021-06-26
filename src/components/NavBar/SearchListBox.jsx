@@ -186,7 +186,7 @@ export default function SearchListBox({
 export const ListItem = ({ index, currentItem, children, ...rest }) => {
   return (
     <span
-      className={`px-4 py-2 text-sm flex space-x-2 items-center hover:bg-gray-100 hover:text-gray-700 cursor-pointer ${
+      className={`text-sm flex space-x-2 items-center hover:bg-gray-100 hover:text-gray-700 cursor-pointer ${
         index === currentItem ? "bg-gray-100 text-gray-700" : "text-gray-600"
       }`}
     >
@@ -201,7 +201,7 @@ const UserItem = ({ user, ...rest }) => {
       <Link
         to={`/profile/${user.uid}`}
         onClick={() => rest.closeSearchMode()}
-        className="flex space-x-2 items-center"
+        className="flex space-x-2 items-center w-full h-full px-4 py-2"
       >
         <div className="rounded-full overflow-hidden h-9 w-9">
           {user.photoURL ? (
