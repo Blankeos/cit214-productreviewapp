@@ -31,27 +31,46 @@ export default function SearchListBox({
   // States
   const [currentItem, setCurrentItem] = useState(-1);
   const [query, setQuery] = useState(null);
-  const [isSearching, setIsSearching] = useState(false); // for loading
 
   const [queriedResults, setQueriedResults] = useState(null); // data
+  const [isSearching, setIsSearching] = useState(false); // for loading
+  const [promiseCounter, setPromiseCounter] = useState(0);
 
-  // Hooks
-  useEffect(async () => {
-    await handleSearch();
-  }, [query]);
+  const onResponse = ({ promiseId, results }) => {
+    // refuse promise if it was not the last
+    if (promiseId !== promiseCounter) {
+      console.log(promiseId, "is not equal to", promiseCounter);
+      return;
+    }
+    // reset counter to avoid overflow
+    setPromiseCounter(0);
 
-  // Helper funcs
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    setQuery(e.target.value);
+    // do what needs to be done
+    setQueriedResults(results);
+    setIsSearching(false);
   };
 
-  const handleSearch = async () => {
+  const asyncFunction = async (query) => {
+    const promiseId = promiseCounter;
+    setPromiseCounter((prev) => {
+      return prev + 1;
+    });
+    const results = await search(query);
+    return { promiseId, results };
+  };
+
+  const loadData = (query) => {
     setIsSearching(true);
-    let results = await search(query);
-    await setQueriedResults(results);
-    console.log(results);
-    setIsSearching(false);
+    asyncFunction(query).then(onResponse);
+  };
+
+  // Hooks
+  useEffect(() => {
+    loadData(query);
+  }, [query]);
+
+  const handleChange = (e) => {
+    setQuery(e.target.value);
   };
 
   const handleKeyPress = (e) => {
@@ -135,7 +154,8 @@ export default function SearchListBox({
         >
           <div
             static
-            className="w-full origin-top-right absolute left-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+            className="w-full origin-top-right absolute left-0 mt-2 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none overflow-y-auto"
+            style={{ maxHeight: "25rem" }}
           >
             <div ref={listBoxNode} className="py-1">
               {isSearching ? (
