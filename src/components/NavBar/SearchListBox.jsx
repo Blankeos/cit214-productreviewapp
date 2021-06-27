@@ -66,7 +66,19 @@ export default function SearchListBox({
 
   // Hooks
   useEffect(() => {
-    loadData(query);
+    // loadData(query);
+    setQueriedResults(null);
+    setIsSearching(true);
+    const timeOut = setTimeout(async () => {
+      let results = await search(query);
+
+      setQueriedResults(results);
+
+      console.log("✅Searched:", query);
+      setIsSearching(false);
+    }, 800);
+
+    return () => clearTimeout(timeOut);
   }, [query]);
 
   const handleChange = (e) => {
