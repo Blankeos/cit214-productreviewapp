@@ -64,6 +64,8 @@ export const searchProductWithText = async (createToken, inputText) => {
 export const search = async (inputText) => {
   const url = `/api/search?query=${inputText}`;
 
+  if (inputText === null) return;
+
   try {
     const res = await axios.get(url);
     return res.data;
