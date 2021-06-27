@@ -139,7 +139,7 @@ export default function SearchListBox({
               autoFocus
               onChange={handleChange}
               className="w-full p-1 outline-none focus:ring-primary focus:ring-1 focus:rounded-sm flex-grow"
-              placeholder="Search..."
+              placeholder="Search other users..."
             ></input>
             <button
               className="px-1.5 focus:ring-primary focus:ring-1 rounded-full focus:outline-none transition transform active:scale-75"
@@ -175,13 +175,22 @@ export default function SearchListBox({
                   <AnimatedLoadingIcon size="2.5rem" />
                 </div>
               ) : queriedResults ? (
-                queriedResults.userResults.map((item, i) => {
-                  return (
-                    <ListItem key={i} index={i} currentItem={currentItem}>
-                      <UserItem user={item} closeSearchMode={closeSearchMode} />
-                    </ListItem>
-                  );
-                })
+                queriedResults.userResults.length > 0 ? (
+                  queriedResults.userResults.map((item, i) => {
+                    return (
+                      <ListItem key={i} index={i} currentItem={currentItem}>
+                        <UserItem
+                          user={item}
+                          closeSearchMode={closeSearchMode}
+                        />
+                      </ListItem>
+                    );
+                  })
+                ) : (
+                  <div className="relative flex w-full h-14 justify-center items-center text-sm text-gray-600">
+                    😭 No results found!
+                  </div>
+                )
               ) : (
                 <div className="relative flex w-full h-28 justify-center items-center">
                   <AnimatedLoadingIcon size="2.5rem" />
