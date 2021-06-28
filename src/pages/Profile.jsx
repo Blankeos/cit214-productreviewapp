@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 // Context API
 import { useAuth } from "../contexts/AuthContext";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 // Services
 import { getProfile } from "../services/restServices";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 // Components
 import ActivityCard, { ActivityCardSkeleton } from "../components/ActivityCard";
 
 // Icons
 import { FiEdit } from "react-icons/fi";
+import { RiFileCopy2Line } from "react-icons/ri";
 import DefaultPhoto from "../components/ProductPage/DefaultPhoto";
 
 //------------------
@@ -68,7 +71,7 @@ const Profile = () => {
         {/* Body */}
         <div className="relative px-2 sm:px-8 pt-12 pb-24">
           {profile ? (
-            <ProfileHeader profileData={profile} />
+            <ProfileHeader profileData={profile} uidSlug={uidSlug} />
           ) : (
             <ProfileHeaderSkeleton />
           )}
@@ -102,7 +105,7 @@ const Profile = () => {
   );
 };
 
-const ProfileHeader = ({ profileData, ...rest }) => {
+const ProfileHeader = ({ profileData, uidSlug, ...rest }) => {
   return (
     <>
       {/* Profile Header Section */}
@@ -130,10 +133,59 @@ const ProfileHeader = ({ profileData, ...rest }) => {
             ? profileData.displayName
             : `Barrack Obama`}
         </h1>
-        {/* Edit Profile Button */}
-        <button className="hidden items-center space-x-2 p-2 px-3 text-xs text-white bg-darkGray self-center rounded-md outline-none focus:outline-none transform transition hover:scale-110 active:scale-75">
-          <FiEdit size="1em" /> <span>Edit Profile</span>
-        </button>
+
+        {/* Edit & Share Profile Button */}
+        {!uidSlug && (
+          <div className="flex items-center space-x-2">
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { type: "spring", duration: 1.5 },
+              }}
+            >
+              <button className="p-2 px-3 text-xs text-white bg-gray-800 self-center rounded-md outline-none focus:outline-none transform transition hover:scale-105 active:scale-75">
+                <Link
+                  className="flex items-center space-x-2"
+                  to="/accountSettings"
+                >
+                  <FiEdit size="1em" /> <span>Edit Profile</span>
+                </Link>
+              </button>
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 10 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { type: "spring", duration: 1.5 },
+              }}
+            >
+              <button
+                onClick={() => {
+                  const customId = "share-profile-toast-id";
+                  navigator.clipboard.writeText(
+                    `https://cafely.vercel.app/profile/${
+                      profileData && profileData.uid
+                    }`
+                  );
+                  toast.success(
+                    `📋 Successfully copied profile link. Share it with your friends!`,
+                    {
+                      autoClose: 3000,
+                      toastId: customId,
+                    }
+                  );
+                }}
+                className="flex items-center space-x-2 p-2 px-3 text-xs text-white bg-gray-800 self-center rounded-md outline-none focus:outline-none transform transition hover:scale-105 active:scale-75"
+              >
+                <RiFileCopy2Line size="1em" /> <span>Share Profile</span>
+              </button>
+            </motion.span>
+          </div>
+        )}
+
         {/* Bio */}
         <div className="flex flex-col relative border border-gray-100 max-w-2xl overflow-hidden rounded-md">
           <div className="text-center text-sm text-gray-600 p-5 whitespace-pre-wrap">
