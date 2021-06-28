@@ -145,9 +145,9 @@ const ProfileHeader = ({ profileData, uidSlug, ...rest }) => {
                 transition: { type: "spring", duration: 1.5 },
               }}
             >
-              <button className="p-2 px-3 text-xs text-white bg-gray-800 self-center rounded-md outline-none focus:outline-none transform transition hover:scale-105 active:scale-75">
+              <button className="text-xs text-white bg-gray-800 self-center rounded-md outline-none focus:outline-none transform transition hover:scale-105 active:scale-95">
                 <Link
-                  className="flex items-center space-x-2"
+                  className="flex items-center space-x-2 p-2 px-3"
                   to="/accountSettings"
                 >
                   <FiEdit size="1em" /> <span>Edit Profile</span>
@@ -178,7 +178,7 @@ const ProfileHeader = ({ profileData, uidSlug, ...rest }) => {
                     }
                   );
                 }}
-                className="flex items-center space-x-2 p-2 px-3 text-xs text-white bg-gray-800 self-center rounded-md outline-none focus:outline-none transform transition hover:scale-105 active:scale-75"
+                className="flex items-center space-x-2 p-2 px-3 text-xs text-white bg-gray-800 self-center rounded-md outline-none focus:outline-none transform transition hover:scale-105 active:scale-95"
               >
                 <RiFileCopy2Line size="1em" /> <span>Share Profile</span>
               </button>
