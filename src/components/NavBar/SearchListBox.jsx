@@ -78,7 +78,10 @@ export default function SearchListBox({
       setIsSearching(false);
     }, 800);
 
-    return () => clearTimeout(timeOut);
+    return () => {
+      clearTimeout(timeOut);
+      setQueriedResults(null);
+    };
   }, [query]);
 
   const handleChange = (e) => {
