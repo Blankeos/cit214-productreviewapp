@@ -15,6 +15,11 @@ import { MdError, MdDashboard } from "react-icons/md";
 // Components
 import ErrorJSX from "../ErrorJSX";
 
+// TippyJS
+import Tippy from "@tippyjs/react";
+import "tippy.js/dist/tippy.css"; // optional
+import "tippy.js/animations/scale.css";
+
 const AdminDashboard = () => {
   const { isAuthorized } = useAdminAuth();
 
@@ -42,8 +47,42 @@ const AdminDashboard = () => {
               {/* Tabs */}
               <div className="flex overflow-x-auto">
                 <TabButton active={true}>Add New Products</TabButton>
-                <TabButton>Update Product Data</TabButton>
-                <TabButton>Delete Products</TabButton>
+                <Tippy
+                  animation="scale"
+                  inertia={true}
+                  content={
+                    <span>
+                      😓 <b>Darn, Sorry!</b>
+                      <br />
+                      This feature is not
+                      <br />
+                      available for now.
+                    </span>
+                  }
+                  placement="bottom"
+                >
+                  <span>
+                    <TabButton>Update Product Data</TabButton>
+                  </span>
+                </Tippy>
+                <Tippy
+                  animation="scale"
+                  inertia={true}
+                  content={
+                    <span>
+                      😓 <b>Darn, Sorry!</b>
+                      <br />
+                      This feature is not
+                      <br />
+                      available for now.
+                    </span>
+                  }
+                  placement="bottom"
+                >
+                  <span>
+                    <TabButton>Delete Products</TabButton>
+                  </span>
+                </Tippy>
               </div>
               {/* Tab Content */}
               <div className="p-8">
