@@ -331,6 +331,19 @@ router.post("/register", async (req, res) => {
   }
 });
 
+router.post("/adminLogin", async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  if (username === "admin" && password === "iamadmin123") {
+    // log this man in
+    console.log("Auth right");
+    const result = { authed: true };
+    return res.status(200).send(result);
+  }
+  return res.status(403).send("Not authorized");
+});
+
 // Utility Functions
 const updateAverageRatings = async (_productID) => {
   const productID = ObjectId(_productID); // convert string to ObjectID
@@ -431,6 +444,28 @@ const updateAllUserInfo = async () => {
     }
   });
 };
+
+router.post("/addNewProduct", async (req, res) => {
+  const name = req.body.name;
+  const description = req.body.description;
+  const images = req.body.images;
+
+  if (!name || !description || !images) {
+    return res.status(400).send("Bad Input");
+  }
+
+  try {
+    await Product.create({
+      name: name,
+      description: description,
+      images: images,
+    });
+    return res.status(200).send("New product is added!");
+  } catch (err) {
+    console.log(err);
+    return res.status(401).send("Failed to add the product.");
+  }
+});
 
 // router.post("/api/login", (req, res) => {
 //   const user = new User({

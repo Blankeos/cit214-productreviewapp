@@ -117,3 +117,25 @@ export const updateProfile = async (
   const res = await axios.post(url, payload, header);
   return res.data;
 };
+
+export const loginAsAdmin = async (username, password) => {
+  const url = "/api/adminLogin";
+  const payload = {
+    username,
+    password,
+  };
+  const res = await axios.post(url, payload);
+  return res.data;
+};
+
+export const addNewProduct = async (name, description, images) => {
+  const url = "/api/addNewProduct";
+  const payload = {
+    name,
+    description,
+    images,
+  };
+
+  const res = await axios.post(url, payload);
+  return res.data;
+};
