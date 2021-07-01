@@ -59,7 +59,9 @@ const ProductPageHeader = ({
       <div className="md:w-8/12 p-8 md:p-12 flex flex-col justify-between rounded-md bg-white shadow-md text-sm flex-wrap border">
         <div className="flex flex-col space-y-3">
           <h1 className="font-extrabold text-3xl">{product && product.name}</h1>
-          <p className="">{product && product.description}</p>
+          <p className="text-gray-600 whitespace-pre-wrap">
+            {product && product.description}
+          </p>
         </div>
         <Link to={product && `/review/${product._id}`}>
           <button className="flex items-center space-x-1 bg-primary text-white px-4 py-4 rounded-md mt-8 transform hover:translate-y-1 transition ease-in-out">
