@@ -15,6 +15,7 @@ import {
   Page404,
   ProductPage,
   AccountSettings,
+  Admin,
 } from "./pages";
 
 import PrivateRoute from "./components/PrivateRoute.js";
@@ -55,6 +56,7 @@ function App() {
             <Route path="/profile/:uidSlug" component={Profile} />
             <PrivateRoute path="/profile" component={Profile} />
             <PrivateRoute path="/accountSettings" component={AccountSettings} />
+            <Route path="/admin" component={Admin} />
             <Route path="*" component={Page404} />
           </Switch>
           <ToastContainer position="bottom-right" />
