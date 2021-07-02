@@ -34,12 +34,12 @@ export default function HorizontalProductCard({
         </div>
         {/* Body */}
         <div className="p-5 flex flex-col flex-grow justify-between hover:bg-gray-100 border-t border-gray-100">
-          <div className="flex space-x-10 justify-between">
-            <div>
+          <div className="flex space-x-10 justify-between max-h-full overflow-hidden mb-3">
+            <div className="max-h-full">
               <h3 className="font-bold text-sm sm:text-xl">
                 {productData.name ? productData.name : "Product Name"}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-600">
+              <p className="text-xs sm:text-sm text-gray-600  overflow-ellipsis">
                 {productData.description
                   ? productData.description.length >= 300
                     ? productData.description.slice(0, 300) + "..."
@@ -57,7 +57,8 @@ export default function HorizontalProductCard({
               </Link>
             </div>
           </div>
-          <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-400">
+          {/* Bottom part */}
+          <div className="flex justify-between text-xs mt-5 sm:text-sm sm:mt-0 text-gray-400 flex-shrink-0">
             <p>{`${
               productData && productData.reviewCount
                 ? productData.reviewCount
