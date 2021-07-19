@@ -37,9 +37,13 @@
   }
 }
 
+.radius-active {
+  transition: 150ms ease-out;
+}
+
 .radius-active:active {
   border-radius: 100%;
-  transition: 0.5s;
+  transition: 150ms ease-out;
 }
 
 .break {

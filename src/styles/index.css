@@ -55,3 +55,11 @@ body {
     min-height: 24rem;
   }
 }
+
+.horizontalproductcard-image-wrapper {
+  @apply w-full h-full object-center object-cover;
+}
+
+.horizontalproductcard-image-wrapper img {
+  @apply w-full h-full object-center object-cover;
+}

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { MdRateReview } from "react-icons/md";
 import StarMeter from "./StarMeter";
 import { Link } from "react-router-dom";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export default function HorizontalProductCard({
   productData,
@@ -16,18 +18,19 @@ export default function HorizontalProductCard({
       <div className="flex flex-col sm:flex-row sm:h-64 md:h-52 w-full overflow-hidden">
         {/* Image */}
         <div className="group relative w-full h-64 sm:h-full sm:w-48 overflow-hidden flex-shrink-0">
-          <div
-            className="absolute w-full h-full bg-gray-50 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-500"
-            style={{
-              backgroundImage: `url(${
+          <div className="absolute w-full h-full bg-gray-50 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-500">
+            <LazyLoadImage
+              key={productData._id}
+              effect="blur"
+              src={
                 productData.images
                   ? productData.images[0]
-                  : "https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg"
-              })`,
-              backgroundSize: `cover`,
-              backgroundPosition: "center",
-            }}
-          ></div>
+                  : `https://cdn-a.william-reed.com/var/wrbm_gb_food_pharma/storage/images/publications/food-beverage-nutrition/beveragedaily.com/news/manufacturers/coca-cola-launches-new-range-of-at-home-costa-coffee-products/11425504-1-eng-GB/Coca-Cola-launches-new-range-of-at-home-Costa-Coffee-products_wrbm_large.jpg`
+              }
+              alt="an image"
+              wrapperClassName="horizontalproductcard-image-wrapper"
+            />
+          </div>
           <div className="absolute w-full h-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition ease-in-out">
             <div className="absolute w-full h-full bg-black opacity-40"></div>
             <p className="text-white absolute">View Product</p>

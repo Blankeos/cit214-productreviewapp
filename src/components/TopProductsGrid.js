@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 // Components
 import HorizontalProductCard from "./HorizontalProductCard";
 import HorizontalProductCardSkeleton from "./Skeletons/HorizontalProductCardSkeleton";
+import { Loadable } from "react-loadable";
 
 // Services
 import { getAllProducts } from "../services/restServices";
