@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MdRateReview } from "react-icons/md";
 import StarMeter from "./StarMeter";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ export default function HorizontalProductCard({
   rating = 4.5,
   reviews = 18,
   ratingNum = 342,
+  maxTitleChar = 30,
   ...rest
 }) {
   return (
@@ -16,7 +17,7 @@ export default function HorizontalProductCard({
         {/* Image */}
         <div className="group relative w-full h-64 sm:h-full sm:w-48 overflow-hidden flex-shrink-0">
           <div
-            className="absolute w-full h-full bg-gray-100 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-500"
+            className="absolute w-full h-full bg-gray-50 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-500"
             style={{
               backgroundImage: `url(${
                 productData.images
@@ -34,15 +35,19 @@ export default function HorizontalProductCard({
         </div>
         {/* Body */}
         <div className="p-5 flex flex-col flex-grow justify-between hover:bg-gray-100 border-t border-gray-100">
-          <div className="flex space-x-10 justify-between max-h-full overflow-hidden mb-3">
-            <div className="max-h-full">
-              <h3 className="font-bold text-sm sm:text-xl">
-                {productData.name ? productData.name : "Product Name"}
+          <div className="flex space-x-10 justify-between max-h-full mb-3">
+            <div className="max-h-full overflow-hidden flex flex-col max-w-full">
+              <h3 className="font-bold text-sm sm:text-xl mb-2 overflow-hidden max-w-full">
+                {productData.name
+                  ? productData.name.length >= maxTitleChar
+                    ? productData.name.slice(0, maxTitleChar).trim() + "..."
+                    : productData.name
+                  : "Product Name"}
               </h3>
-              <p className="text-xs sm:text-sm text-gray-600  overflow-ellipsis">
+              <p className="text-xs sm:text-sm text-gray-500 overflow-ellipsis overflow-hidden">
                 {productData.description
                   ? productData.description.length >= 300
-                    ? productData.description.slice(0, 300) + "..."
+                    ? productData.description.slice(0, 300).trim() + "..."
                     : productData.description
                   : "Pumpkin spice cream rich single origin, bar french press aromatic that latte. Crema, white organic crema steamed grounds mazagran organic mazagran cultivar."}
               </p>
@@ -51,7 +56,7 @@ export default function HorizontalProductCard({
             <div className="h-full flex-shrink-0 flex justify-end">
               <Link
                 to={`/review/${productData._id}`}
-                className="bg-brown-200 h-10 w-10 rounded flex justify-center items-center shadow focus:outline-none outline-none transform transition active:scale-90 hover:scale-110 overflow-hidden focus:ring focus:ring-offset-2 focus:ring-brown-200 radius-active"
+                className="bg-brown-300 h-10 w-10 rounded flex justify-center items-center shadow focus:outline-none outline-none transform transition active:scale-90 hover:scale-110 overflow-hidden focus:ring focus:ring-offset-2 focus:ring-brown-200 radius-active"
               >
                 <MdRateReview className="text-white" size="1.2em" />
               </Link>
