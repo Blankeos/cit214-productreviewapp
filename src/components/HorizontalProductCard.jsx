@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-lazy-load-image-component/src/effects/blur.css";
 
+import { useInView } from "react-intersection-observer";
+
 export default function HorizontalProductCard({
   productData,
   rating = 4.5,
@@ -13,9 +15,16 @@ export default function HorizontalProductCard({
   maxTitleChar = 30,
   ...rest
 }) {
+  const { ref, inView } = useInView();
+
   return (
     <Link to={`/products/${productData._id}`}>
-      <div className="flex flex-col sm:flex-row sm:h-64 md:h-52 w-full overflow-hidden">
+      <div
+        ref={ref}
+        className={`flex flex-col sm:flex-row sm:h-64 md:h-52 w-full overflow-hidden ${
+          inView ? "visible" : "invisible"
+        }`}
+      >
         {/* Image */}
         <div className="group relative w-full h-64 sm:h-full sm:w-48 overflow-hidden flex-shrink-0">
           <div className="absolute w-full h-full bg-gray-50 flex-shrink-0 transform transition group-hover:scale-110 ease-in-out duration-500">
