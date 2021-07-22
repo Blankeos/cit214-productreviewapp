@@ -193,9 +193,9 @@ const Products = () => {
 
 export const ProductCard = ({ productData, ...rest }) => {
   return (
-    <div>
+    <div className="h-full">
       <Link to={`/products/${productData._id}`}>
-        <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group  overflow-hidden h-full">
+        <div className="border border-gray-100 bg-white text-gray-800 flex flex-col relative group overflow-hidden h-full">
           {/* Product Image */}
           <div className="relative w-full h-80 sm:h-40 md:h-48">
             <div className="bg-gradient-to-t from-transparent via-transparent to-black opacity-70 w-full h-full absolute"></div>
@@ -231,24 +231,27 @@ export const ProductCard = ({ productData, ...rest }) => {
             </span>
           </div>
           {/* Body */}
-          <div className="flex flex-col p-2 bg-white group-hover:text-white flex-grow group-hover:bg-primary transition-all duration-300">
+          <div className="flex flex-col justify-between p-2 bg-white group-hover:text-white flex-grow group-hover:bg-primary transition-all duration-300">
             <h3 className="relative font-bold text-sm">
               {productData.name ? productData.name : "No Name Found"}
             </h3>
-            <p className="text-xs">
-              {productData && productData.reviewCount
-                ? `${productData.reviewCount} ${
-                    productData.reviewCount > 0 ? "Reviews" : "Review"
-                  }`
-                : "No Reviews"}
-            </p>
-            <p className="text-xs">
-              {productData && productData.ratingCount
-                ? `${productData.ratingCount} ${
-                    productData.ratingCount > 0 ? "Ratings" : "Rating"
-                  }`
-                : "No Ratings"}
-            </p>
+
+            <div>
+              <p className="text-xs">
+                {productData && productData.reviewCount
+                  ? `${productData.reviewCount} ${
+                      productData.reviewCount > 0 ? "Reviews" : "Review"
+                    }`
+                  : "No Reviews"}
+              </p>
+              <p className="text-xs">
+                {productData && productData.ratingCount
+                  ? `${productData.ratingCount} ${
+                      productData.ratingCount > 0 ? "Ratings" : "Rating"
+                    }`
+                  : "No Ratings"}
+              </p>
+            </div>
           </div>
         </div>
       </Link>
